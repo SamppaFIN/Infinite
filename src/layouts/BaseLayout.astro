@@ -9,7 +9,11 @@ const locale = initLocale();
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Sami Räisänen — Full‑stack developer portfolio. AI‑powered web apps, creative tools, and open‑source projects." />
+    <meta name="description" content="Infinite — Developer portfolio. AI‑powered web apps, creative tools, and open‑source projects." />
+    <!-- Blocking script: set theme BEFORE first paint to prevent flash -->
+    <script is:inline>
+      (function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();
+    </script>
     <meta name="author" content="Sami Räisänen" />
 
     <!-- Open Graph -->
