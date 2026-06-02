@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Sami Räisänen",
+    "tagline": "Full‑stack developer crafting AI‑powered experiences",
+    "cta_projects": "Explore Projects",
+    "cta_github": "GitHub Profile"
+  },
+  "featured": {
+    "label": "Featured Project"
+  },
+  "gallery": {
+    "title": "Projects",
+    "subtitle": "A selection of what I've built. Click to explore.",
+    "filter_all": "All",
+    "empty": "No projects match this filter."
+  },
+  "modal": {
+    "close": "Close",
+    "repo": "View Repository",
+    "demo": "Live Demo",
+    "learnings": "What I Learned",
+    "tech_stack": "Tech Stack"
+  },
+  "about": {
+    "title": "About Me",
+    "text": "I'm an experienced software developer from Tampere, Finland, with 25 years in the industry. I build full‑stack applications with modern web technologies, and I'm passionate about AI‑assisted development. Beyond code, I care deeply about UI/UX — because great software starts with how it feels.",
+    "cv_link": "View Full CV"
+  },
+  "footer": {
+    "copyright": "© 2026 Sami Räisänen",
+    "built_with": "Built with Astro, Tailwind CSS & care"
+  }
+}

@@ -1,0 +1,22 @@
+---
+import { t } from '../i18n/utils';
+---
+
+<section id="about" class="py-24 md:py-32 px-6">
+  <div class="max-w-3xl mx-auto text-center reveal">
+    <h2 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)]">
+      {t('about.title')}
+    </h2>
+    <p class="mt-6 text-lg text-[var(--color-text-secondary)] leading-relaxed">
+      {t('about.text')}
+    </p>
+    <a
+      href="https://samppafin.github.io/CV-Site/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-full border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-accent-glow)] hover:border-[var(--color-accent)] transition-all duration-300"
+    >
+      {t('about.cv_link')} →
+    </a>
+  </div>
+</section>

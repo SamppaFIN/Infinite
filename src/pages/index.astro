@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import FeaturedProject from '../components/FeaturedProject.astro';
+import ProjectGallery from '../components/ProjectGallery.astro';
+import ProjectModal from '../components/ProjectModal.svelte';
+import AboutSnippet from '../components/AboutSnippet.astro';
+import Footer from '../components/Footer.astro';
+import { getFeaturedProject, getProjects } from '../lib/projects';
+import { getLocale } from '../i18n/utils';
+import '../styles/global.css';
+
+const featured = await getFeaturedProject();
+const projects = await getProjects();
+const locale = getLocale();
+---
+
+<BaseLayout>
+  <main>
+    <Hero />
+
+    {featured && <FeaturedProject project={featured} />}
+
+    <ProjectGallery />
+
+    <ProjectModal projects={projects} locale={locale} client:load />
+
+    <AboutSnippet />
+
+    <Footer />
+  </main>
+</BaseLayout>

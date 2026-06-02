@@ -1,0 +1,71 @@
+---
+import { t } from '../i18n/utils';
+import { getProjects, getAllTags } from '../lib/projects';
+import ProjectCard from './ProjectCard.astro';
+import ProjectFilter from './ProjectFilter.svelte';
+
+const projects = await getProjects();
+const nonFeatured = projects.filter((p) => !p.featured);
+const tags = await getAllTags();
+---
+
+<section id="projects" class="py-24 md:py-32 px-6">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-12 reveal">
+      <h2 class="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)]">
+        {t('gallery.title')}
+      </h2>
+      <p class="mt-4 text-lg text-[var(--color-text-secondary)] max-w-xl mx-auto">
+        {t('gallery.subtitle')}
+      </p>
+    </div>
+
+    <!-- Filter (Svelte island) -->
+    <ProjectFilter tags={tags} client:load />
+
+    <!-- Grid -->
+    <div id="project-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {nonFeatured.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+
+    <!-- Empty state -->
+    <div id="project-empty" class="hidden text-center py-16">
+      <p class="text-lg text-[var(--color-text-muted)]">{t('gallery.empty')}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Listen for filter events from the Svelte island
+  window.addEventListener('project-filter', ((e: CustomEvent) => {
+    const activeTag = e.detail?.tag as string | null;
+    const cards = document.querySelectorAll<HTMLElement>('[data-project-slug]');
+    const empty = document.getElementById('project-empty');
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const tags = card.querySelectorAll('.tech-badge');
+      let match = !activeTag; // null = show all
+
+      if (activeTag) {
+        tags.forEach((badge) => {
+          if (badge.textContent?.trim() === activeTag) match = true;
+        });
+      }
+
+      if (match) {
+        card.style.display = '';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (empty) {
+      empty.classList.toggle('hidden', visibleCount > 0);
+    }
+  }) as EventListener);
+</script>
