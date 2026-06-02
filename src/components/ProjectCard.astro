@@ -64,15 +64,15 @@ const hasLinks = project.demoUrl || project.repoUrl;
 
     <!-- Links -->
     {hasLinks && (
-      <div class="mt-4 flex gap-3 text-sm">
+      <div class="mt-4 flex gap-4 text-sm font-medium">
         {project.demoUrl && (
-          <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:text-[var(--color-accent-glow)] font-medium transition-colors">
-            {t('modal.demo')} →
+          <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:text-[var(--color-accent-glow)] transition-colors">
+            {t('modal.demo')}
           </a>
         )}
         {project.repoUrl && (
-          <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" class="text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] font-medium transition-colors">
-            {t('modal.repo')} →
+          <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" class="text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] transition-colors">
+            {t('modal.repo')}
           </a>
         )}
       </div>
