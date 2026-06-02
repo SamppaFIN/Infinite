@@ -4,7 +4,6 @@ import Hero from '../components/Hero.astro';
 import FeaturedProject from '../components/FeaturedProject.astro';
 import ProjectGallery from '../components/ProjectGallery.astro';
 import ProjectModal from '../components/ProjectModal.svelte';
-import AboutSnippet from '../components/AboutSnippet.astro';
 import Footer from '../components/Footer.astro';
 import { getFeaturedProject, getProjects } from '../lib/projects';
 import { getLocale } from '../i18n/utils';
@@ -24,8 +23,6 @@ const locale = getLocale();
     <ProjectGallery />
 
     <ProjectModal projects={projects} locale={locale} client:load />
-
-    <AboutSnippet />
 
     <Footer />
   </main>

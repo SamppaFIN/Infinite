@@ -1,8 +1,8 @@
 {
   "hero": {
     "greeting": "Hei, olen",
-    "name": "Sami Räisänen",
-    "tagline": "Full‑stack ‑kehittäjä, joka rakentaa tekoälyavusteisia sovelluksia",
+    "name": "Infinite",
+    "tagline": "Tutkin tekoälyavusteisen kehityksen rajoja",
     "cta_projects": "Tutustu projekteihin",
     "cta_github": "GitHub-profiili"
   },
@@ -22,13 +22,8 @@
     "learnings": "Mitä Opin",
     "tech_stack": "Teknologiat"
   },
-  "about": {
-    "title": "Minusta",
-    "text": "Olen kokenut ohjelmistokehittäjä Tampereelta, 25 vuoden kokemuksella alalta. Rakennan full‑stack‑sovelluksia moderneilla web-tekniikoilla ja intohimoni on tekoälyavusteinen kehitys. Koodin lisäksi välitän syvästi UI/UX:stä — koska hyvä ohjelmisto alkaa siitä, miltä se tuntuu.",
-    "cv_link": "Koko CV"
-  },
   "footer": {
-    "copyright": "© 2026 Sami Räisänen",
+    "copyright": "© 2026 Infinite",
     "built_with": "Rakennettu Astrolla, Tailwind CSS:llä ja huolella"
   }
 }

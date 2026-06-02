@@ -1,164 +1,152 @@
 [
   {
-    "slug": "legal-insights",
-    "title": { "en": "LegalInsights – AI Legal Document Analysis", "fi": "LegalInsights – Tekoälypohjainen dokumenttianalyysi" },
+    "slug": "ai-koulu",
+    "title": { "en": "AI-Koulu – AI Education Platform", "fi": "AI-Koulu – Tekoälykoulutus" },
     "description": {
-      "en": "AI-powered legal document analysis with OCR, metadata extraction, and case management. Built to demonstrate how AI can transform document-heavy workflows.",
-      "fi": "Tekoälyavusteinen juridisten dokumenttien analyysi OCR:llä, metadata-poiminnalla ja case-hallinnalla. Rakennettu demonstroimaan miten tekoäly mullistaa dokumenttityönkulut."
+      "en": "Finnish educational site covering all AI concepts in teaching format with React Flow, quizzes, and glossary. A comprehensive learning journey into artificial intelligence.",
+      "fi": "Suomenkielinen opetussivusto, joka kattaa kaikki tekoälykonseptit opetusmuodossa — React Flow, visailut ja sanasto. Kattava oppimismatka tekoälyyn."
     },
-    "learnings": {
-      "en": "OCR integration taught me the importance of preprocessing pipelines. The metadata extraction layer proved that structured output from LLMs is reliable when properly constrained with schemas.",
-      "fi": "OCR-integraatio opetti esikäsittelyputkien tärkeyden. Metadata-poiminta todisti, että LLM:ien strukturoitu ulostulo on luotettavaa kun se on kunnolla rajattu skeemoilla."
-    },
-    "tags": ["AI/ML", "OCR", "NLP", "Node.js", "React", "PostgreSQL"],
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["TypeScript", "MDX", "AI", "React Flow"],
     "image": "",
-    "demoUrl": "https://legal-insights-770d1ef5a8c6.herokuapp.com/",
-    "repoUrl": "https://github.com/SamppaFIN/LegalInsights",
+    "demoUrl": "",
+    "repoUrl": "https://github.com/SamppaFIN/AI-Koulu",
     "featured": true,
     "order": 1
   },
   {
-    "slug": "webshop",
-    "title": { "en": "WebShop – Modern E-Commerce Platform", "fi": "WebShop – Moderni verkkokauppa-alusta" },
+    "slug": "roguereborn",
+    "title": { "en": "RogueReborn – HTML5 Roguelike", "fi": "RogueReborn – HTML5 Roguelike-peli" },
     "description": {
-      "en": "Full-stack e-commerce platform with dual themes, shopping cart, and secure JWT authentication. Built with React, Node.js, PostgreSQL and Supabase.",
-      "fi": "Full-stack verkkokauppa-alusta kaksoisteemoilla, ostoskorilla ja suojatulla JWT-autentikoinnilla. Rakennettu Reactilla, Node.js:llä, PostgreSQL:llä ja Supabasella."
+      "en": "Full-featured turn-based HTML5 roguelike with town mechanics, infinite dungeon abyss, and complex combat system. Inspired by TomeNet.",
+      "fi": "Täysiverinen vuoropohjainen HTML5-roguelike, jossa kaupunkimekaniikat, ääretön luolasto ja monimutkainen taistelujärjestelmä. Inspiroitunut TomeNetistä."
     },
-    "learnings": {
-      "en": "JWT authentication implementation deepened my understanding of stateless auth flows. Supabase simplified the backend dramatically compared to traditional setups.",
-      "fi": "JWT-autentikoinnin toteutus syvensi ymmärrystäni tilattomista auth-vuista. Supabase yksinkertaisti backendiä dramaattisesti verrattuna perinteisiin ratkaisuihin."
-    },
-    "tags": ["React", "TypeScript", "Node.js", "PostgreSQL", "Supabase", "JWT"],
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["JavaScript", "HTML5", "Game", "Roguelike"],
     "image": "",
     "demoUrl": "",
-    "repoUrl": "https://github.com/SamppaFIN/WebShop",
+    "repoUrl": "https://github.com/SamppaFIN/RogueReborn",
     "featured": false,
     "order": 2
   },
   {
-    "slug": "klitoritari",
-    "title": { "en": "Klitoritari – Multiplayer Adventure", "fi": "Klitoritari – Moninpeliseikkailu" },
+    "slug": "spatial-3d-ui-framework",
+    "title": { "en": "Spatial-3D-UI – Immersive 3D Framework", "fi": "Spatial-3D-UI – Upottava 3D-käyttöliittymä" },
     "description": {
-      "en": "Real-time multiplayer adventure game with live player sync and state management via WebSockets. A fun experiment in real-time game architecture.",
-      "fi": "Reaaliaikainen moninpeliseikkailu WebSocket-pohjaisella pelaajasynkronoinnilla ja tilanhallinnalla. Hauska kokeilu reaaliaikaisessa peliarkkitehtuurissa."
+      "en": "Next-gen 3D UI library for immersive web experiences with 26+ interactive components. Built with Three.js and WebGL.",
+      "fi": "Seuraavan sukupolven 3D-käyttöliittymäkirjasto upottaviin web-kokemuksiin, 26+ interaktiivista komponenttia. Rakennettu Three.js:llä ja WebGL:llä."
     },
-    "learnings": {
-      "en": "WebSocket state synchronization is surprisingly complex — handling latency, reconnections, and state conflicts required careful architectural decisions.",
-      "fi": "WebSocket-tilansynkronointi on yllättävän monimutkaista — viiveiden, uudelleenyhteyksien ja tilakonfliktien käsittely vaati huolellisia arkkitehtuuripäätöksiä."
-    },
-    "tags": ["WebSocket", "Multiplayer", "JavaScript", "Node.js"],
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["Three.js", "WebGL", "JavaScript", "HTML5"],
     "image": "",
-    "demoUrl": "https://klitoritari-v2-69d21a77a0c2.herokuapp.com/",
-    "repoUrl": "https://github.com/SamppaFIN/Klitoritari",
+    "demoUrl": "https://samppafin.github.io/Spatial-3D-UI-framework/",
+    "repoUrl": "https://github.com/SamppaFIN/Spatial-3D-UI-framework",
     "featured": false,
     "order": 3
   },
   {
-    "slug": "nlp-ai",
-    "title": { "en": "NLP-AI – Natural Language Processing Lab", "fi": "NLP-AI – Luonnollisen kielen käsittelyn laboratorio" },
+    "slug": "ai-pasianssi",
+    "title": { "en": "AI-Pasianssi – AI Solitaire", "fi": "AI-Pasianssi – Tekoälypasianssi" },
     "description": {
-      "en": "NLP experiments with prompt engineering, text analysis, and language models. A playground for exploring embeddings, semantic search, and AI text generation.",
-      "fi": "NLP-kokeiluja prompt-engineeringillä, tekstianalyysillä ja kielimalleilla. Leikkikenttä upotusten, semanttisen haun ja tekoälytekstin generoinnin tutkimiseen."
+      "en": "AI-powered Klondike solitaire with OpenRouter/Groq integration. A classic card game enhanced with artificial intelligence.",
+      "fi": "Tekoälyavusteinen Klondike-pasianssi OpenRouter/Groq-integraatiolla. Klassinen korttipeli tekoälyllä tehostettuna."
     },
-    "learnings": {
-      "en": "Embeddings and vector search opened up a new world of semantic understanding. Prompt engineering is both art and science — small changes yield dramatically different results.",
-      "fi": "Upotukset ja vektorihaku avasivat uuden maailman semanttista ymmärrystä. Prompt-engineering on sekä taidetta että tiedettä — pienet muutokset tuottavat dramaattisesti erilaisia tuloksia."
-    },
-    "tags": ["Python", "NLP", "AI", "Embeddings"],
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["JavaScript", "CSS", "AI", "Groq", "OpenRouter"],
     "image": "",
-    "demoUrl": "https://kotinlp-f2f36174831d.herokuapp.com/",
-    "repoUrl": "https://github.com/SamppaFIN/NLP-AI",
+    "demoUrl": "",
+    "repoUrl": "https://github.com/SamppaFIN/AI-pasianssi",
     "featured": false,
     "order": 4
   },
   {
-    "slug": "health-connect-ai",
-    "title": { "en": "HealthConnectAI – AI Health Assistant", "fi": "HealthConnectAI – Tekoäly-terveysavustaja" },
+    "slug": "nlp-ai",
+    "title": { "en": "TerapiaAI – AI Therapy Chat", "fi": "TerapiaAI – Tekoälyterapia-chat" },
     "description": {
-      "en": "Health Q&A platform powered by Perplexity AI with a clean TypeScript + React implementation. Demonstrates API integration with external AI services.",
-      "fi": "Terveyskysymysalusta Perplexity AI:n voimalla, siisti TypeScript + React -toteutus. Demonstroi API-integraatiota ulkoisiin tekoälypalveluihin."
+      "en": "Finnish browser-based therapy chat with 8 AI personas (Rogers, Freud, Jung, CBT, and more). NLP-powered with speech recognition.",
+      "fi": "Suomenkielinen selainpohjainen terapia-chat kahdeksalla tekoälypersoonalla (Rogers, Freud, Jung, CBT ja muita). NLP-pohjainen puheentunnistuksella."
     },
-    "learnings": {
-      "en": "Integrating third-party AI APIs requires careful prompt design and response handling. TypeScript was invaluable for maintaining type safety across API boundaries.",
-      "fi": "Kolmannen osapuolen tekoäly-APIen integrointi vaatii huolellista prompt-suunnittelua ja vastausten käsittelyä. TypeScript oli korvaamaton tyyppiturvallisuuden ylläpitämisessä API-rajapintojen yli."
-    },
-    "tags": ["TypeScript", "React", "Perplexity AI", "API"],
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["HTML", "JavaScript", "NLP", "AI", "SpeechRecognition"],
     "image": "",
     "demoUrl": "",
-    "repoUrl": "https://github.com/SamppaFIN/HealthConnectAI",
+    "repoUrl": "https://github.com/SamppaFIN/NLP-AI",
     "featured": false,
     "order": 5
   },
   {
-    "slug": "angelic-waves",
-    "title": { "en": "AngelicWaves – Audio Frequency Analyzer", "fi": "AngelicWaves – Äänitaajuusanalyysi" },
+    "slug": "j-rjestelm-nvarjot",
+    "title": { "en": "Järjestelmän Varjot – Societal Critique", "fi": "Järjestelmän Varjot – Yhteiskuntakritiikki" },
     "description": {
-      "en": "Real-time audio analysis with WebAudio API, FFT spectrum visualization, and frequency tracking. A deep dive into browser-based signal processing.",
-      "fi": "Reaaliaikainen äänianalyysi WebAudio API:lla, FFT-spektrivisualisoinnilla ja taajuusseurannalla. Syväsukellus selainpohjaiseen signaalinkäsittelyyn."
+      "en": "Lists known problems in societal structures with a Finnish focus. A structured critique of systemic issues.",
+      "fi": "Listaa tunnettuja ongelmia yhteiskuntarakenteissa suomalaisesta näkökulmasta. Jäsenneltyä kritiikkiä systeemisistä ongelmista."
     },
-    "learnings": {
-      "en": "The WebAudio API is remarkably powerful for real-time signal processing. FFT visualization taught me the fundamentals of frequency-domain analysis in a practical context.",
-      "fi": "WebAudio API on hämmästyttävän tehokas reaaliaikaiseen signaalinkäsittelyyn. FFT-visualisointi opetti taajuustason analyysin perusteet käytännön kontekstissa."
-    },
-    "tags": ["TypeScript", "WebAudio API", "FFT", "Canvas"],
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["HTML"],
     "image": "",
-    "demoUrl": "https://angelicfrequencies-e93bdd1222b5.herokuapp.com/",
-    "repoUrl": "https://github.com/SamppaFIN/AngelicWaves",
+    "demoUrl": "",
+    "repoUrl": "https://github.com/SamppaFIN/J-rjestelm-nVarjot",
     "featured": false,
     "order": 6
   },
   {
-    "slug": "rag-demo",
-    "title": { "en": "RAG-Demo – Retrieval Augmented Generation", "fi": "RAG-Demo – Hakuavusteinen generointi" },
+    "slug": "hallituspaatokset",
+    "title": { "en": "Hallituspäätökset – Government Tracker", "fi": "Hallituspäätökset – Hallitusseuranta" },
     "description": {
-      "en": "RAG demonstration with vector search, embeddings, and AI synthesis using FastAPI, ChromaDB, and OpenAI. Shows how to ground AI responses in real data.",
-      "fi": "RAG-demonstraatio vektorihaulla, upotuksilla ja tekoälysynteesillä käyttäen FastAPI:a, ChromaDB:tä ja OpenAI:ta. Näyttää miten tekoälyn vastaukset ankkuroidaan oikeaan dataan."
+      "en": "Infographic tracking Finnish government promises and their fulfillment. Data-driven policy accountability tool.",
+      "fi": "Infografiikka, joka seuraa Suomen hallituksen lupauksia ja niiden toteutumista. Datavetoinen politiikan vastuullisuustyökalu."
     },
-    "learnings": {
-      "en": "RAG is the bridge between general AI knowledge and domain-specific accuracy. ChromaDB made vector storage surprisingly simple for a prototype.",
-      "fi": "RAG on silta yleisen tekoälytiedon ja toimialakohtaisen tarkkuuden välillä. ChromaDB teki vektoritallennuksesta yllättävän yksinkertaista prototyypille."
-    },
-    "tags": ["Python", "FastAPI", "ChromaDB", "OpenAI", "React"],
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["HTML"],
     "image": "",
     "demoUrl": "",
-    "repoUrl": "https://github.com/SamppaFIN/RAG-Demo",
+    "repoUrl": "https://github.com/SamppaFIN/Hallituspaatokset",
     "featured": false,
     "order": 7
   },
   {
-    "slug": "cosmic-tarot",
-    "title": { "en": "Cosmic Tarot – Consciousness-Aware Divination", "fi": "Cosmic Tarot – Tietoisuustarot" },
+    "slug": "factory-ultra",
+    "title": { "en": "Factory Ultra – AI Development Factory", "fi": "Factory Ultra – Tekoälyn kehitystehdas" },
     "description": {
-      "en": "Mobile-first tarot journey with 5 emotional questions and personalized readings. A creative experiment blending spirituality with web technology.",
-      "fi": "Mobiili ensin -tarotmatka viidellä tunnekysymyksellä ja personoiduilla tulkinnoilla. Luova kokeilu, jossa henkisyys kohtaa web-teknologian."
+      "en": "Production-grade AI development factory template: BRDC workflow, audit trails, security, cost tracking, and Oracle research. Built for serious AI projects.",
+      "fi": "Tuotantotason tekoälykehityksen tehdaspohja: BRDC-työnkulku, auditoidut polut, tietoturva, kustannusseuranta ja Oracle-tutkimus. Rakennettu vakaviin tekoälyprojekteihin."
     },
-    "learnings": {
-      "en": "Mobile-first design truly matters — this project reinforced that you design for the smallest screen first and scale up. The emotional UX required thoughtful interaction design.",
-      "fi": "Mobiili ensin -suunnittelu on todella tärkeää — tämä projekti vahvisti, että suunnitellaan pienimmälle ruudulle ensin ja skaalataan ylöspäin. Emotionaalinen UX vaati harkittua vuorovaikutussuunnittelua."
-    },
-    "tags": ["JavaScript", "HTML5", "CSS3"],
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["Python", "JavaScript", "AI", "Automation", "Security"],
     "image": "",
-    "demoUrl": "https://samppafin.github.io/tarot-game/",
-    "repoUrl": "",
+    "demoUrl": "",
+    "repoUrl": "https://github.com/SamppaFIN/factory-ultra",
     "featured": false,
     "order": 8
   },
   {
-    "slug": "insurance-gap-review",
-    "title": { "en": "Insurance Gap Review – Coverage Checker", "fi": "Insurance Gap Review – Vakuutuskattavuuden tarkistus" },
+    "slug": "angelicwaves",
+    "title": { "en": "AngelicWaves – Frequency Detector", "fi": "AngelicWaves – Taajuusilmaisin" },
     "description": {
-      "en": "Lightweight PWA that uploads and analyzes insurance documents directly in the browser. Detects missing or overlapping coverage based on Finnish health and home baselines.",
-      "fi": "Kevyt PWA, joka lataa ja analysoi vakuutusdokumentteja suoraan selaimessa. Havaitsee puuttuvat tai päällekkäiset kattavuudet suomalaisten terveys- ja kotivakuutusperusteiden mukaan."
+      "en": "Real-time frequency detector for angelic frequencies (432, 528, 639, 741, 963 Hz). Web Audio API analysis with healing and consciousness themes.",
+      "fi": "Reaaliaikainen taajuusilmaisin enkelitaajuuksille (432, 528, 639, 741, 963 Hz). Web Audio API -analyysi parantavilla ja tietoisuusteemoilla."
     },
-    "learnings": {
-      "en": "Client-side PDF parsing with PDF.js is entirely feasible for document analysis PWAs. The PWA pattern (service workers, offline support) adds genuine value for practical tools.",
-      "fi": "Asiakaspuolen PDF-jäsennys PDF.js:llä on täysin toteuttamiskelpoista dokumenttianalyysi-PWA:lle. PWA-malli (service workerit, offline-tuki) tuo aitoa lisäarvoa käytännön työkaluille."
-    },
-    "tags": ["Vanilla JS", "HTML5", "CSS3", "PDF.js"],
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["TypeScript", "WebAudio API", "Canvas"],
     "image": "",
-    "demoUrl": "https://samppafin.github.io/Insurance-Gap-Review/",
-    "repoUrl": "https://github.com/SamppaFIN/Insurance-Gap-Review",
+    "demoUrl": "",
+    "repoUrl": "https://github.com/SamppaFIN/AngelicWaves",
     "featured": false,
     "order": 9
+  },
+  {
+    "slug": "tarot-game",
+    "title": { "en": "Cosmic Tarot – Tarot Journey", "fi": "Cosmic Tarot – Tarotmatka" },
+    "description": {
+      "en": "Mobile-first tarot journey with emotional questions and personalized readings. A creative blend of spirituality and web technology.",
+      "fi": "Mobiili ensin -tarotmatka tunnekysymyksillä ja personoiduilla tulkinnoilla. Luova yhdistelmä henkisyyttä ja web-teknologiaa."
+    },
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["JavaScript", "HTML5", "CSS3"],
+    "image": "",
+    "demoUrl": "https://samppafin.github.io/tarot-game/",
+    "repoUrl": "https://github.com/SamppaFIN/tarot-game",
+    "featured": false,
+    "order": 10
   }
 ]

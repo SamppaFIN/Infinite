@@ -1,8 +1,8 @@
 {
   "hero": {
     "greeting": "Hi, I'm",
-    "name": "Sami Räisänen",
-    "tagline": "Full‑stack developer crafting AI‑powered experiences",
+    "name": "Infinite",
+    "tagline": "Exploring the frontier of AI‑assisted development",
     "cta_projects": "Explore Projects",
     "cta_github": "GitHub Profile"
   },
@@ -22,13 +22,8 @@
     "learnings": "What I Learned",
     "tech_stack": "Tech Stack"
   },
-  "about": {
-    "title": "About Me",
-    "text": "I'm an experienced software developer from Tampere, Finland, with 25 years in the industry. I build full‑stack applications with modern web technologies, and I'm passionate about AI‑assisted development. Beyond code, I care deeply about UI/UX — because great software starts with how it feels.",
-    "cv_link": "View Full CV"
-  },
   "footer": {
-    "copyright": "© 2026 Sami Räisänen",
+    "copyright": "© 2026 Infinite",
     "built_with": "Built with Astro, Tailwind CSS & care"
   }
 }
