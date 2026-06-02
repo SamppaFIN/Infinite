@@ -9,7 +9,7 @@
     "learnings": { "en": "", "fi": "" },
     "tags": ["TypeScript", "MDX", "AI", "React Flow"],
     "image": "",
-    "demoUrl": "",
+    "demoUrl": "https://samppafin.github.io/AI-Koulu/",
     "repoUrl": "https://github.com/SamppaFIN/AI-Koulu",
     "featured": true,
     "order": 1
@@ -24,7 +24,7 @@
     "learnings": { "en": "", "fi": "" },
     "tags": ["JavaScript", "HTML5", "Game", "Roguelike"],
     "image": "",
-    "demoUrl": "",
+    "demoUrl": "https://samppafin.github.io/RogueReborn/",
     "repoUrl": "https://github.com/SamppaFIN/RogueReborn",
     "featured": false,
     "order": 2
@@ -54,7 +54,7 @@
     "learnings": { "en": "", "fi": "" },
     "tags": ["JavaScript", "CSS", "AI", "Groq", "OpenRouter"],
     "image": "",
-    "demoUrl": "",
+    "demoUrl": "https://samppafin.github.io/AI-pasianssi/",
     "repoUrl": "https://github.com/SamppaFIN/AI-pasianssi",
     "featured": false,
     "order": 4
@@ -69,7 +69,7 @@
     "learnings": { "en": "", "fi": "" },
     "tags": ["HTML", "JavaScript", "NLP", "AI", "SpeechRecognition"],
     "image": "",
-    "demoUrl": "",
+    "demoUrl": "https://samppafin.github.io/NLP-AI/",
     "repoUrl": "https://github.com/SamppaFIN/NLP-AI",
     "featured": false,
     "order": 5
@@ -84,7 +84,7 @@
     "learnings": { "en": "", "fi": "" },
     "tags": ["HTML"],
     "image": "",
-    "demoUrl": "",
+    "demoUrl": "https://samppafin.github.io/J-rjestelm-nVarjot/",
     "repoUrl": "https://github.com/SamppaFIN/J-rjestelm-nVarjot",
     "featured": false,
     "order": 6
@@ -99,7 +99,7 @@
     "learnings": { "en": "", "fi": "" },
     "tags": ["HTML"],
     "image": "",
-    "demoUrl": "",
+    "demoUrl": "https://samppafin.github.io/Hallituspaatokset/",
     "repoUrl": "https://github.com/SamppaFIN/Hallituspaatokset",
     "featured": false,
     "order": 7
@@ -120,21 +120,6 @@
     "order": 8
   },
   {
-    "slug": "angelicwaves",
-    "title": { "en": "AngelicWaves – Frequency Detector", "fi": "AngelicWaves – Taajuusilmaisin" },
-    "description": {
-      "en": "Real-time frequency detector for angelic frequencies (432, 528, 639, 741, 963 Hz). Web Audio API analysis with healing and consciousness themes.",
-      "fi": "Reaaliaikainen taajuusilmaisin enkelitaajuuksille (432, 528, 639, 741, 963 Hz). Web Audio API -analyysi parantavilla ja tietoisuusteemoilla."
-    },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["TypeScript", "WebAudio API", "Canvas"],
-    "image": "",
-    "demoUrl": "",
-    "repoUrl": "https://github.com/SamppaFIN/AngelicWaves",
-    "featured": false,
-    "order": 9
-  },
-  {
     "slug": "tarot-game",
     "title": { "en": "Cosmic Tarot – Tarot Journey", "fi": "Cosmic Tarot – Tarotmatka" },
     "description": {
@@ -147,6 +132,6 @@
     "demoUrl": "https://samppafin.github.io/tarot-game/",
     "repoUrl": "https://github.com/SamppaFIN/tarot-game",
     "featured": false,
-    "order": 10
+    "order": 9
   }
 ]
