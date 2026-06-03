@@ -133,5 +133,20 @@
     "repoUrl": "https://github.com/SamppaFIN/tarot-game",
     "featured": false,
     "order": 9
+  },
+  {
+    "slug": "globeciv",
+    "title": { "en": "GlobeCiv – 3D Civilization Game", "fi": "GlobeCiv – 3D-sivilisaatiopeli" },
+    "description": {
+      "en": "A 3D globe-based civilization game with city building, resource management (Food, Production, Science, Culture), tech tree, AI opponents, and territory expansion. Built with Three.js and WebGL.",
+      "fi": "Kolmiulotteinen maapalloon pohjautuva sivilisaatiopeli, jossa kaupunginrakennusta, resurssienhallintaa (ruoka, tuotanto, tiede, kulttuuri), teknologiapuu, tekoälyvastustajia ja alueiden laajennusta. Rakennettu Three.js:llä ja WebGL:llä."
+    },
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["Three.js", "WebGL", "JavaScript", "Game", "HTML5"],
+    "image": "/Infinite/images/projects/globeciv.jpg",
+    "demoUrl": "https://samppafin.github.io/GlobeCiv/",
+    "repoUrl": "https://github.com/SamppaFIN/GlobeCiv",
+    "featured": false,
+    "order": 10
   }
 ]
