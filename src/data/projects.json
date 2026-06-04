@@ -158,8 +158,8 @@
     },
     "learnings": { "en": "", "fi": "" },
     "tags": ["TypeScript", "React", "Vite", "Supabase", "Zustand"],
-    "image": "",
-    "demoUrl": "",
+    "image": "/Infinite/images/projects/sein.jpg",
+    "demoUrl": "https://samppafin.github.io/Sein-/",
     "repoUrl": "https://github.com/SamppaFIN/Sein-",
     "featured": false,
     "order": 11
