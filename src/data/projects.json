@@ -148,5 +148,20 @@
     "repoUrl": "https://github.com/SamppaFIN/GlobeCiv",
     "featured": false,
     "order": 10
+  },
+  {
+    "slug": "sein",
+    "title": { "en": "Seinä – The Anonymous Wall", "fi": "Seinä – Anonyymi viestiseinä" },
+    "description": {
+      "en": "An infinite anonymous digital wall where anyone can leave messages as Post-it notes or graffiti spray. Real-time, Markdown support, tagging, and filtering. Built with React, TypeScript, and Supabase.",
+      "fi": "Ääretön anonyymi digitaalinen seinä, jonne kuka tahansa voi jättää viestejä Post-it -tarroina tai spraymaalina. Reaaliaikainen, Markdown-tuki, tägäys ja suodatus. Rakennettu Reactilla, TypeScriptillä ja Supabasella."
+    },
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["TypeScript", "React", "Vite", "Supabase", "Zustand"],
+    "image": "",
+    "demoUrl": "",
+    "repoUrl": "https://github.com/SamppaFIN/Sein-",
+    "featured": false,
+    "order": 11
   }
 ]
