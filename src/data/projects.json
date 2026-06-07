@@ -163,5 +163,50 @@
     "repoUrl": "https://github.com/SamppaFIN/Sein-",
     "featured": false,
     "order": 11
+  },
+  {
+    "slug": "newsscaper",
+    "title": { "en": "NewsScaper – Multi-Source Research", "fi": "NewsScaper – Monilähdetutkimus" },
+    "description": {
+      "en": "Multi-source news research engine that searches across Reddit, X, YouTube, Hacker News, Bluesky, GitHub, and more — all from one place. Built with FastAPI and Tailwind CSS.",
+      "fi": "Monilähteinen uutistutkimusmoottori, joka hakee Redditistä, X:stä, YouTubesta, Hacker Newsistä, Blueskysta, GitHubista ja muualta — kaikki yhdestä paikasta. Rakennettu FastAPI:lla ja Tailwind CSS:llä."
+    },
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["Python", "FastAPI", "Tailwind CSS", "JavaScript", "CLI"],
+    "image": "/Infinite/images/projects/newsscaper.jpg",
+    "demoUrl": "https://samppafin.github.io/NewsScaper/",
+    "repoUrl": "https://github.com/SamppaFIN/NewsScaper",
+    "featured": false,
+    "order": 12
+  },
+  {
+    "slug": "nutriscan",
+    "title": { "en": "NutriScan – Food Scanner", "fi": "NutriScan – Ruokaskanneri" },
+    "description": {
+      "en": "Mobile-first nutrition scanner with camera barcode scanning, manual entry, allergen bank, and recipe bank. A practical tool for conscious eating.",
+      "fi": "Mobiili ensin -ravintoskanneri, jossa kamera-viivakoodiluku, manuaalinen syöttö, allergeenipankki ja reseptipankki. Käytännöllinen työkalu tietoiseen syömiseen."
+    },
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["PWA", "JavaScript", "Nutrition", "Mobile", "Camera"],
+    "image": "/Infinite/images/projects/nutriscan.jpg",
+    "demoUrl": "https://samppafin.github.io/NutriScan/web/",
+    "repoUrl": "https://github.com/SamppaFIN/NutriScan",
+    "featured": false,
+    "order": 13
+  },
+  {
+    "slug": "resonance",
+    "title": { "en": "Resonance – Geometric Meditation", "fi": "Resonance – Geometrinen Meditaatio" },
+    "description": {
+      "en": "An interactive geometric audio-visual meditation experience. Evolve through Triangle, Hexagon, Star and Void with Solfeggio frequencies (432/528/963 Hz). Touch-driven generative art.",
+      "fi": "Interaktiivinen geometrinen audiovisuaalinen meditaatiokokemus. Kehity kolmion, kuusikulmion, tähden ja tyhjiön kautta Solfeggio-taajuuksilla (432/528/963 Hz). Kosketusohjattua generatiivista taidetta."
+    },
+    "learnings": { "en": "", "fi": "" },
+    "tags": ["JavaScript", "HTML5 Canvas", "Web Audio", "Generative", "Interactive"],
+    "image": "/Infinite/images/projects/resonance.jpg",
+    "demoUrl": "https://samppafin.github.io/Resonance/",
+    "repoUrl": "https://github.com/SamppaFIN/Resonance",
+    "featured": false,
+    "order": 14
   }
 ]

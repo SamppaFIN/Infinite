@@ -120,6 +120,37 @@
           </div>
         </div>
 
+        <!-- GitHub Stats -->
+        {#if activeProject.github}
+          <div class="mt-6">
+            <h3 class="text-sm font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-3">
+              {locale === 'fi' ? 'GitHub-tilastot' : 'GitHub Stats'}
+            </h3>
+            <div class="flex flex-wrap items-center gap-4 text-sm text-[var(--color-text-muted)] font-mono">
+              <span class="flex items-center gap-1.5">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                {activeProject.github.stars} stars
+              </span>
+              <span class="flex items-center gap-1.5">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3v18l6-3 6 3V3H6z"/></svg>
+                {activeProject.github.forks} forks
+              </span>
+              {#if activeProject.github.language}
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)]"></span>
+                  {activeProject.github.language}
+                </span>
+              {/if}
+              {#if activeProject.github.updatedAt}
+                <span class="flex items-center gap-1.5">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  {new Date(activeProject.github.updatedAt).toLocaleDateString(locale === 'fi' ? 'fi-FI' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                </span>
+              {/if}
+            </div>
+          </div>
+        {/if}
+
         <!-- Learnings -->
         {#if learnings(activeProject)}
           <div class="mt-6">
