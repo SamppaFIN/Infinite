@@ -189,7 +189,7 @@
     "learnings": { "en": "", "fi": "" },
     "tags": ["PWA", "JavaScript", "Nutrition", "Mobile", "Camera"],
     "image": "/Infinite/images/projects/nutriscan.jpg",
-    "demoUrl": "https://samppafin.github.io/NutriScan/web/",
+    "demoUrl": "https://samppafin.github.io/NutriScan/",
     "repoUrl": "https://github.com/SamppaFIN/NutriScan",
     "featured": false,
     "order": 13
