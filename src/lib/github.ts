@@ -57,7 +57,7 @@ export async function fetchGitHubRepos(): Promise<GitHubRepo[]> {
  */
 export function matchGitHubRepo(repos: GitHubRepo[], slug: string): GitHubRepo | undefined {
   return repos.find((r) => {
-    const normalized = r.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    const normalized = r.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/^-+|-+$/g, '');
     return (
       normalized === slug ||
       r.name.toLowerCase() === slug
