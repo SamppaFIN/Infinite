@@ -175,6 +175,16 @@
               {locale === 'fi' ? 'Live-demo' : 'Live Demo'} →
             </a>
           {/if}
+          {#each activeProject.links ?? [] as link}
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-primary)] font-medium hover:border-[var(--color-accent)] transition-all duration-300"
+            >
+              {link.label[locale] ?? link.label.en} →
+            </a>
+          {/each}
           {#if activeProject.repoUrl}
             <a
               href={activeProject.repoUrl}

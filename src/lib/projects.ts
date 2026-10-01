@@ -13,6 +13,9 @@ export const projectSchema = z.object({
   demoUrl: z.string(),
   repoUrl: z.string(),
   featured: z.boolean(),
+  links: z
+    .array(z.object({ label: z.object({ en: z.string(), fi: z.string() }), url: z.string() }))
+    .optional(),
   order: z.number(),
 });
 

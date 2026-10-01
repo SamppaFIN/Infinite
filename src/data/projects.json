@@ -1,13 +1,24 @@
 [
   {
     "slug": "ai-koulu",
-    "title": { "en": "AI-Koulu – AI Education Platform", "fi": "AI-Koulu – Tekoälykoulutus" },
+    "title": {
+      "en": "AI-Koulu – AI Education Platform",
+      "fi": "AI-Koulu – Tekoälykoulutus"
+    },
     "description": {
       "en": "Finnish educational site covering all AI concepts in teaching format with React Flow, quizzes, and glossary. A comprehensive learning journey into artificial intelligence.",
       "fi": "Suomenkielinen opetussivusto, joka kattaa kaikki tekoälykonseptit opetusmuodossa — React Flow, visailut ja sanasto. Kattava oppimismatka tekoälyyn."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["TypeScript", "MDX", "AI", "React Flow"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "TypeScript",
+      "MDX",
+      "AI",
+      "React Flow"
+    ],
     "image": "/Infinite/images/projects/ai-koulu.jpg",
     "demoUrl": "https://samppafin.github.io/AI-Koulu/",
     "repoUrl": "https://github.com/SamppaFIN/AI-Koulu",
@@ -16,13 +27,24 @@
   },
   {
     "slug": "roguereborn",
-    "title": { "en": "RogueReborn – HTML5 Roguelike", "fi": "RogueReborn – HTML5 Roguelike-peli" },
+    "title": {
+      "en": "RogueReborn – HTML5 Roguelike",
+      "fi": "RogueReborn – HTML5 Roguelike-peli"
+    },
     "description": {
       "en": "Full-featured turn-based HTML5 roguelike with town mechanics, infinite dungeon abyss, and complex combat system. Inspired by TomeNet.",
       "fi": "Täysiverinen vuoropohjainen HTML5-roguelike, jossa kaupunkimekaniikat, ääretön luolasto ja monimutkainen taistelujärjestelmä. Inspiroitunut TomeNetistä."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["JavaScript", "HTML5", "Game", "Roguelike"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "JavaScript",
+      "HTML5",
+      "Game",
+      "Roguelike"
+    ],
     "image": "/Infinite/images/projects/roguereborn.jpg",
     "demoUrl": "https://samppafin.github.io/RogueReborn/",
     "repoUrl": "https://github.com/SamppaFIN/RogueReborn",
@@ -31,13 +53,24 @@
   },
   {
     "slug": "spatial-3d-ui-framework",
-    "title": { "en": "Spatial-3D-UI – Immersive 3D Framework", "fi": "Spatial-3D-UI – Upottava 3D-käyttöliittymä" },
+    "title": {
+      "en": "Spatial-3D-UI – Immersive 3D Framework",
+      "fi": "Spatial-3D-UI – Upottava 3D-käyttöliittymä"
+    },
     "description": {
       "en": "Next-gen 3D UI library for immersive web experiences with 26+ interactive components. Built with Three.js and WebGL.",
       "fi": "Seuraavan sukupolven 3D-käyttöliittymäkirjasto upottaviin web-kokemuksiin, 26+ interaktiivista komponenttia. Rakennettu Three.js:llä ja WebGL:llä."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["Three.js", "WebGL", "JavaScript", "HTML5"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "Three.js",
+      "WebGL",
+      "JavaScript",
+      "HTML5"
+    ],
     "image": "/Infinite/images/projects/spatial-3d-ui.jpg",
     "demoUrl": "https://samppafin.github.io/Spatial-3D-UI-framework/",
     "repoUrl": "https://github.com/SamppaFIN/Spatial-3D-UI-framework",
@@ -46,13 +79,25 @@
   },
   {
     "slug": "ai-pasianssi",
-    "title": { "en": "AI-Pasianssi – AI Solitaire", "fi": "AI-Pasianssi – Tekoälypasianssi" },
+    "title": {
+      "en": "AI-Pasianssi – AI Solitaire",
+      "fi": "AI-Pasianssi – Tekoälypasianssi"
+    },
     "description": {
       "en": "AI-powered Klondike solitaire with OpenRouter/Groq integration. A classic card game enhanced with artificial intelligence.",
       "fi": "Tekoälyavusteinen Klondike-pasianssi OpenRouter/Groq-integraatiolla. Klassinen korttipeli tekoälyllä tehostettuna."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["JavaScript", "CSS", "AI", "Groq", "OpenRouter"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "JavaScript",
+      "CSS",
+      "AI",
+      "Groq",
+      "OpenRouter"
+    ],
     "image": "/Infinite/images/projects/ai-pasianssi.jpg",
     "demoUrl": "https://samppafin.github.io/AI-pasianssi/",
     "repoUrl": "https://github.com/SamppaFIN/AI-pasianssi",
@@ -61,13 +106,25 @@
   },
   {
     "slug": "nlp-ai",
-    "title": { "en": "TerapiaAI – AI Therapy Chat", "fi": "TerapiaAI – Tekoälyterapia-chat" },
+    "title": {
+      "en": "TerapiaAI – AI Therapy Chat",
+      "fi": "TerapiaAI – Tekoälyterapia-chat"
+    },
     "description": {
       "en": "Finnish browser-based therapy chat with 8 AI personas (Rogers, Freud, Jung, CBT, and more). NLP-powered with speech recognition.",
       "fi": "Suomenkielinen selainpohjainen terapia-chat kahdeksalla tekoälypersoonalla (Rogers, Freud, Jung, CBT ja muita). NLP-pohjainen puheentunnistuksella."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["HTML", "JavaScript", "NLP", "AI", "SpeechRecognition"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "HTML",
+      "JavaScript",
+      "NLP",
+      "AI",
+      "SpeechRecognition"
+    ],
     "image": "/Infinite/images/projects/nlp-ai.jpg",
     "demoUrl": "https://samppafin.github.io/NLP-AI/",
     "repoUrl": "https://github.com/SamppaFIN/NLP-AI",
@@ -76,13 +133,21 @@
   },
   {
     "slug": "j-rjestelm-nvarjot",
-    "title": { "en": "Järjestelmän Varjot – Societal Critique", "fi": "Järjestelmän Varjot – Yhteiskuntakritiikki" },
+    "title": {
+      "en": "Järjestelmän Varjot – Societal Critique",
+      "fi": "Järjestelmän Varjot – Yhteiskuntakritiikki"
+    },
     "description": {
       "en": "Lists known problems in societal structures with a Finnish focus. A structured critique of systemic issues.",
       "fi": "Listaa tunnettuja ongelmia yhteiskuntarakenteissa suomalaisesta näkökulmasta. Jäsenneltyä kritiikkiä systeemisistä ongelmista."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["HTML"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "HTML"
+    ],
     "image": "/Infinite/images/projects/jarjestelman-varjot.jpg",
     "demoUrl": "https://samppafin.github.io/J-rjestelm-nVarjot/",
     "repoUrl": "https://github.com/SamppaFIN/J-rjestelm-nVarjot",
@@ -91,13 +156,21 @@
   },
   {
     "slug": "hallituspaatokset",
-    "title": { "en": "Hallituspäätökset – Government Tracker", "fi": "Hallituspäätökset – Hallitusseuranta" },
+    "title": {
+      "en": "Hallituspäätökset – Government Tracker",
+      "fi": "Hallituspäätökset – Hallitusseuranta"
+    },
     "description": {
       "en": "Infographic tracking Finnish government promises and their fulfillment. Data-driven policy accountability tool.",
       "fi": "Infografiikka, joka seuraa Suomen hallituksen lupauksia ja niiden toteutumista. Datavetoinen politiikan vastuullisuustyökalu."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["HTML"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "HTML"
+    ],
     "image": "/Infinite/images/projects/hallituspaatokset.jpg",
     "demoUrl": "https://samppafin.github.io/Hallituspaatokset/",
     "repoUrl": "https://github.com/SamppaFIN/Hallituspaatokset",
@@ -106,13 +179,25 @@
   },
   {
     "slug": "factory-ultra",
-    "title": { "en": "Factory Ultra – AI Development Factory", "fi": "Factory Ultra – Tekoälyn kehitystehdas" },
+    "title": {
+      "en": "Factory Ultra – AI Development Factory",
+      "fi": "Factory Ultra – Tekoälyn kehitystehdas"
+    },
     "description": {
       "en": "Production-grade AI development factory template: BRDC workflow, audit trails, security, cost tracking, and Oracle research. Built for serious AI projects.",
       "fi": "Tuotantotason tekoälykehityksen tehdaspohja: BRDC-työnkulku, auditoidut polut, tietoturva, kustannusseuranta ja Oracle-tutkimus. Rakennettu vakaviin tekoälyprojekteihin."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["Python", "JavaScript", "AI", "Automation", "Security"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "Python",
+      "JavaScript",
+      "AI",
+      "Automation",
+      "Security"
+    ],
     "image": "",
     "demoUrl": "",
     "repoUrl": "https://github.com/SamppaFIN/factory-ultra",
@@ -121,13 +206,23 @@
   },
   {
     "slug": "tarot-game",
-    "title": { "en": "Cosmic Tarot – Tarot Journey", "fi": "Cosmic Tarot – Tarotmatka" },
+    "title": {
+      "en": "Cosmic Tarot – Tarot Journey",
+      "fi": "Cosmic Tarot – Tarotmatka"
+    },
     "description": {
       "en": "Mobile-first tarot journey with emotional questions and personalized readings. A creative blend of spirituality and web technology.",
       "fi": "Mobiili ensin -tarotmatka tunnekysymyksillä ja personoiduilla tulkinnoilla. Luova yhdistelmä henkisyyttä ja web-teknologiaa."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["JavaScript", "HTML5", "CSS3"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "JavaScript",
+      "HTML5",
+      "CSS3"
+    ],
     "image": "/Infinite/images/projects/tarot-game.jpg",
     "demoUrl": "https://samppafin.github.io/tarot-game/",
     "repoUrl": "https://github.com/SamppaFIN/tarot-game",
@@ -136,13 +231,25 @@
   },
   {
     "slug": "globeciv",
-    "title": { "en": "GlobeCiv – 3D Civilization Game", "fi": "GlobeCiv – 3D-sivilisaatiopeli" },
+    "title": {
+      "en": "GlobeCiv – 3D Civilization Game",
+      "fi": "GlobeCiv – 3D-sivilisaatiopeli"
+    },
     "description": {
       "en": "A 3D globe-based civilization game with city building, resource management (Food, Production, Science, Culture), tech tree, AI opponents, and territory expansion. Built with Three.js and WebGL.",
       "fi": "Kolmiulotteinen maapalloon pohjautuva sivilisaatiopeli, jossa kaupunginrakennusta, resurssienhallintaa (ruoka, tuotanto, tiede, kulttuuri), teknologiapuu, tekoälyvastustajia ja alueiden laajennusta. Rakennettu Three.js:llä ja WebGL:llä."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["Three.js", "WebGL", "JavaScript", "Game", "HTML5"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "Three.js",
+      "WebGL",
+      "JavaScript",
+      "Game",
+      "HTML5"
+    ],
     "image": "/Infinite/images/projects/globeciv.jpg",
     "demoUrl": "https://samppafin.github.io/GlobeCiv/",
     "repoUrl": "https://github.com/SamppaFIN/GlobeCiv",
@@ -151,13 +258,25 @@
   },
   {
     "slug": "sein",
-    "title": { "en": "Seinä – The Anonymous Wall", "fi": "Seinä – Anonyymi viestiseinä" },
+    "title": {
+      "en": "Seinä – The Anonymous Wall",
+      "fi": "Seinä – Anonyymi viestiseinä"
+    },
     "description": {
       "en": "An infinite anonymous digital wall where anyone can leave messages as Post-it notes or graffiti spray. Real-time, Markdown support, tagging, and filtering. Built with React, TypeScript, and Supabase.",
       "fi": "Ääretön anonyymi digitaalinen seinä, jonne kuka tahansa voi jättää viestejä Post-it -tarroina tai spraymaalina. Reaaliaikainen, Markdown-tuki, tägäys ja suodatus. Rakennettu Reactilla, TypeScriptillä ja Supabasella."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["TypeScript", "React", "Vite", "Supabase", "Zustand"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "TypeScript",
+      "React",
+      "Vite",
+      "Supabase",
+      "Zustand"
+    ],
     "image": "/Infinite/images/projects/sein.jpg",
     "demoUrl": "https://samppafin.github.io/Sein-/",
     "repoUrl": "https://github.com/SamppaFIN/Sein-",
@@ -166,13 +285,25 @@
   },
   {
     "slug": "newsscaper",
-    "title": { "en": "NewsScaper – Multi-Source Research", "fi": "NewsScaper – Monilähdetutkimus" },
+    "title": {
+      "en": "NewsScaper – Multi-Source Research",
+      "fi": "NewsScaper – Monilähdetutkimus"
+    },
     "description": {
       "en": "Multi-source news research engine that searches across Reddit, X, YouTube, Hacker News, Bluesky, GitHub, and more — all from one place. Built with FastAPI and Tailwind CSS.",
       "fi": "Monilähteinen uutistutkimusmoottori, joka hakee Redditistä, X:stä, YouTubesta, Hacker Newsistä, Blueskysta, GitHubista ja muualta — kaikki yhdestä paikasta. Rakennettu FastAPI:lla ja Tailwind CSS:llä."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["Python", "FastAPI", "Tailwind CSS", "JavaScript", "CLI"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "Python",
+      "FastAPI",
+      "Tailwind CSS",
+      "JavaScript",
+      "CLI"
+    ],
     "image": "/Infinite/images/projects/newsscaper.jpg",
     "demoUrl": "https://samppafin.github.io/NewsScaper/",
     "repoUrl": "https://github.com/SamppaFIN/NewsScaper",
@@ -181,13 +312,25 @@
   },
   {
     "slug": "nutriscan",
-    "title": { "en": "NutriScan – Food Scanner", "fi": "NutriScan – Ruokaskanneri" },
+    "title": {
+      "en": "NutriScan – Food Scanner",
+      "fi": "NutriScan – Ruokaskanneri"
+    },
     "description": {
       "en": "Mobile-first nutrition scanner with camera barcode scanning, manual entry, allergen bank, and recipe bank. A practical tool for conscious eating.",
       "fi": "Mobiili ensin -ravintoskanneri, jossa kamera-viivakoodiluku, manuaalinen syöttö, allergeenipankki ja reseptipankki. Käytännöllinen työkalu tietoiseen syömiseen."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["PWA", "JavaScript", "Nutrition", "Mobile", "Camera"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "PWA",
+      "JavaScript",
+      "Nutrition",
+      "Mobile",
+      "Camera"
+    ],
     "image": "/Infinite/images/projects/nutriscan.jpg",
     "demoUrl": "https://samppafin.github.io/NutriScan/",
     "repoUrl": "https://github.com/SamppaFIN/NutriScan",
@@ -196,17 +339,146 @@
   },
   {
     "slug": "resonance",
-    "title": { "en": "Resonance – Geometric Meditation", "fi": "Resonance – Geometrinen Meditaatio" },
+    "title": {
+      "en": "Resonance – Geometric Meditation",
+      "fi": "Resonance – Geometrinen Meditaatio"
+    },
     "description": {
       "en": "An interactive geometric audio-visual meditation experience. Evolve through Triangle, Hexagon, Star and Void with Solfeggio frequencies (432/528/963 Hz). Touch-driven generative art.",
       "fi": "Interaktiivinen geometrinen audiovisuaalinen meditaatiokokemus. Kehity kolmion, kuusikulmion, tähden ja tyhjiön kautta Solfeggio-taajuuksilla (432/528/963 Hz). Kosketusohjattua generatiivista taidetta."
     },
-    "learnings": { "en": "", "fi": "" },
-    "tags": ["JavaScript", "HTML5 Canvas", "Web Audio", "Generative", "Interactive"],
+    "learnings": {
+      "en": "",
+      "fi": ""
+    },
+    "tags": [
+      "JavaScript",
+      "HTML5 Canvas",
+      "Web Audio",
+      "Generative",
+      "Interactive"
+    ],
     "image": "/Infinite/images/projects/resonance.jpg",
     "demoUrl": "https://samppafin.github.io/Resonance/",
     "repoUrl": "https://github.com/SamppaFIN/Resonance",
     "featured": false,
     "order": 14
+  },
+  {
+    "slug": "harakka",
+    "title": {
+      "en": "Harakka – Voting App",
+      "fi": "Harakka – Äänestyssovellus"
+    },
+    "description": {
+      "en": "Mobile-first voting app with no sign-in. Create a poll with a Markdown description and image, vote with one tap and watch live results as bars. Edit with a 5-character code right on the published page.",
+      "fi": "Mobiili ensin -äänestyssovellus ilman kirjautumista. Luo äänestys Markdown-kuvauksella ja kuvalla, äänestä yhdellä napautuksella ja seuraa tuloksia palkkeina. Muokkaus 5-merkkisellä koodilla suoraan julkaistulla sivulla."
+    },
+    "learnings": {
+      "en": "Page and API are a single Cloudflare Worker, and all data lives in R2 with no database. Concurrent votes are handled with optimistic etag writes, and codes and voters are stored only as HMAC digests – no IP addresses. The known limit is documented: hundreds of votes per second would need a Durable Object.",
+      "fi": "Sivu ja API ovat yksi Cloudflare Worker, ja kaikki data elää R2:ssa ilman tietokantaa. Samanaikaiset äänet hoidetaan optimistisella etag-kirjoituksella, ja koodit ja äänestäjät tallennetaan vain HMAC-tiivisteinä – ei IP-osoitteita. Tunnettu rajoite dokumentoitu: satoja ääniä sekunnissa vaatisi Durable Objectin."
+    },
+    "tags": [
+      "React",
+      "TypeScript",
+      "Cloudflare Workers",
+      "R2",
+      "Tailwind"
+    ],
+    "image": "/Infinite/images/projects/harakka.jpg",
+    "demoUrl": "https://harakka.es3-world-worker.workers.dev",
+    "repoUrl": "https://github.com/SamppaFIN/Harakka",
+    "featured": false,
+    "order": 15
+  },
+  {
+    "slug": "toni1-0",
+    "title": {
+      "en": "Toni1.0 – BetTracker",
+      "fi": "Toni1.0 – BetTracker"
+    },
+    "description": {
+      "en": "A new kind of scraper and betting value analyzer: collects odds and stats, compares bookmakers and uses a Poisson model and Kelly staking to find where real value is. Football and Liiga ice hockey.",
+      "fi": "Uudenlainen scraper ja vedonlyönnin value-analyysi: kerää kertoimet ja tilastot, vertailee toimistoja ja laskee Poisson-mallilla ja Kelly-panostuksella, missä todellista arvoa on. Jalkapallo ja Liiga-jääkiekko."
+    },
+    "learnings": {
+      "en": "Data fetching runs on a server-side schedule and is published as a static snapshot to GitHub Pages, since browsers can't fetch odds directly. Models are measured with Brier score, calibration and CLV, and the project has 400+ unit tests and 60 E2E tests. Responsible-gambling notes are part of the tool – it's a learning aid for analysis, not betting advice.",
+      "fi": "Datan haku ajetaan ajastettuna palvelinpuolella ja julkaistaan staattisena snapshotina GitHub Pagesiin, koska selain ei voi hakea kertoimia suoraan. Mallit mitataan Brier-pisteellä, kalibroinnilla ja CLV:llä, ja projektissa on yli 400 yksikkötestiä sekä 60 E2E-testiä. Vastuullisuustekstit kuuluvat työkaluun – tämä on analyysin harjoitusväline, ei vedonlyöntineuvoja."
+    },
+    "tags": [
+      "TypeScript",
+      "Scraping",
+      "Supabase",
+      "Poisson",
+      "Analytics"
+    ],
+    "image": "/Infinite/images/projects/toni1-0.jpg",
+    "demoUrl": "https://samppafin.github.io/Toni1.0/demo.html",
+    "repoUrl": "https://github.com/SamppaFIN/Toni1.0",
+    "featured": false,
+    "order": 16
+  },
+  {
+    "slug": "eldritch",
+    "title": {
+      "en": "Eldritch Sanctuary – GPS Territory Game",
+      "fi": "Eldritch Sanctuary – GPS-valtauspeli"
+    },
+    "description": {
+      "en": "A city-capture game you play by walking the real world: H3 hexagons fill from the routes you walk, and the ground remembers you. Fog of war, watchtowers, temples, gates and a shared Reckoning against an Ancient One – with a Lovecraftian face.",
+      "fi": "Kaupunginvaltauspeli, jossa kävelet oikeassa maailmassa: kuusikulmiot (H3) täyttyvät kävelemistäsi reiteistä, ja maa muistaa sinut. Sumu, vartiotornit, temppelit, portit ja yhteinen Tilinteko Muinaista vastaan lovecraftilaisella ilmeellä."
+    },
+    "learnings": {
+      "en": "v3 is a rewrite: a single module and a CI-enforced 400-line file limit replaced 68 script tags and 4,000-line files, with progress driven by BRDC tickets. The rules reward routine (daily reinforcement, decay), not grinding. Sammon Takomo's game review (88/100) is linked below.",
+      "fi": "v3 on uudelleenkirjoitus: edellisen version 68 script-tagia ja 4 000 rivin tiedostoja korvasi yksi moduuli, 400 rivin tiedostoraja CI:ssä ja tiketeittäin etenevä BRDC-suunnitelma. Pelisäännöt palkitsevat rutiinia (vahvistus päivittäin, rapautuminen), ei grindausta. Sammon Takomon peliarvostelu (88/100) on luettavissa alla olevasta linkistä."
+    },
+    "tags": [
+      "TypeScript",
+      "React",
+      "PWA",
+      "MapLibre",
+      "H3",
+      "GPS"
+    ],
+    "image": "/Infinite/images/projects/eldritch.jpg",
+    "demoUrl": "https://samppafin.github.io/Eldritch/",
+    "repoUrl": "https://github.com/SamppaFIN/Eldritch",
+    "featured": false,
+    "order": 17,
+    "links": [
+      {
+        "label": {
+          "fi": "Sammon Takomo: peliarvostelu",
+          "en": "Sammon Takomo: game review"
+        },
+        "url": "https://claude.ai/artifact/NvuXA7XAmpLoxQm4VBZyLu"
+      }
+    ]
+  },
+  {
+    "slug": "bandrock",
+    "title": {
+      "en": "BandRock – Band Bulletin Board",
+      "fi": "BandRock – Bändien ilmoitustaulu"
+    },
+    "description": {
+      "en": "A bulletin board for bands: anyone can create their own page with no sign-in – gigs, intro and contact details – and edit it later with a 5-character code. Search and filter by type, city and date.",
+      "fi": "Ilmoitustaulu bändeille: kuka tahansa luo oman sivun ilman kirjautumista – keikat, esittely ja yhteystiedot – ja muokkaa sitä myöhemmin 5-merkkisellä koodilla. Haku ja suodatus tyypin, kaupungin ja ajankohdan mukaan."
+    },
+    "learnings": {
+      "en": "A static GitHub Pages site and Cloudflare Worker + R2 storage work together: tests, Worker and site deploy in that order so the page can never be ahead of the API. This architecture became the basis for the later Harakka project.",
+      "fi": "Staattinen GitHub Pages -sivu ja Cloudflare Worker + R2 -tallennus toimivat yhdessä: testit, Worker ja sivu julkaistaan putkessa tässä järjestyksessä, jotta sivu ei voi olla API:a edellä. Tämä arkkitehtuuri toimi pohjana myöhemmälle Harakka-projektille."
+    },
+    "tags": [
+      "JavaScript",
+      "Cloudflare Workers",
+      "R2",
+      "GitHub Pages"
+    ],
+    "image": "/Infinite/images/projects/bandrock.jpg",
+    "demoUrl": "https://samppafin.github.io/BandRock/",
+    "repoUrl": "https://github.com/SamppaFIN/BandRock",
+    "featured": false,
+    "order": 18
   }
 ]
