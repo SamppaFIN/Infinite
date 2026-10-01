@@ -386,7 +386,7 @@
       "Tailwind"
     ],
     "image": "/Infinite/images/projects/harakka.jpg",
-    "demoUrl": "https://harakka.es3-world-worker.workers.dev",
+    "demoUrl": "https://samppafin.github.io/Harakka/",
     "repoUrl": "https://github.com/SamppaFIN/Harakka",
     "featured": false,
     "order": 15
@@ -402,8 +402,8 @@
       "fi": "Uudenlainen scraper ja vedonlyönnin value-analyysi: kerää kertoimet ja tilastot, vertailee toimistoja ja laskee Poisson-mallilla ja Kelly-panostuksella, missä todellista arvoa on. Jalkapallo ja Liiga-jääkiekko."
     },
     "learnings": {
-      "en": "Data fetching runs on a server-side schedule and is published as a static snapshot to GitHub Pages, since browsers can't fetch odds directly. Models are measured with Brier score, calibration and CLV, and the project has 400+ unit tests and 60 E2E tests. Responsible-gambling notes are part of the tool – it's a learning aid for analysis, not betting advice.",
-      "fi": "Datan haku ajetaan ajastettuna palvelinpuolella ja julkaistaan staattisena snapshotina GitHub Pagesiin, koska selain ei voi hakea kertoimia suoraan. Mallit mitataan Brier-pisteellä, kalibroinnilla ja CLV:llä, ja projektissa on yli 400 yksikkötestiä sekä 60 E2E-testiä. Vastuullisuustekstit kuuluvat työkaluun – tämä on analyysin harjoitusväline, ei vedonlyöntineuvoja."
+      "en": "Data fetching runs on a server-side schedule and is published as a static snapshot to GitHub Pages, since browsers can't fetch odds directly. Models are measured with Brier score, calibration and CLV, and the project has 400+ unit tests and 60 E2E tests.",
+      "fi": "Datan haku ajetaan ajastettuna palvelinpuolella ja julkaistaan staattisena snapshotina GitHub Pagesiin, koska selain ei voi hakea kertoimia suoraan. Mallit mitataan Brier-pisteellä, kalibroinnilla ja CLV:llä, ja projektissa on yli 400 yksikkötestiä sekä 60 E2E-testiä."
     },
     "tags": [
       "TypeScript",
