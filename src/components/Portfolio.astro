@@ -1,0 +1,395 @@
+---
+import css from '../styles/portfolio.css?raw';
+import js from '../scripts/portfolio.js?raw';
+import { page, jsonLd, pageUrl, sitemapXml, robotsTxt, llmsTxt, projects, story, asset } from '../lib/site';
+import { SEO, TAGS, LANGS, LIBS, CWV, REDIRECTS, SECTIONS, BASE, PERSONAS, CONTACT, CONTACT_REASONS, type Lang } from '../data/content';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const { ui, top, byDim, label, counts, client, mm } = page(lang);
+const seo = SEO[lang];
+const other: Lang = lang === 'fi' ? 'en' : 'fi';
+const dims: [string, string][] = [['purpose', ui.dimPurpose], ['tech', ui.dimTech], ['ai', ui.dimAi]];
+const nf = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, lang === 'fi' ? ' ' : ',');
+const mIdx = (d: string) => (+d.slice(0, 4) - 2025) * 12 + +d.slice(5, 7) - 3;
+
+// Tarinan luvut: luvun projektit aikajärjestyksessä, commitit, uudet tekniikat ja käytetyt AI-mallit
+const inCh = (c: { from: number; to: number }, d: string) => mIdx(d) >= c.from && mIdx(d) <= c.to;
+const models = story.lanes.filter((x) => x.group === 'model');
+const chapters = story.chapters.map((c) => ({ ...c,
+  items: projects.filter((p) => inCh(c, p.start)).sort((a, b) => a.start.localeCompare(b.start)),
+  commits: story.months.slice(c.from, c.to + 1).reduce((a, b) => a + b, 0),
+  newTech: projects.filter((p) => inCh(c, p.techAt)).flatMap((p) => p.firstTech[lang]),
+  models: models.filter((x) => x.uses.some((u) => inCh(c, u.date))).map((x) => x.label[lang]) }));
+if (chapters.reduce((a, c) => a + c.items.length, 0) !== projects.length) throw new Error('Kaikki projektit eivät osu lukuihin');
+
+const real = REDIRECTS.filter((r) => r.from !== r.to);
+const chains = real.filter((r) => real.some((x) => x.from === r.to)).length;
+const data = JSON.stringify(client).replace(/</g, '\\u003c');
+const ld = JSON.stringify(jsonLd(lang)).replace(/</g, '\\u003c');
+const maxLang = LANGS[0].pct, maxLib = LIBS[0].n;
+const otherUrl = `${BASE}${other === 'fi' ? '/' : '/en/'}`;
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{seo.title}</title>
+  <meta name="description" content={seo.description} />
+  <link rel="canonical" href={pageUrl(lang)} />
+  <meta name="robots" content="index, follow" />
+  <link rel="alternate" hreflang="fi" href={pageUrl('fi')} />
+  <link rel="alternate" hreflang="en" href={pageUrl('en')} />
+  <link rel="alternate" hreflang="x-default" href={pageUrl('fi')} />
+  <meta name="author" content="Infinite" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Infinite" />
+  <meta property="og:title" content={seo.title} />
+  <meta property="og:description" content={seo.description} />
+  <meta property="og:url" content={pageUrl(lang)} />
+  <meta property="og:locale" content={seo.locale} />
+  <meta property="og:locale:alternate" content={SEO[other].locale} />
+  <!-- og:image: paikkamerkki · sisältö: 1200×630-jakokuva, esim. <meta property="og:image" content="https://samppafin.github.io/Infinite/og.png" /> -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seo.title} />
+  <meta name="twitter:description" content={seo.description} />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f6f9" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#12151c" />
+  <link rel="icon" type="image/svg+xml" href={`${BASE}/favicon.svg`} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <script is:inline>(function(){try{var t=localStorage.getItem('infinite-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <style is:inline set:html={css}></style>
+  <script type="application/ld+json" is:inline set:html={ld}></script>
+</head>
+<body>
+  <a class="skip" href="#main">{ui.skip}</a>
+  <header class="topbar" id="topbar">
+    <div class="topbar-in wrap">
+      <a class="brand" href="#etusivu">
+        <svg width="30" height="16" viewBox="0 0 30 16" aria-hidden="true"><path d="M8 2C4.7 2 2 4.7 2 8s2.7 6 6 6c4.5 0 9.5-12 14-12 3.3 0 6 2.7 6 6s-2.7 6-6 6C17.5 14 12.5 2 8 2Z" fill="none" stroke="currentColor" stroke-width="2"></path></svg>
+        <span>Infinite</span>
+      </a>
+      <nav class="nav" aria-label={ui.navLabel}>
+        <ul>{SECTIONS.filter((s) => s.id !== 'etusivu').map((s) => <li><a href={`#${s.id}`}>{s.nav[lang]}</a></li>)}</ul>
+      </nav>
+      <div class="actions">
+        <button type="button" class="btn icon-btn" id="map-btn" aria-haspopup="dialog" aria-controls="map-dialog">
+          <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"></circle><circle cx="8" cy="8" r="1.6" fill="currentColor"></circle><circle cx="8" cy="2" r="1.2" fill="currentColor"></circle><circle cx="13.2" cy="11" r="1.2" fill="currentColor"></circle><circle cx="2.8" cy="11" r="1.2" fill="currentColor"></circle></svg>
+          <span class="lbl">{ui.map}</span>
+        </button>
+        <button type="button" class="btn icon-btn" id="theme-btn">
+          <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 14 6 8 14.5 2 6Z" fill="none" stroke="currentColor" stroke-width="1.4"></path><path d="M2 6h12M8 1.5 5.5 6 8 14.5 10.5 6Z" fill="none" stroke="currentColor" stroke-width="1"></path></svg>
+          <span class="lbl" id="theme-label">{ui.themeDark}</span>
+        </button>
+        <button type="button" class="btn" id="seo-btn" aria-haspopup="dialog" aria-controls="seo-dialog">{ui.seo}</button>
+        <a class="btn" href={otherUrl} hreflang={other} lang={other} aria-label={ui.langSwitchLabel}>{ui.langSwitch}</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="etusivu" class="hero" aria-labelledby="h-hero">
+      <canvas id="hero-canvas" role="img" aria-label={ui.heroCanvas}></canvas>
+      <div class="hero-in wrap">
+        <div class="glass hero-card" data-attn="hero">
+          <p class="eyebrow">{ui.heroEyebrow}</p>
+          <h1 id="h-hero" tabindex="-1">Infinite</h1>
+          <p class="tagline">{ui.heroTagline}</p>
+          <p class="muted">{ui.heroText}</p>
+          <div class="row">
+            <a class="btn primary lg" href="#projektit">{ui.heroCta}</a>
+            <a class="btn lg" href="https://github.com/SamppaFIN">{ui.heroGithub}</a>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="tech-tag hero-tech" data-tech="hero">{ui.techHero}</button>
+    </section>
+
+    <div class="wrap sections">
+      <section id="top5" aria-labelledby="h-top5">
+        <div class="scape scape-crystal" aria-hidden="true"><i class="neb"></i><i class="stars"></i><i class="mtn m1"></i><i class="mtn m2"></i></div>
+        <button type="button" class="tech-tag scape-tag" data-tech="scapes">{ui.scapeCss}</button>
+        <div class="sec-head" data-attn="top5">
+          <div><h2 id="h-top5" tabindex="-1">{ui.top5Title}</h2><p class="lead">{ui.top5Sub}</p></div>
+          <button type="button" class="tech-tag" data-tech="rim">{ui.techRim}</button>
+        </div>
+        <div class="top-grid">
+          {top.map((p) => (
+            <article class={`glass card${p.top === 1 ? ' card-lead' : ''}`} data-attn={`p-${p.id}`}>
+              <img src={asset(p.image)} width={p.imageW} height={p.imageH} alt="" loading={p.top <= 2 ? 'eager' : 'lazy'} decoding="async" />
+              <div class="card-body">
+                <div class="card-meta"><span class="rank">0{p.top}</span><span class="mono">{p.score} {ui.pts} · {mm(p.start)}</span></div>
+                <h3>{p.name}</h3>
+                <p class="muted">{p.one[lang]}</p>
+                <dl class="facts">
+                  <dt>{ui.purpose}</dt><dd>{byDim(p, 'purpose').join(', ')}</dd>
+                  <dt>{ui.technology}</dt><dd>{byDim(p, 'tech').join(', ')}</dd>
+                  <dt>{ui.ai}</dt><dd>{p.pair || '–'}</dd>
+                  <dt>{ui.result}</dt><dd class={p.result[lang] ? '' : 'muted'}>{p.result[lang] || ui.noResult}</dd>
+                </dl>
+                <div class="row">
+                  {p.demoUrl && <a class="btn primary" href={p.demoUrl}>{ui.demo}<span class="sr-only">: {p.name}</span></a>}
+                  <a class="btn" href={p.repoUrl}>{ui.code}<span class="sr-only">: {p.name}</span></a>
+                  <button type="button" class="btn" data-project={p.id} aria-haspopup="dialog">{ui.openReview}<span class="sr-only">: {p.name}</span></button>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="projektit" aria-labelledby="h-proj">
+        <canvas class="scape scape-meteor" aria-hidden="true"></canvas>
+        <button type="button" class="tech-tag scape-tag" data-tech="scapes">{ui.scapeMeteor}</button>
+        <div class="sec-head" data-attn="projektit">
+          <div>
+            <p class="eyebrow">{ui.storyEyebrow} · {nf(story.total)} {ui.commits} · {projects.length + story.others.length} {ui.repos}</p>
+            <h2 id="h-proj" tabindex="-1">{ui.finderTitle}</h2>
+            <p class="lead">{ui.finderSub}</p>
+          </div>
+          <button type="button" class="tech-tag" data-tech="finder">{ui.techFinder}</button>
+        </div>
+        <div class="finder" id="finder">
+          <div class="chip-row ch-pick" role="group" aria-label={ui.chapters}>
+            <button type="button" class="chip" data-ch="" aria-pressed="true">{ui.allChapters}<span class="count" aria-hidden="true">{projects.length}</span></button>
+            {chapters.map((c, i) => (
+              <button type="button" class="chip" data-ch={i} aria-pressed="false"><span class="p">{c.period} </span>{c.title[lang]}<span class="count" aria-hidden="true">{c.items.length}</span></button>
+            ))}
+          </div>
+          <figure class="ftl">
+            <div class="ftl-track" id="finder-tl" role="group" aria-labelledby="ftl-cap"></div>
+            <figcaption class="small muted" id="ftl-cap">{ui.ftlLabel}</figcaption>
+          </figure>
+          <div class="finder-controls">
+            {dims.map(([dim, name]) => (
+              <fieldset class="chips">
+                <legend>{name}</legend>
+                <div class="chip-row">
+                  {TAGS.filter((t) => t.dim === dim).map((t) => (
+                    <button type="button" class="chip" data-tag={t.id} aria-pressed="false">{t.label[lang]}<span class="count" aria-hidden="true">{counts[t.id]}</span></button>
+                  ))}
+                </div>
+              </fieldset>
+            ))}
+          </div>
+          <div class="finder-bar">
+            <p id="finder-count" class="mono small" aria-live="polite">{projects.length} {ui.projects} · {ui.finderNone}</p>
+            <button type="button" class="btn sm" id="finder-clear" disabled>{ui.clear}</button>
+          </div>
+          {chapters.map((c, i) => (
+            <section class="pch" data-ch={i} aria-labelledby={`pch-${i}`}>
+              <div class="pch-head">
+                <p class="pch-meta mono">{c.period} · {c.items.length} {ui.projects} · {nf(c.commits)} {ui.commits}</p>
+                <h3 id={`pch-${i}`}>{c.title[lang]}</h3>
+                <p>{c.paras[lang][0]}</p>
+                <details class="pch-more">
+                  <summary>{ui.readMore}</summary>
+                  {c.paras[lang].slice(1).map((x) => <p>{x}</p>)}
+                  {c.newTech.length > 0 && <p class="small"><strong>{ui.newHere}:</strong> {c.newTech.join(', ')}</p>}
+                  {c.models.length > 0 && <p class="small"><strong>{ui.gModel}:</strong> {c.models.join(', ')}</p>}
+                </details>
+              </div>
+              <ul class="acards">
+                {c.items.map((p) => (
+                  <li class="acard aurora-bg" data-card={p.id} data-attn={`p-${p.id}`} style={`--ax:${(p.score * 7) % 70 + 15}%`}>
+                    <div class="ac-head">
+                      <h4><button type="button" class="link-btn" data-project={p.id} aria-haspopup="dialog">{p.name}</button></h4>
+                      <span class="ac-score mono">{p.top ? `Top 5 · ${p.score} ${ui.pts}` : `${p.score} ${ui.pts}`}</span>
+                    </div>
+                    <p class="ac-one">{p.one[lang]}</p>
+                    <p class="ac-meta mono">{mm(p.start)} · {nf(p.commits)} {ui.commits}{p.pair ? ` · ${p.pair.split(' · ').pop()}` : ''}</p>
+                    <p class="ac-tags">{p.tags.map((x, j) => <>{j ? ' · ' : ''}<span data-t={x}>{label(x)}</span></>)}</p>
+                    <div class="ac-links">
+                      <button type="button" class="link-btn" data-project={p.id} aria-haspopup="dialog">{ui.analysis}<span class="sr-only">: {p.name}</span></button>
+                      {p.demoUrl && <a href={p.demoUrl}>Demo<span class="sr-only">: {p.name}</span></a>}
+                      <a href={p.repoUrl}>{ui.codeShort}<span class="sr-only">: {p.name}</span></a>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+          <p class="small muted">{ui.storySources}</p>
+        </div>
+      </section>
+
+      <section id="teknologiat" aria-labelledby="h-tek">
+        <canvas class="scape scape-flow" aria-hidden="true"></canvas>
+        <button type="button" class="tech-tag scape-tag" data-tech="scapes">{ui.scapeFlow}</button>
+        <div class="sec-head" data-attn="teknologiat">
+          <div><h2 id="h-tek" tabindex="-1">{ui.techTitle}</h2><p class="lead">{ui.techSub}</p></div>
+        </div>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <h3>{ui.langsTitle}</h3>
+            {LANGS.map((l) => (
+              <div class="bar-row"><span>{l.name}</span><span class="bar" aria-hidden="true"><span style={`width:${(l.pct / maxLang * 100).toFixed(1)}%`}></span></span>
+                <span class="v">{lang === 'fi' ? String(l.pct).replace('.', ',') : l.pct} %</span><span class="v muted">{l.repos} {ui.repos}</span></div>
+            ))}
+          </div>
+          <div class="tech-card">
+            <h3>{ui.libsTitle}</h3>
+            {LIBS.map((l) => (
+              <div class="bar-row libs"><span>{l.name}</span><span class="bar" aria-hidden="true"><span style={`width:${(l.n / maxLib * 100).toFixed(1)}%`}></span></span><span class="v">{l.n}</span></div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="yhteys" aria-labelledby="h-yht">
+        <div class="scape scape-eclipse" aria-hidden="true"><i class="corona"></i><i class="ring"></i><i class="disc"></i><i class="limb"></i></div>
+        <button type="button" class="tech-tag scape-tag" data-tech="scapes">{ui.scapeEclipse}</button>
+        <div class="sec-head" data-attn="yhteys">
+          <div><h2 id="h-yht" tabindex="-1">{ui.contactTitle}</h2><p class="lead">{ui.contactText}</p></div>
+        </div>
+        <div class="contact">
+          <div class="glass contact-pitch">
+            <h3>{ui.cPitchTitle}</h3>
+            <ul class="reasons">
+              {CONTACT_REASONS.map((r) => <li><strong>{r.label[lang]}</strong><span>{r.pitch[lang]}</span></li>)}
+            </ul>
+            <div class="row"><button type="button" class="btn" data-open-ask>{ui.cAsk}</button><a class="btn" href="https://github.com/SamppaFIN">GitHub · SamppaFIN</a></div>
+          </div>
+          <form class="glass contact-form" id="contact-form" novalidate>
+            <fieldset class="chips">
+              <legend>{ui.cReason}</legend>
+              <div class="chip-row">{CONTACT_REASONS.map((r, i) => <label class="chip"><input type="radio" name="reason" value={r.id} checked={i === 0} />{r.label[lang]}</label>)}</div>
+            </fieldset>
+            <label class="field"><span>{ui.cProject}</span><select id="cf-project" name="project"><option value="">{ui.cProjectNone}</option>{[...projects].sort((x, y) => (x.top || 99) - (y.top || 99) || x.name.localeCompare(y.name)).map((p) => <option value={p.name}>{p.name}</option>)}</select></label>
+            <label class="field"><span>{ui.cName}</span><input id="cf-name" name="name" type="text" autocomplete="name" /></label>
+            <label class="field"><span>{ui.cMsg}</span><textarea id="cf-msg" name="msg" rows="4"></textarea></label>
+            <div class="row">
+              <button type="submit" class="btn primary" data-via="mail" disabled={!CONTACT.email}>{ui.cMail}</button>
+              <button type="submit" class="btn" data-via="wa" disabled={!CONTACT.whatsapp}>{ui.cWa}</button>
+            </div>
+            {(!CONTACT.email || !CONTACT.whatsapp) && <p class="placeholder small">{ui.cPending}</p>}
+            <p class="small muted">{ui.cNote}</p>
+            <p id="cf-status" class="small" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap"><span>© 2026 Infinite</span><span>{ui.footerSources}</span></div>
+  </footer>
+
+  <canvas id="bugs" class="bugs" aria-hidden="true"></canvas>
+  <div id="bubble" class="bubble thought" aria-hidden="true" hidden><strong></strong><span></span></div>
+
+  <button type="button" class="fab" id="ask-btn" aria-haspopup="dialog" aria-controls="ask-dialog">
+    <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 3.5h11v7h-6l-3 2.5v-2.5h-2z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"></path></svg>
+    <span>{ui.ask}</span>
+  </button>
+  <p id="crew-line" class="sr-only"></p>
+
+  <dialog id="map-dialog" class="map-dialog" aria-labelledby="map-title">
+    <div class="dlg-head"><h2 id="map-title">{ui.mapTitle}</h2><button type="button" class="btn sm" data-close>{ui.close}</button></div>
+    <div class="dlg-body">
+      <canvas id="map-canvas" tabindex="0" role="img" aria-label={ui.mapCanvas} aria-describedby="map-help"></canvas>
+      <p id="map-help" class="small muted">{ui.mapHelp}</p>
+      <div class="map-list" id="map-list" role="group" aria-label={ui.navLabel}>
+        {client.sections.map((s, i) => <button type="button" class="btn sm" data-sec={i} aria-pressed={i === 0 ? 'true' : 'false'}>{s.name}</button>)}
+      </div>
+      <div class="glass map-info" aria-live="polite">
+        <div class="row"><h3 id="map-name">{client.sections[0].name}</h3><span class="status" id="map-status">{client.sections[0].status}</span></div>
+        <p id="map-text">{client.sections[0].summary}</p>
+        <div class="row"><button type="button" class="btn primary" id="map-go">{ui.mapGo}</button><button type="button" class="tech-tag" data-tech="map">{ui.techMap}</button></div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="seo-dialog" aria-labelledby="seo-title">
+    <div class="dlg-head"><h2 id="seo-title">{ui.seoTitle}</h2><button type="button" class="btn sm" data-close>{ui.close}</button></div>
+    <div class="dlg-body">
+      <div class="tabs" role="tablist" aria-label={ui.seoTitle}>
+        {[['titles', ui.tabTitles], ['sitemap', 'sitemap.xml'], ['robots', 'robots.txt'], ['redirects', ui.tabRedirects], ['headings', ui.tabHeadings], ['cwv', 'Core Web Vitals'], ['llms', 'llms.txt']].map(([id, name], i) => (
+          <button type="button" role="tab" class="tab" id={`seo-t-${id}`} aria-controls={`seo-p-${id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>{name}</button>
+        ))}
+      </div>
+      <div role="tabpanel" id="seo-p-titles" aria-labelledby="seo-t-titles" class="tbl-wrap">
+        <table>
+          <thead><tr><th>{ui.page}</th><th>Title / description</th><th>{ui.chars}</th></tr></thead>
+          <tbody>
+            {(['fi', 'en'] as Lang[]).map((l) => (
+              <>
+                <tr><td class="num">{SEO[l].path}</td><td>{SEO[l].title}</td><td class="num">{SEO[l].title.length}/60</td></tr>
+                <tr><td></td><td class="muted">{SEO[l].description}</td><td class="num">{SEO[l].description.length}/155</td></tr>
+              </>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div role="tabpanel" id="seo-p-sitemap" aria-labelledby="seo-t-sitemap" hidden><pre>{sitemapXml()}</pre></div>
+      <div role="tabpanel" id="seo-p-robots" aria-labelledby="seo-t-robots" hidden><pre>{robotsTxt()}</pre><p class="small muted">{ui.robotsNote}</p></div>
+      <div role="tabpanel" id="seo-p-redirects" aria-labelledby="seo-t-redirects" hidden>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>From</th><th>To</th><th>Status</th></tr></thead>
+          <tbody>{REDIRECTS.map((r) => <tr><td class="num">{r.from}</td><td class="num">{r.to}</td><td>{r.from === r.to ? ui.noRedirect : '301 (script)'}</td></tr>)}</tbody>
+        </table></div>
+        <p>{ui.chains}: <strong class="ok" id="seo-chains">{chains}</strong></p>
+        <p class="small muted">{ui.redirectNote}</p>
+      </div>
+      <div role="tabpanel" id="seo-p-headings" aria-labelledby="seo-t-headings" hidden><div id="heading-check"></div></div>
+      <div role="tabpanel" id="seo-p-cwv" aria-labelledby="seo-t-cwv" hidden>
+        <table><tbody>{CWV.map((c) => <tr><th scope="row">{c.metric}</th><td class="num">{lang === 'fi' ? c.target : c.target.replace(',', '.')}</td><td>{c.how[lang]}</td></tr>)}</tbody></table>
+      </div>
+      <div role="tabpanel" id="seo-p-llms" aria-labelledby="seo-t-llms" hidden><pre>{llmsTxt()}</pre></div>
+      <button type="button" class="tech-tag" data-tech="seo" style="align-self:flex-start">{ui.techSeo}</button>
+    </div>
+  </dialog>
+
+  <dialog id="tech-dialog" aria-labelledby="tech-title">
+    <div class="dlg-head"><h2 id="tech-title">–</h2><button type="button" class="btn sm" data-close>{ui.close}</button></div>
+    <div class="dlg-body">
+      <h3>{ui.technique}</h3><p id="tech-technique"></p>
+      <h3>{ui.formula}</h3><pre id="tech-formula"></pre>
+      <h3>{ui.why}</h3><p id="tech-why"></p>
+    </div>
+  </dialog>
+
+  <dialog id="project-dialog" class="project-dialog" aria-labelledby="pd-title">
+    <div class="dlg-head"><h2 id="pd-title">{ui.projectCard}</h2><button type="button" class="btn sm" data-close>{ui.close}</button></div>
+    <div class="dlg-body" id="pd-body"></div>
+  </dialog>
+
+  <dialog id="ask-dialog" class="ask-dialog" aria-labelledby="ask-title">
+    <div class="dlg-head"><h2 id="ask-title">{ui.askTitle}</h2><button type="button" class="btn sm" data-close>{ui.close}</button></div>
+    <div class="dlg-body">
+      <p class="small muted">{ui.askLead}</p>
+      <section class="worms" aria-labelledby="worms-title">
+        <h3 id="worms-title">{ui.wormsTitle}</h3>
+        <div class="worm-cards">
+          {Object.entries(PERSONAS).map(([k, v]) => (
+            <div class={`worm-card by-${k}`}><p><strong class={`who-${k}`}>{v.name}</strong> <span class="muted small">· {v.role[lang]}</span></p><p class="small">{v.bio[lang]}</p></div>
+          ))}
+        </div>
+        <div class="row">
+          <button type="button" class="btn sm" id="crew-toggle" aria-pressed="false"><span class="lbl">{ui.hide}</span></button>
+          <button type="button" class="btn sm" id="log-btn" aria-haspopup="dialog" aria-controls="log-dialog"><span class="lbl">{ui.log}</span> <span id="log-count" class="mono">0</span></button>
+          <button type="button" class="tech-tag" data-tech="personas">{ui.techPersonas}</button>
+        </div>
+      </section>
+      <ol class="ask-log" id="ask-log" aria-live="polite"></ol>
+      <div class="chip-row" id="ask-sugg">{ui.askSuggest.split('|').map((s) => <button type="button" class="chip sm" data-q={s}>{s}</button>)}</div>
+      <form class="ask-form" id="ask-form">
+        <label for="ask-q" class="sr-only">{ui.askLabel}</label>
+        <input id="ask-q" name="q" type="text" autocomplete="off" placeholder={ui.askPlaceholder} />
+        <button type="submit" class="btn primary">{ui.askSend}</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="log-dialog" aria-labelledby="log-title">
+    <div class="dlg-head"><h2 id="log-title">{ui.logTitle}</h2><button type="button" class="btn sm" data-close>{ui.close}</button></div>
+    <div class="dlg-body"><ol class="log-list" id="log-list"></ol></div>
+  </dialog>
+
+  <script type="application/json" id="pf-data" is:inline set:html={data}></script>
+  <script is:inline set:html={js}></script>
+</body>
+</html>

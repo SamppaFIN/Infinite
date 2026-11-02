@@ -1,484 +1,2944 @@
 [
-  {
-    "slug": "ai-koulu",
-    "title": {
-      "en": "AI-Koulu – AI Education Platform",
-      "fi": "AI-Koulu – Tekoälykoulutus"
-    },
-    "description": {
-      "en": "Finnish educational site covering all AI concepts in teaching format with React Flow, quizzes, and glossary. A comprehensive learning journey into artificial intelligence.",
-      "fi": "Suomenkielinen opetussivusto, joka kattaa kaikki tekoälykonseptit opetusmuodossa — React Flow, visailut ja sanasto. Kattava oppimismatka tekoälyyn."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "TypeScript",
-      "MDX",
-      "AI",
-      "React Flow"
-    ],
-    "image": "/Infinite/images/projects/ai-koulu.jpg",
-    "demoUrl": "https://samppafin.github.io/AI-Koulu/",
-    "repoUrl": "https://github.com/SamppaFIN/AI-Koulu",
-    "featured": true,
-    "order": 1
+ {
+  "id": "eldritch",
+  "repo": "Eldritch",
+  "name": "Eldritch",
+  "top": 5,
+  "score": 98,
+  "parts": {
+   "R": 0.97,
+   "L": 1,
+   "D": 1.0,
+   "Doc": 1.0,
+   "T": 1.0,
+   "K": 0.9
   },
-  {
-    "slug": "roguereborn",
-    "title": {
-      "en": "RogueReborn – HTML5 Roguelike",
-      "fi": "RogueReborn – HTML5 Roguelike-peli"
-    },
-    "description": {
-      "en": "Full-featured turn-based HTML5 roguelike with town mechanics, infinite dungeon abyss, and complex combat system. Inspired by TomeNet.",
-      "fi": "Täysiverinen vuoropohjainen HTML5-roguelike, jossa kaupunkimekaniikat, ääretön luolasto ja monimutkainen taistelujärjestelmä. Inspiroitunut TomeNetistä."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "JavaScript",
-      "HTML5",
-      "Game",
-      "Roguelike"
-    ],
-    "image": "/Infinite/images/projects/roguereborn.jpg",
-    "demoUrl": "https://samppafin.github.io/RogueReborn/",
-    "repoUrl": "https://github.com/SamppaFIN/RogueReborn",
-    "featured": false,
-    "order": 2
+  "review": {
+   "fi": "Kurinalaisin työ: pnpm-monorepo, testattu puhdas ydin, mobiili-ensin Playwright ja WCAG 2.2 AA. 473 committia kahdessa kuukaudessa ja ainoa mitattu tulos (CSS 11 204 → 372 riviä). Heikkous: README ei merkitse vaiheita 1–3 (MapLibre, H3, Supabase) vielä valmiiksi, eikä pelaajadataa ole.",
+   "en": "The most disciplined work: a pnpm monorepo, a tested pure core, mobile-first Playwright and WCAG 2.2 AA. 473 commits in two months and the only measured result (CSS 11,204 → 372 lines). Weakness: the README does not yet mark phases 1–3 (MapLibre, H3, Supabase) as done, and there is no player data."
   },
-  {
-    "slug": "spatial-3d-ui-framework",
-    "title": {
-      "en": "Spatial-3D-UI – Immersive 3D Framework",
-      "fi": "Spatial-3D-UI – Upottava 3D-käyttöliittymä"
-    },
-    "description": {
-      "en": "Next-gen 3D UI library for immersive web experiences with 26+ interactive components. Built with Three.js and WebGL.",
-      "fi": "Seuraavan sukupolven 3D-käyttöliittymäkirjasto upottaviin web-kokemuksiin, 26+ interaktiivista komponenttia. Rakennettu Three.js:llä ja WebGL:llä."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "Three.js",
-      "WebGL",
-      "JavaScript",
-      "HTML5"
-    ],
-    "image": "/Infinite/images/projects/spatial-3d-ui.jpg",
-    "demoUrl": "https://samppafin.github.io/Spatial-3D-UI-framework/",
-    "repoUrl": "https://github.com/SamppaFIN/Spatial-3D-UI-framework",
-    "featured": false,
-    "order": 3
+  "recs": {
+   "fi": [
+    "Merkitse README:hen läpäistyt vaiheportit ja julkaise vaiheiden 1–2 demo.",
+    "Kerää testipelaajilta mitattu tulos, esim. kävellyt lenkit ja vallatut alueet viikossa.",
+    "Anna Claude Code -agentin ajaa vaiheportit ja kirjata tulokset suoraan tiketteihin."
+   ],
+   "en": [
+    "Mark the passed phase gates in the README and publish a demo of phases 1–2.",
+    "Collect a measured result from test players, e.g. loops walked and areas claimed per week.",
+    "Let a Claude Code agent run the phase gates and log results straight into the tickets."
+   ]
   },
-  {
-    "slug": "ai-pasianssi",
-    "title": {
-      "en": "AI-Pasianssi – AI Solitaire",
-      "fi": "AI-Pasianssi – Tekoälypasianssi"
-    },
-    "description": {
-      "en": "AI-powered Klondike solitaire with OpenRouter/Groq integration. A classic card game enhanced with artificial intelligence.",
-      "fi": "Tekoälyavusteinen Klondike-pasianssi OpenRouter/Groq-integraatiolla. Klassinen korttipeli tekoälyllä tehostettuna."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "JavaScript",
-      "CSS",
-      "AI",
-      "Groq",
-      "OpenRouter"
-    ],
-    "image": "/Infinite/images/projects/ai-pasianssi.jpg",
-    "demoUrl": "https://samppafin.github.io/AI-pasianssi/",
-    "repoUrl": "https://github.com/SamppaFIN/AI-pasianssi",
-    "featured": false,
-    "order": 4
+  "start": "2026-08-26",
+  "last": "2026-10-19",
+  "commits": 473,
+  "techAt": "2026-08-26",
+  "one": {
+   "fi": "GPS-valtauspeli: kävele suljettu lenkki, ja sen sisään jäävä alue on sinun.",
+   "en": "GPS territory game: walk a closed loop and the area inside it is yours."
   },
-  {
-    "slug": "nlp-ai",
-    "title": {
-      "en": "TerapiaAI – AI Therapy Chat",
-      "fi": "TerapiaAI – Tekoälyterapia-chat"
-    },
-    "description": {
-      "en": "Finnish browser-based therapy chat with 8 AI personas (Rogers, Freud, Jung, CBT, and more). NLP-powered with speech recognition.",
-      "fi": "Suomenkielinen selainpohjainen terapia-chat kahdeksalla tekoälypersoonalla (Rogers, Freud, Jung, CBT ja muita). NLP-pohjainen puheentunnistuksella."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "HTML",
-      "JavaScript",
-      "NLP",
-      "AI",
-      "SpeechRecognition"
-    ],
-    "image": "/Infinite/images/projects/nlp-ai.jpg",
-    "demoUrl": "https://samppafin.github.io/NLP-AI/",
-    "repoUrl": "https://github.com/SamppaFIN/NLP-AI",
-    "featured": false,
-    "order": 5
+  "result": {
+   "fi": "v2 → v3: CSS 34 tiedostoa ja 11 204 riviä → 1 tiedosto ja 372 riviä (README)",
+   "en": "v2 → v3: CSS from 34 files and 11,204 lines → 1 file and 372 lines (README)"
   },
-  {
-    "slug": "j-rjestelm-nvarjot",
-    "title": {
-      "en": "Järjestelmän Varjot – Societal Critique",
-      "fi": "Järjestelmän Varjot – Yhteiskuntakritiikki"
-    },
-    "description": {
-      "en": "Lists known problems in societal structures with a Finnish focus. A structured critique of systemic issues.",
-      "fi": "Listaa tunnettuja ongelmia yhteiskuntarakenteissa suomalaisesta näkökulmasta. Jäsenneltyä kritiikkiä systeemisistä ongelmista."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "HTML"
-    ],
-    "image": "/Infinite/images/projects/jarjestelman-varjot.jpg",
-    "demoUrl": "https://samppafin.github.io/J-rjestelm-nVarjot/",
-    "repoUrl": "https://github.com/SamppaFIN/J-rjestelm-nVarjot",
-    "featured": false,
-    "order": 6
+  "note": {
+   "fi": "",
+   "en": ""
   },
-  {
-    "slug": "hallituspaatokset",
-    "title": {
-      "en": "Hallituspäätökset – Government Tracker",
-      "fi": "Hallituspäätökset – Hallitusseuranta"
-    },
-    "description": {
-      "en": "Infographic tracking Finnish government promises and their fulfillment. Data-driven policy accountability tool.",
-      "fi": "Infografiikka, joka seuraa Suomen hallituksen lupauksia ja niiden toteutumista. Datavetoinen politiikan vastuullisuustyökalu."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "HTML"
-    ],
-    "image": "/Infinite/images/projects/hallituspaatokset.jpg",
-    "demoUrl": "https://samppafin.github.io/Hallituspaatokset/",
-    "repoUrl": "https://github.com/SamppaFIN/Hallituspaatokset",
-    "featured": false,
-    "order": 7
+  "tags": [
+   "p-peli",
+   "t-ts",
+   "t-react",
+   "t-mob",
+   "t-test",
+   "a-claude"
+  ],
+  "evidence": {
+   "p-peli": {
+    "src": "K",
+    "q": "Kaupunginvaltauspeli"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "t-react": {
+    "src": "R",
+    "q": "apps/game/ React PWA"
+   },
+   "t-mob": {
+    "src": "R",
+    "q": "apps/game/ React PWA"
+   },
+   "t-test": {
+    "src": "R",
+    "q": "WCAG 2.2 AA as the floor, 44 px targets, visible focus"
+   },
+   "a-claude": {
+    "src": "A",
+    "q": "alusta: Claude Code (VS Code)"
+   }
   },
-  {
-    "slug": "factory-ultra",
-    "title": {
-      "en": "Factory Ultra – AI Development Factory",
-      "fi": "Factory Ultra – Tekoälyn kehitystehdas"
-    },
-    "description": {
-      "en": "Production-grade AI development factory template: BRDC workflow, audit trails, security, cost tracking, and Oracle research. Built for serious AI projects.",
-      "fi": "Tuotantotason tekoälykehityksen tehdaspohja: BRDC-työnkulku, auditoidut polut, tietoturva, kustannusseuranta ja Oracle-tutkimus. Rakennettu vakaviin tekoälyprojekteihin."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "Python",
-      "JavaScript",
-      "AI",
-      "Automation",
-      "Security"
-    ],
-    "image": "",
-    "demoUrl": "",
-    "repoUrl": "https://github.com/SamppaFIN/factory-ultra",
-    "featured": false,
-    "order": 8
+  "pair": "Aavistus · Claude Code",
+  "agent": "1.9.2026",
+  "agentEdits": {
+   "fi": "vähintään 100",
+   "en": "at least 100"
   },
-  {
-    "slug": "tarot-game",
-    "title": {
-      "en": "Cosmic Tarot – Tarot Journey",
-      "fi": "Cosmic Tarot – Tarotmatka"
-    },
-    "description": {
-      "en": "Mobile-first tarot journey with emotional questions and personalized readings. A creative blend of spirituality and web technology.",
-      "fi": "Mobiili ensin -tarotmatka tunnekysymyksillä ja personoiduilla tulkinnoilla. Luova yhdistelmä henkisyyttä ja web-teknologiaa."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "JavaScript",
-      "HTML5",
-      "CSS3"
-    ],
-    "image": "/Infinite/images/projects/tarot-game.jpg",
-    "demoUrl": "https://samppafin.github.io/tarot-game/",
-    "repoUrl": "https://github.com/SamppaFIN/tarot-game",
-    "featured": false,
-    "order": 9
+  "firstTech": {
+   "fi": [
+    "pnpm-monorepo",
+    "WCAG 2.2 AA",
+    "Claude Code"
+   ],
+   "en": [
+    "pnpm-monorepo",
+    "WCAG 2.2 AA",
+    "Claude Code"
+   ]
   },
-  {
-    "slug": "globeciv",
-    "title": {
-      "en": "GlobeCiv – 3D Civilization Game",
-      "fi": "GlobeCiv – 3D-sivilisaatiopeli"
-    },
-    "description": {
-      "en": "A 3D globe-based civilization game with city building, resource management (Food, Production, Science, Culture), tech tree, AI opponents, and territory expansion. Built with Three.js and WebGL.",
-      "fi": "Kolmiulotteinen maapalloon pohjautuva sivilisaatiopeli, jossa kaupunginrakennusta, resurssienhallintaa (ruoka, tuotanto, tiede, kulttuuri), teknologiapuu, tekoälyvastustajia ja alueiden laajennusta. Rakennettu Three.js:llä ja WebGL:llä."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "Three.js",
-      "WebGL",
-      "JavaScript",
-      "Game",
-      "HTML5"
-    ],
-    "image": "/Infinite/images/projects/globeciv.jpg",
-    "demoUrl": "https://samppafin.github.io/GlobeCiv/",
-    "repoUrl": "https://github.com/SamppaFIN/GlobeCiv",
-    "featured": false,
-    "order": 10
+  "thread": {
+   "fi": "Eldritch-sarja",
+   "en": "Eldritch series"
   },
-  {
-    "slug": "sein",
-    "title": {
-      "en": "Seinä – The Anonymous Wall",
-      "fi": "Seinä – Anonyymi viestiseinä"
-    },
-    "description": {
-      "en": "An infinite anonymous digital wall where anyone can leave messages as Post-it notes or graffiti spray. Real-time, Markdown support, tagging, and filtering. Built with React, TypeScript, and Supabase.",
-      "fi": "Ääretön anonyymi digitaalinen seinä, jonne kuka tahansa voi jättää viestejä Post-it -tarroina tai spraymaalina. Reaaliaikainen, Markdown-tuki, tägäys ja suodatus. Rakennettu Reactilla, TypeScriptillä ja Supabasella."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "TypeScript",
-      "React",
-      "Vite",
-      "Supabase",
-      "Zustand"
-    ],
-    "image": "/Infinite/images/projects/sein.jpg",
-    "demoUrl": "https://samppafin.github.io/Sein-/",
-    "repoUrl": "https://github.com/SamppaFIN/Sein-",
-    "featured": false,
-    "order": 11
+  "image": "eldritch.jpg",
+  "imageW": 1280,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/Eldritch/",
+  "repoUrl": "https://github.com/SamppaFIN/Eldritch"
+ },
+ {
+  "id": "globeciv3",
+  "repo": "GlobeCiv3",
+  "name": "GlobeCiv3",
+  "top": 2,
+  "score": 92,
+  "parts": {
+   "R": 1.0,
+   "L": 0.96,
+   "D": 1.0,
+   "Doc": 1.0,
+   "T": 1.0,
+   "K": 0.33
   },
-  {
-    "slug": "newsscaper",
-    "title": {
-      "en": "NewsScaper – Multi-Source Research",
-      "fi": "NewsScaper – Monilähdetutkimus"
-    },
-    "description": {
-      "en": "Multi-source news research engine that searches across Reddit, X, YouTube, Hacker News, Bluesky, GitHub, and more — all from one place. Built with FastAPI and Tailwind CSS.",
-      "fi": "Monilähteinen uutistutkimusmoottori, joka hakee Redditistä, X:stä, YouTubesta, Hacker Newsistä, Blueskysta, GitHubista ja muualta — kaikki yhdestä paikasta. Rakennettu FastAPI:lla ja Tailwind CSS:llä."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "Python",
-      "FastAPI",
-      "Tailwind CSS",
-      "JavaScript",
-      "CLI"
-    ],
-    "image": "/Infinite/images/projects/newsscaper.jpg",
-    "demoUrl": "https://samppafin.github.io/NewsScaper/",
-    "repoUrl": "https://github.com/SamppaFIN/NewsScaper",
-    "featured": false,
-    "order": 12
+  "review": {
+   "fi": "Sarjan kypsin versio: Three.js, Svelte ja Zustand, saumaton zoom planeetalta ruutuun sekä Vitest- ja Playwright-testit. 241 committia kolmessa viikossa, ja README kertoo pelin kulun ja ohjauksen. Heikkous: suorituskyvystä ja pelattavuudesta ei ole mittauksia.",
+   "en": "The most mature version of the series: Three.js, Svelte and Zustand, seamless zoom from planet to tile, and Vitest and Playwright tests. 241 commits in three weeks, and the README explains the gameplay and controls. Weakness: there are no measurements of performance or playability."
   },
-  {
-    "slug": "nutriscan",
-    "title": {
-      "en": "NutriScan – Food Scanner",
-      "fi": "NutriScan – Ruokaskanneri"
-    },
-    "description": {
-      "en": "Mobile-first nutrition scanner with camera barcode scanning, manual entry, allergen bank, and recipe bank. A practical tool for conscious eating.",
-      "fi": "Mobiili ensin -ravintoskanneri, jossa kamera-viivakoodiluku, manuaalinen syöttö, allergeenipankki ja reseptipankki. Käytännöllinen työkalu tietoiseen syömiseen."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "PWA",
-      "JavaScript",
-      "Nutrition",
-      "Mobile",
-      "Camera"
-    ],
-    "image": "/Infinite/images/projects/nutriscan.jpg",
-    "demoUrl": "https://samppafin.github.io/NutriScan/",
-    "repoUrl": "https://github.com/SamppaFIN/NutriScan",
-    "featured": false,
-    "order": 13
+  "recs": {
+   "fi": [
+    "Mittaa ruudunpäivitys puhelimessa ja kirjaa tulos README:hen.",
+    "Kokoa GlobeCiv-sarjan opit (1 → 2.0 → 3) yhdeksi kehityskertomukseksi.",
+    "Kokeile Claude-pohjaista neuvonantajaa, joka selittää löytöjen vaihtoehdot pelaajalle."
+   ],
+   "en": [
+    "Measure the frame rate on a phone and record it in the README.",
+    "Write up the lessons of the GlobeCiv series (1 → 2.0 → 3) as one development story.",
+    "Try a Claude-based advisor that explains the choices of a discovery to the player."
+   ]
   },
-  {
-    "slug": "resonance",
-    "title": {
-      "en": "Resonance – Geometric Meditation",
-      "fi": "Resonance – Geometrinen Meditaatio"
-    },
-    "description": {
-      "en": "An interactive geometric audio-visual meditation experience. Evolve through Triangle, Hexagon, Star and Void with Solfeggio frequencies (432/528/963 Hz). Touch-driven generative art.",
-      "fi": "Interaktiivinen geometrinen audiovisuaalinen meditaatiokokemus. Kehity kolmion, kuusikulmion, tähden ja tyhjiön kautta Solfeggio-taajuuksilla (432/528/963 Hz). Kosketusohjattua generatiivista taidetta."
-    },
-    "learnings": {
-      "en": "",
-      "fi": ""
-    },
-    "tags": [
-      "JavaScript",
-      "HTML5 Canvas",
-      "Web Audio",
-      "Generative",
-      "Interactive"
-    ],
-    "image": "/Infinite/images/projects/resonance.jpg",
-    "demoUrl": "https://samppafin.github.io/Resonance/",
-    "repoUrl": "https://github.com/SamppaFIN/Resonance",
-    "featured": false,
-    "order": 14
+  "start": "2026-10-09",
+  "last": "2026-10-30",
+  "commits": 241,
+  "techAt": "2026-10-09",
+  "one": {
+   "fi": "Sivilisaatiosimulaatio heksaplaneetalla. Kartta piirtyy sitä mukaa kuin tutkit, ja zoom vie planeetalta yksittäiseen ruutuun.",
+   "en": "Civilisation simulation on a hex planet. The map draws itself as you explore, and zoom goes from the planet down to a single tile."
   },
-  {
-    "slug": "harakka",
-    "title": {
-      "en": "Harakka – Voting App",
-      "fi": "Harakka – Äänestyssovellus"
-    },
-    "description": {
-      "en": "Mobile-first voting app with no sign-in. Create a poll with a Markdown description and image, vote with one tap and watch live results as bars. Edit with a 5-character code right on the published page.",
-      "fi": "Mobiili ensin -äänestyssovellus ilman kirjautumista. Luo äänestys Markdown-kuvauksella ja kuvalla, äänestä yhdellä napautuksella ja seuraa tuloksia palkkeina. Muokkaus 5-merkkisellä koodilla suoraan julkaistulla sivulla."
-    },
-    "learnings": {
-      "en": "Page and API are a single Cloudflare Worker, and all data lives in R2 with no database. Concurrent votes are handled with optimistic etag writes, and codes and voters are stored only as HMAC digests – no IP addresses. The known limit is documented: hundreds of votes per second would need a Durable Object.",
-      "fi": "Sivu ja API ovat yksi Cloudflare Worker, ja kaikki data elää R2:ssa ilman tietokantaa. Samanaikaiset äänet hoidetaan optimistisella etag-kirjoituksella, ja koodit ja äänestäjät tallennetaan vain HMAC-tiivisteinä – ei IP-osoitteita. Tunnettu rajoite dokumentoitu: satoja ääniä sekunnissa vaatisi Durable Objectin."
-    },
-    "tags": [
-      "React",
-      "TypeScript",
-      "Cloudflare Workers",
-      "R2",
-      "Tailwind"
-    ],
-    "image": "/Infinite/images/projects/harakka.jpg",
-    "demoUrl": "https://samppafin.github.io/Harakka/",
-    "repoUrl": "https://github.com/SamppaFIN/Harakka",
-    "featured": false,
-    "order": 15
+  "result": {
+   "fi": "",
+   "en": ""
   },
-  {
-    "slug": "toni1-0",
-    "title": {
-      "en": "Toni1.0 – BetTracker",
-      "fi": "Toni1.0 – BetTracker"
-    },
-    "description": {
-      "en": "A new kind of scraper and betting value analyzer: collects odds and stats, compares bookmakers and uses a Poisson model and Kelly staking to find where real value is. Football and Liiga ice hockey.",
-      "fi": "Uudenlainen scraper ja vedonlyönnin value-analyysi: kerää kertoimet ja tilastot, vertailee toimistoja ja laskee Poisson-mallilla ja Kelly-panostuksella, missä todellista arvoa on. Jalkapallo ja Liiga-jääkiekko."
-    },
-    "learnings": {
-      "en": "Data fetching runs on a server-side schedule and is published as a static snapshot to GitHub Pages, since browsers can't fetch odds directly. Models are measured with Brier score, calibration and CLV, and the project has 400+ unit tests and 60 E2E tests.",
-      "fi": "Datan haku ajetaan ajastettuna palvelinpuolella ja julkaistaan staattisena snapshotina GitHub Pagesiin, koska selain ei voi hakea kertoimia suoraan. Mallit mitataan Brier-pisteellä, kalibroinnilla ja CLV:llä, ja projektissa on yli 400 yksikkötestiä sekä 60 E2E-testiä."
-    },
-    "tags": [
-      "TypeScript",
-      "Scraping",
-      "Supabase",
-      "Poisson",
-      "Analytics"
-    ],
-    "image": "/Infinite/images/projects/toni1-0.jpg",
-    "demoUrl": "https://samppafin.github.io/Toni1.0/demo.html",
-    "repoUrl": "https://github.com/SamppaFIN/Toni1.0",
-    "featured": false,
-    "order": 16
+  "note": {
+   "fi": "",
+   "en": ""
   },
-  {
-    "slug": "eldritch",
-    "title": {
-      "en": "Eldritch Sanctuary – GPS Territory Game",
-      "fi": "Eldritch Sanctuary – GPS-valtauspeli"
-    },
-    "description": {
-      "en": "A city-capture game you play by walking the real world: H3 hexagons fill from the routes you walk, and the ground remembers you. Fog of war, watchtowers, temples, gates and a shared Reckoning against an Ancient One – with a Lovecraftian face.",
-      "fi": "Kaupunginvaltauspeli, jossa kävelet oikeassa maailmassa: kuusikulmiot (H3) täyttyvät kävelemistäsi reiteistä, ja maa muistaa sinut. Sumu, vartiotornit, temppelit, portit ja yhteinen Tilinteko Muinaista vastaan lovecraftilaisella ilmeellä."
-    },
-    "learnings": {
-      "en": "v3 is a rewrite: a single module and a CI-enforced 400-line file limit replaced 68 script tags and 4,000-line files, with progress driven by BRDC tickets. The rules reward routine (daily reinforcement, decay), not grinding. Sammon Takomo's game review (88/100) is linked below.",
-      "fi": "v3 on uudelleenkirjoitus: edellisen version 68 script-tagia ja 4 000 rivin tiedostoja korvasi yksi moduuli, 400 rivin tiedostoraja CI:ssä ja tiketeittäin etenevä BRDC-suunnitelma. Pelisäännöt palkitsevat rutiinia (vahvistus päivittäin, rapautuminen), ei grindausta. Sammon Takomon peliarvostelu (88/100) on luettavissa alla olevasta linkistä."
-    },
-    "tags": [
-      "TypeScript",
-      "React",
-      "PWA",
-      "MapLibre",
-      "H3",
-      "GPS"
-    ],
-    "image": "/Infinite/images/projects/eldritch.jpg",
-    "demoUrl": "https://samppafin.github.io/Eldritch/",
-    "repoUrl": "https://github.com/SamppaFIN/Eldritch",
-    "featured": false,
-    "order": 17,
-    "links": [
-      {
-        "label": {
-          "fi": "Sammon Takomo: peliarvostelu",
-          "en": "Sammon Takomo: game review"
-        },
-        "url": "https://claude.ai/artifact/NvuXA7XAmpLoxQm4VBZyLu"
-      }
-    ]
+  "tags": [
+   "p-peli",
+   "t-3d",
+   "t-svelte",
+   "t-ts",
+   "t-test",
+   "t-mob",
+   "a-claude"
+  ],
+  "evidence": {
+   "p-peli": {
+    "src": "R",
+    "q": "Selaimessa toimiva sivilisaatiosimulaatio heksaplaneetalla"
+   },
+   "t-3d": {
+    "src": "P",
+    "q": "three"
+   },
+   "t-svelte": {
+    "src": "P",
+    "q": "svelte"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "t-test": {
+    "src": "R",
+    "q": "npm test – yksikkötestit (Vitest)"
+   },
+   "t-mob": {
+    "src": "R",
+    "q": "toimii puhelimessa ja työpöydällä"
+   },
+   "a-claude": {
+    "src": "A",
+    "q": "model: Claude Opus 5.5"
+   }
   },
-  {
-    "slug": "bandrock",
-    "title": {
-      "en": "BandRock – Band Bulletin Board",
-      "fi": "BandRock – Bändien ilmoitustaulu"
-    },
-    "description": {
-      "en": "A bulletin board for bands: anyone can create their own page with no sign-in – gigs, intro and contact details – and edit it later with a 5-character code. Search and filter by type, city and date.",
-      "fi": "Ilmoitustaulu bändeille: kuka tahansa luo oman sivun ilman kirjautumista – keikat, esittely ja yhteystiedot – ja muokkaa sitä myöhemmin 5-merkkisellä koodilla. Haku ja suodatus tyypin, kaupungin ja ajankohdan mukaan."
-    },
-    "learnings": {
-      "en": "A static GitHub Pages site and Cloudflare Worker + R2 storage work together: tests, Worker and site deploy in that order so the page can never be ahead of the API. This architecture became the basis for the later Harakka project.",
-      "fi": "Staattinen GitHub Pages -sivu ja Cloudflare Worker + R2 -tallennus toimivat yhdessä: testit, Worker ja sivu julkaistaan putkessa tässä järjestyksessä, jotta sivu ei voi olla API:a edellä. Tämä arkkitehtuuri toimi pohjana myöhemmälle Harakka-projektille."
-    },
-    "tags": [
-      "JavaScript",
-      "Cloudflare Workers",
-      "R2",
-      "GitHub Pages"
-    ],
-    "image": "/Infinite/images/projects/bandrock.jpg",
-    "demoUrl": "https://samppafin.github.io/BandRock/",
-    "repoUrl": "https://github.com/SamppaFIN/BandRock",
-    "featured": false,
-    "order": 18
-  }
+  "pair": "Linssi · Claude Opus 5.5",
+  "agent": "9.10.2026",
+  "agentEdits": {
+   "fi": "64",
+   "en": "64"
+  },
+  "firstTech": {
+   "fi": [],
+   "en": []
+  },
+  "thread": {
+   "fi": "GlobeCiv-sarja",
+   "en": "GlobeCiv series"
+  },
+  "image": "globeciv3.jpg",
+  "imageW": 1280,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/GlobeCiv3/",
+  "repoUrl": "https://github.com/SamppaFIN/GlobeCiv3"
+ },
+ {
+  "id": "toni1-0",
+  "repo": "Toni1.0",
+  "name": "Toni1.0",
+  "top": 0,
+  "score": 90,
+  "parts": {
+   "R": 1.0,
+   "L": 0.99,
+   "D": 1.0,
+   "Doc": 0.01,
+   "T": 1.0,
+   "K": 1.0
+  },
+  "review": {
+   "fi": "Repo, jossa on eniten työtä: 652 committia, skrapperi, Supabase, Express sekä Playwright- ja Vitest-testit, ja työ jatkuu yhä. Malli on Poisson ja panostus Kelly. Heikkous: README:ssä on 30 merkkiä, eikä mallin osumatarkkuutta tai tuottoa ole raportoitu.",
+   "en": "The repo with the most work: 652 commits, a scraper, Supabase, Express and Playwright and Vitest tests, and work is still ongoing. The model is Poisson and the staking Kelly. Weakness: the README has 30 characters, and neither hit rate nor return has been reported."
+  },
+  "recs": {
+   "fi": [
+    "Kirjoita README: datalähteet, malli ja miten value lasketaan.",
+    "Raportoi backtestin tulos (osumatarkkuus ja ROI) tunnetulta aikaväliltä.",
+    "Tuo vastuullisen pelaamisen huomautus ja mallin rajoitukset näkyviin."
+   ],
+   "en": [
+    "Write a README: data sources, the model and how value is calculated.",
+    "Report a backtest result (hit rate and ROI) over a known period.",
+    "Show a responsible gambling notice and the model’s limits."
+   ]
+  },
+  "start": "2026-08-03",
+  "last": "2026-11-01",
+  "commits": 652,
+  "techAt": "2026-08-03",
+  "one": {
+   "fi": "BetTracker: kerää kertoimet ja tilastot ja laskee Poisson-mallilla ja Kelly-panostuksella, missä on todellista arvoa.",
+   "en": "BetTracker: collects odds and statistics and uses a Poisson model and Kelly staking to find real value."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-data",
+   "t-ts",
+   "t-back",
+   "t-test",
+   "a-ds"
+  ],
+  "evidence": {
+   "p-data": {
+    "src": "P",
+    "q": "Liiga-vedonlyönnin value-analyysijärjestelmä"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "t-back": {
+    "src": "P",
+    "q": "@supabase/supabase-js, express"
+   },
+   "t-test": {
+    "src": "P",
+    "q": "@playwright/test, vitest"
+   },
+   "a-ds": {
+    "src": "A",
+    "q": "malli: DeepSeek V4 Pro · alusta: GitHub Copilot"
+   }
+  },
+  "pair": "Kajo · DeepSeek V4 Pro",
+  "agent": "3.8.2026",
+  "agentEdits": {
+   "fi": "19",
+   "en": "19"
+  },
+  "firstTech": {
+   "fi": [
+    "Express",
+    "Poisson ja Kelly",
+    "Skrapperi"
+   ],
+   "en": [
+    "Express",
+    "Poisson and Kelly",
+    "Scraper"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "toni1-0.jpg",
+  "imageW": 1280,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/Toni1.0/demo.html",
+  "repoUrl": "https://github.com/SamppaFIN/Toni1.0"
+ },
+ {
+  "id": "3dihminen",
+  "repo": "3DIhminen",
+  "name": "3DIhminen",
+  "top": 3,
+  "score": 79,
+  "parts": {
+   "R": 0.97,
+   "L": 0.85,
+   "D": 1.0,
+   "Doc": 0.0,
+   "T": 1.0,
+   "K": 0.27
+  },
+  "review": {
+   "fi": "Teknisesti kunnianhimoinen: React Three Fiber, glTF-putki Draco- ja meshoptimizer-pakkauksella sekä anatomia, joka kuoriutuu kerros kerrokselta zoomatessa. Sovellus sanoo selvästi, ettei kyse ole diagnoosista. Heikkous: README puuttuu kokonaan, ja testejä on vain Vitestillä.",
+   "en": "Technically ambitious: React Three Fiber, a glTF pipeline with Draco and meshoptimizer compression, and anatomy that peels away layer by layer as you zoom. The app states clearly that it is not a diagnosis. Weakness: there is no README at all, and tests exist only in Vitest."
+  },
+  "recs": {
+   "fi": [
+    "Kirjoita README: mitä sovellus tekee, mistä anatomiadata ja lisenssit tulevat ja miten se ajetaan.",
+    "Lisää Playwright-testi, joka klikkaa kipukohtaa ja tarkistaa ehdotetut lihakset.",
+    "Anna Claude Opus 5.5:n selittää valittu lihas arkikielellä lähdeviittein."
+   ],
+   "en": [
+    "Write a README: what the app does, where the anatomy data and licences come from and how to run it.",
+    "Add a Playwright test that clicks a pain point and checks the suggested muscles.",
+    "Let Claude Opus 5.5 explain the selected muscle in plain language with citations."
+   ]
+  },
+  "start": "2026-10-04",
+  "last": "2026-10-20",
+  "commits": 20,
+  "techAt": "2026-10-04",
+  "one": {
+   "fi": "Lihastohtori: klikkaa mallista kohtaa, johon sattuu, niin näet lihakset, jotka voivat liittyä kipuun.",
+   "en": "Lihastohtori (Muscle Doctor): click where it hurts to see the muscles that may be related to the pain."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-hyv",
+   "t-3d",
+   "t-react",
+   "t-ts",
+   "t-test",
+   "a-claude"
+  ],
+  "evidence": {
+   "p-hyv": {
+    "src": "K",
+    "q": "Anatomisesti lähellä ihmistä oleva malli, mikä tietää kivun"
+   },
+   "t-3d": {
+    "src": "P",
+    "q": "three, @react-three/fiber, @gltf-transform/core"
+   },
+   "t-react": {
+    "src": "P",
+    "q": "react, @react-three/fiber"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "t-test": {
+    "src": "P",
+    "q": "vitest"
+   },
+   "a-claude": {
+    "src": "A",
+    "q": "Pohjamalli: Claude Opus 5.5"
+   }
+  },
+  "pair": "Delta · Claude Opus 5.5",
+  "agent": "4.10.2026",
+  "agentEdits": {
+   "fi": "9",
+   "en": "9"
+  },
+  "firstTech": {
+   "fi": [
+    "React Three Fiber",
+    "glTF-putki (Draco, meshopt)",
+    "Claude Opus 5.5"
+   ],
+   "en": [
+    "React Three Fiber",
+    "glTF pipeline (Draco, meshopt)",
+    "Claude Opus 5.5"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "3dihminen.jpg",
+  "imageW": 1280,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/3DIhminen/",
+  "repoUrl": "https://github.com/SamppaFIN/3DIhminen"
+ },
+ {
+  "id": "harakka",
+  "repo": "Harakka",
+  "name": "Harakka",
+  "top": 0,
+  "score": 75,
+  "parts": {
+   "R": 0.92,
+   "L": 0.81,
+   "D": 1.0,
+   "Doc": 1.0,
+   "T": 0.0,
+   "K": 0.6
+  },
+  "review": {
+   "fi": "Siisti tuotantopalvelu yhdessä Cloudflare Workerissa: R2-tallennus, optimistiset kirjoitukset etagilla ja HMAC-SHA256 muokkauskoodeille. Heikkous: testejä ei ole, ja README mainitsee tunnetun rajoituksen R2-kirjoituksissa.",
+   "en": "A tidy production service in one Cloudflare Worker: R2 storage, optimistic writes with etags and HMAC-SHA256 for edit codes. Weakness: there are no tests, and the README mentions a known limitation in R2 writes."
+  },
+  "recs": {
+   "fi": [
+    "Lisää testit yhtäaikaisille äänille ja muokkauskoodin tarkistukselle.",
+    "Dokumentoi, miten äänestyksen voi upottaa toiselle sivulle.",
+    "Kokeile AI-avusteista moderointia Ilmoita asiaton -toiminnon tueksi."
+   ],
+   "en": [
+    "Add tests for concurrent votes and for checking the edit code.",
+    "Document how a poll can be embedded in another page.",
+    "Try AI-assisted moderation to support the Report function."
+   ]
+  },
+  "start": "2026-08-25",
+  "last": "2026-10-01",
+  "commits": 11,
+  "techAt": "2026-08-25",
+  "one": {
+   "fi": "Mobiili-ensin äänestyssovellus ilman kirjautumista. Sivu ja API ovat yksi Cloudflare Worker.",
+   "en": "Mobile-first voting app with no login. The page and the API are a single Cloudflare Worker."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-yht",
+   "t-react",
+   "t-ts",
+   "t-back",
+   "t-mob",
+   "a-claude"
+  ],
+  "evidence": {
+   "p-yht": {
+    "src": "R",
+    "q": "Mobiili-ensin äänestyssovellus"
+   },
+   "t-react": {
+    "src": "P",
+    "q": "react, react-router-dom"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "t-back": {
+    "src": "R",
+    "q": "Sivu ja API ovat yksi Cloudflare Worker; äänestykset ja kuvat elävät R2:ssa"
+   },
+   "t-mob": {
+    "src": "R",
+    "q": "Mobiili-ensin"
+   },
+   "a-claude": {
+    "src": "A",
+    "q": "malli: claude-sonnet-4-6"
+   }
+  },
+  "pair": "Aavistus · Claude Sonnet 4.6",
+  "agent": "25.8.2026",
+  "agentEdits": {
+   "fi": "5",
+   "en": "5"
+  },
+  "firstTech": {
+   "fi": [
+    "Cloudflare Workers ja R2",
+    "HMAC-SHA256"
+   ],
+   "en": [
+    "Cloudflare Workers and R2",
+    "HMAC-SHA256"
+   ]
+  },
+  "thread": {
+   "fi": "Worker + R2 -arkkitehtuuri",
+   "en": "Worker + R2 architecture"
+  },
+  "image": "harakka.jpg",
+  "imageW": 1280,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/Harakka/",
+  "repoUrl": "https://github.com/SamppaFIN/Harakka"
+ },
+ {
+  "id": "roguereborn",
+  "repo": "RogueReborn",
+  "name": "RogueReborn",
+  "top": 0,
+  "score": 89,
+  "parts": {
+   "R": 0.59,
+   "L": 0.94,
+   "D": 1.0,
+   "Doc": 1.0,
+   "T": 1.0,
+   "K": 1.0
+  },
+  "review": {
+   "fi": "Iso ja hyvin dokumentoitu roguelike: kaupunki, ääretön luolasto, kolme luokkaa, statusvaikutukset ja proseduraaliset tasot. 47 committia neljän kuukauden aikana, ja Playwright on riippuvuutena. Heikkous: kehitys pysähtyi kesäkuussa 2026, eikä agenttitiedostoa ole.",
+   "en": "A large, well-documented roguelike: a town, an endless dungeon, three classes, status effects and procedural levels. 47 commits over four months, with Playwright as a dependency. Weakness: development stopped in June 2026, and there is no agent file."
+  },
+  "recs": {
+   "fi": [
+    "Lisää Playwright-testi, joka pelaa ensimmäisen kerroksen läpi.",
+    "Kirjaa tunnetut bugit ja tiekartta README:hen.",
+    "Kokeile LLM-kertojaa, joka kuvaa luolaston tapahtumat."
+   ],
+   "en": [
+    "Add a Playwright test that plays through the first floor.",
+    "Record known bugs and a roadmap in the README.",
+    "Try an LLM narrator that describes events in the dungeon."
+   ]
+  },
+  "start": "2026-03-11",
+  "last": "2026-06-02",
+  "commits": 47,
+  "techAt": "2026-03-11",
+  "one": {
+   "fi": "Vuoropohjainen HTML5-roguelike: kaupunki, ääretön luolasto ja taistelujärjestelmä.",
+   "en": "Turn-based HTML5 roguelike: a town, an endless dungeon and a combat system."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-peli",
+   "t-test"
+  ],
+  "evidence": {
+   "p-peli": {
+    "src": "R",
+    "q": "turn-based HTML5 roguelike"
+   },
+   "t-test": {
+    "src": "P",
+    "q": "playwright"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [],
+   "en": []
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "roguereborn.jpg",
+  "imageW": 1180,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/RogueReborn/",
+  "repoUrl": "https://github.com/SamppaFIN/RogueReborn"
+ },
+ {
+  "id": "webshop",
+  "repo": "WebShop",
+  "name": "WebShop",
+  "top": 0,
+  "score": 81,
+  "parts": {
+   "R": 0.61,
+   "L": 0.8,
+   "D": 1.0,
+   "Doc": 0.48,
+   "T": 1.0,
+   "K": 1.0
+  },
+  "review": {
+   "fi": "Tekninen pohja on laaja: Next.js, Prisma, Supabase, Stripe, NextAuth ja OpenAI. Varsinainen toteutus tehtiin kesäkuussa 2026. Heikkous: README on Next.js-oletuspohja, joten repo ei kerro, mitä kauppa myy tai miten semanttinen haku toimii.",
+   "en": "A broad technical base: Next.js, Prisma, Supabase, Stripe, NextAuth and OpenAI. The actual build happened in June 2026. Weakness: the README is the Next.js default, so the repo does not say what the shop sells or how the semantic search works."
+  },
+  "recs": {
+   "fi": [
+    "Korvaa oletus-README kuvauksella arkkitehtuurista ja hausta.",
+    "Lisää testit kassaprosessille Stripen testitilassa.",
+    "Mittaa semanttisen haun osuvuus muutamalla esimerkkikyselyllä."
+   ],
+   "en": [
+    "Replace the default README with a description of the architecture and search.",
+    "Add tests for checkout in Stripe’s test mode.",
+    "Measure the relevance of the semantic search with a few sample queries."
+   ]
+  },
+  "start": "2025-10-02",
+  "last": "2026-06-10",
+  "commits": 13,
+  "techAt": "2026-06-09",
+  "one": {
+   "fi": "Verkkokauppapohja semanttisella haulla: Next.js, Prisma, Stripe ja OpenAI.",
+   "en": "Web shop template with semantic search: Next.js, Prisma, Stripe and OpenAI."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "Kolme committia 10/2025, varsinainen toteutus 06/2026.",
+   "en": "Three commits in 10/2025, the actual build in 06/2026."
+  },
+  "tags": [
+   "p-tyo",
+   "t-react",
+   "t-ts",
+   "t-back",
+   "t-test",
+   "a-prod",
+   "a-ds"
+  ],
+  "evidence": {
+   "p-tyo": {
+    "src": "K",
+    "q": "WebShop template"
+   },
+   "t-react": {
+    "src": "P",
+    "q": "next, react"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "t-back": {
+    "src": "P",
+    "q": "@supabase/supabase-js, prisma, stripe"
+   },
+   "t-test": {
+    "src": "P",
+    "q": "vitest, @testing-library/react"
+   },
+   "a-prod": {
+    "src": "P",
+    "q": "Moderni AI-semanttinen verkkokauppa · openai"
+   },
+   "a-ds": {
+    "src": "A",
+    "q": "malli: DeepSeek V4 Pro"
+   }
+  },
+  "pair": "DeepSeek V4 Pro",
+  "agent": "9.6.2026",
+  "agentEdits": {
+   "fi": "1",
+   "en": "1"
+  },
+  "firstTech": {
+   "fi": [
+    "Next.js",
+    "Prisma",
+    "Stripe"
+   ],
+   "en": [
+    "Next.js",
+    "Prisma",
+    "Stripe"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "https://samppafin.github.io/WebShop/",
+  "repoUrl": "https://github.com/SamppaFIN/WebShop"
+ },
+ {
+  "id": "vaihtokaupat",
+  "repo": "Vaihtokaupat",
+  "name": "Vaihtokaupat",
+  "top": 0,
+  "score": 81,
+  "parts": {
+   "R": 0.99,
+   "L": 0.89,
+   "D": 1.0,
+   "Doc": 0.0,
+   "T": 1.0,
+   "K": 0.35
+  },
+  "review": {
+   "fi": "Tuore ja selkeä palvelu: staattinen sivu ja Worker + R2 -rajapinta sekä axe-saavutettavuustestit Playwrightilla. AI-avustajana on Hermes (Claude Opus 5.5). Heikkous: README puuttuu, eikä käyttöä ole mitattu.",
+   "en": "A fresh, clear service: a static page and a Worker + R2 API, with axe accessibility tests in Playwright. The AI assistant is Hermes (Claude Opus 5.5). Weakness: there is no README, and usage has not been measured."
+  },
+  "recs": {
+   "fi": [
+    "Kirjoita README ja kuvaa vaihdon kulku.",
+    "Seuraa avoimien ja vaihdettujen ilmoitusten määrää.",
+    "Yhdistä BandRockin ja Harakan kanssa jaettu Worker + R2 -koodi kirjastoksi."
+   ],
+   "en": [
+    "Write a README and describe how a swap works.",
+    "Track the number of open and completed listings.",
+    "Merge the Worker + R2 code shared with BandRock and Harakka into a library."
+   ]
+  },
+  "start": "2026-10-05",
+  "last": "2026-10-26",
+  "commits": 24,
+  "techAt": "2026-10-05",
+  "one": {
+   "fi": "Vaihtoalusta: kerro mitä tarjoat ja mitä toivot tilalle, ja sovi vaihto kasvokkain ilman rahaa.",
+   "en": "Barter board: say what you offer and what you want in return, and swap face to face without money."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-yht",
+   "t-back",
+   "t-test",
+   "a-claude"
+  ],
+  "evidence": {
+   "p-yht": {
+    "src": "K",
+    "q": "sovi vaihto kasvokkain ilman rahaa"
+   },
+   "t-back": {
+    "src": "P",
+    "q": "GitHub Pages, static + Cloudflare Worker/R2 API"
+   },
+   "t-test": {
+    "src": "P",
+    "q": "@axe-core/playwright"
+   },
+   "a-claude": {
+    "src": "A",
+    "q": "model: Claude Opus 5.5"
+   }
+  },
+  "pair": "Hermes · Claude Opus 5.5",
+  "agent": "5.10.2026",
+  "agentEdits": {
+   "fi": "9",
+   "en": "9"
+  },
+  "firstTech": {
+   "fi": [],
+   "en": []
+  },
+  "thread": {
+   "fi": "Worker + R2 -arkkitehtuuri",
+   "en": "Worker + R2 architecture"
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "https://samppafin.github.io/Vaihtokaupat/",
+  "repoUrl": "https://github.com/SamppaFIN/Vaihtokaupat"
+ },
+ {
+  "id": "spotifyplaylisttherapist",
+  "repo": "SpotifyPlaylistTherapist",
+  "name": "SpotifyPlaylistTherapist",
+  "top": 0,
+  "score": 77,
+  "parts": {
+   "R": 0.77,
+   "L": 0.84,
+   "D": 1.0,
+   "Doc": 0.52,
+   "T": 1.0,
+   "K": 0.05
+  },
+  "review": {
+   "fi": "Kiinnostava idea ja hyvä pohja: Express-mock, Vitest ja Playwright. README kertoo suunnitelman: Spotify OAuth PKCE, Genius ja GPT-4o-mini. Heikkous: projekti on suunnitteluvaiheessa, eikä analyysiä ole vielä toteutettu.",
+   "en": "An interesting idea on a good base: an Express mock, Vitest and Playwright. The README lays out the plan: Spotify OAuth PKCE, Genius and GPT-4o-mini. Weakness: the project is at the planning stage, and the analysis is not built yet."
+  },
+  "recs": {
+   "fi": [
+    "Toteuta ensin yksi analyysi, esim. tunnetilaprofiili, ja näytä se demossa.",
+    "Merkitse demoon selvästi, mikä on mock-dataa.",
+    "Vaihda analyysin malli ajantasaiseen Claude-malliin ja vertaa tuloksia."
+   ],
+   "en": [
+    "Build one analysis first, e.g. the mood profile, and show it in the demo.",
+    "Mark clearly in the demo what is mock data.",
+    "Switch the analysis model to a current Claude model and compare the results."
+   ]
+  },
+  "start": "2026-08-03",
+  "last": "2026-08-07",
+  "commits": 43,
+  "techAt": "2026-08-03",
+  "one": {
+   "fi": "Soittolistan psykoanalyysi: tunnetilat ja persoonallisuuspiirteet. Suunnitteluvaihe (MVP 0.1.0).",
+   "en": "Psychoanalysis of a playlist: moods and personality traits. Planning stage (MVP 0.1.0)."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-data",
+   "p-taide",
+   "t-ts",
+   "t-test",
+   "a-prod",
+   "a-ds"
+  ],
+  "evidence": {
+   "p-data": {
+    "src": "R",
+    "q": "tee sen biiseistä psykoanalyysi"
+   },
+   "p-taide": {
+    "src": "R",
+    "q": "Hae Spotify-soittolista"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "t-test": {
+    "src": "R",
+    "q": "Testit: Vitest + Playwright"
+   },
+   "a-prod": {
+    "src": "R",
+    "q": "GPT-4o-mini (analyysin generointi), suunnitteluvaihe"
+   },
+   "a-ds": {
+    "src": "A",
+    "q": "malli: DeepSeek V4 Pro"
+   }
+  },
+  "pair": "Psyko · DeepSeek V4 Pro",
+  "agent": "3.8.2026",
+  "agentEdits": {
+   "fi": "2",
+   "en": "2"
+  },
+  "firstTech": {
+   "fi": [],
+   "en": []
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "https://samppafin.github.io/SpotifyPlaylistTherapist/",
+  "repoUrl": "https://github.com/SamppaFIN/SpotifyPlaylistTherapist"
+ },
+ {
+  "id": "spatial-3d-ui-framework",
+  "repo": "Spatial-3D-UI-framework",
+  "name": "Spatial-3D-UI",
+  "top": 0,
+  "score": 75,
+  "parts": {
+   "R": 0.6,
+   "L": 1,
+   "D": 1.0,
+   "Doc": 1.0,
+   "T": 0.0,
+   "K": 1.0
+  },
+  "review": {
+   "fi": "Laajin dokumentaatio (README yli 31 000 merkkiä) ja ainoat GitHub-tähdet. Mukana on 26+ komponenttia ja Playwright-testit. Heikkous: viimeisin commit on kesäkuulta 2026, eikä kirjastoa ole julkaistu pakettina.",
+   "en": "The most extensive documentation (a README of over 31,000 characters) and the only GitHub stars. It has 26+ components and Playwright tests. Weakness: the last commit is from June 2026, and the library has not been published as a package."
+  },
+  "recs": {
+   "fi": [
+    "Julkaise kirjasto npm-pakettina ja ota versiointi käyttöön.",
+    "Lisää komponenttikohtainen suorituskykymittaus.",
+    "Hyödynnä komponentteja GlobeCiv3:n ja 3DIhmisen käyttöliittymissä."
+   ],
+   "en": [
+    "Publish the library as an npm package and adopt versioning.",
+    "Add a per-component performance measurement.",
+    "Reuse the components in the GlobeCiv3 and 3DIhminen interfaces."
+   ]
+  },
+  "start": "2026-01-20",
+  "last": "2026-06-08",
+  "commits": 42,
+  "techAt": "2026-01-20",
+  "one": {
+   "fi": "3D-käyttöliittymäkirjasto, jossa on 26+ interaktiivista komponenttia. Repon ainoat GitHub-tähdet (2).",
+   "en": "3D user interface library with 26+ interactive components. The only repo with GitHub stars (2)."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-tyo",
+   "t-3d",
+   "t-test",
+   "a-claude"
+  ],
+  "evidence": {
+   "p-tyo": {
+    "src": "R",
+    "q": "3D user interface library for immersive web experiences"
+   },
+   "t-3d": {
+    "src": "V",
+    "q": "Rakennettu Three.js:llä ja WebGL:llä"
+   },
+   "t-test": {
+    "src": "R",
+    "q": "tests/ – Playwright tests"
+   },
+   "a-claude": {
+    "src": "A",
+    "q": "malli: claude-sonnet-4-6"
+   }
+  },
+  "pair": "Aavistus · Claude Sonnet 4.6",
+  "agent": "6.6.2026",
+  "agentEdits": {
+   "fi": "1",
+   "en": "1"
+  },
+  "firstTech": {
+   "fi": [
+    "Three.js ja WebGL",
+    "Playwright"
+   ],
+   "en": [
+    "Three.js and WebGL",
+    "Playwright"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "spatial-3d-ui.jpg",
+  "imageW": 1180,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/Spatial-3D-UI-framework/",
+  "repoUrl": "https://github.com/SamppaFIN/Spatial-3D-UI-framework"
+ },
+ {
+  "id": "bandrock",
+  "repo": "BandRock",
+  "name": "BandRock",
+  "top": 4,
+  "score": 74,
+  "parts": {
+   "R": 0.95,
+   "L": 0.85,
+   "D": 1.0,
+   "Doc": 1.0,
+   "T": 0.0,
+   "K": 0.33
+  },
+  "review": {
+   "fi": "Toimiva ja hyvin dokumentoitu palvelu: staattinen GitHub Pages -sivu ja Worker + R2 -tallennus ilman kirjautumista, muokkaus 5-merkkisellä koodilla. CLAUDE.md:tä on muutettu 29 kertaa, joten työtä on ohjattu järjestelmällisesti. Heikkous: automaattisia testejä ei ole, eikä käyttömääriä ole mitattu.",
+   "en": "A working, well-documented service: a static GitHub Pages site and Worker + R2 storage without login, edited with a 5-character code. CLAUDE.md has been changed 29 times, so the work has been steered systematically. Weakness: there are no automated tests, and usage has not been measured."
+  },
+  "recs": {
+   "fi": [
+    "Lisää Playwright-testi bändisivun luonnille ja muokkaukselle.",
+    "Seuraa luotujen sivujen määrää ja kerro se README:ssä.",
+    "Siirrä Worker + R2 -malli yhteiseksi kirjastoksi Harakan ja Vaihtokauppojen kanssa."
+   ],
+   "en": [
+    "Add a Playwright test for creating and editing a band page.",
+    "Track the number of pages created and report it in the README.",
+    "Move the Worker + R2 pattern into a library shared with Harakka and Vaihtokaupat."
+   ]
+  },
+  "start": "2026-09-21",
+  "last": "2026-10-12",
+  "commits": 32,
+  "techAt": "2026-09-21",
+  "one": {
+   "fi": "Ilmoitustaulu bändeille: oma sivu ilman kirjautumista, muokkaus 5-merkkisellä koodilla.",
+   "en": "Bulletin board for bands: your own page without login, edited with a 5-character code."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-yht",
+   "t-back",
+   "a-claude"
+  ],
+  "evidence": {
+   "p-yht": {
+    "src": "R",
+    "q": "Ilmoitustaulu bändeille"
+   },
+   "t-back": {
+    "src": "R",
+    "q": "Worker + R2 -tallennus"
+   },
+   "a-claude": {
+    "src": "A",
+    "q": "malli: claude-sonnet-5 · alusta: Claude Code"
+   }
+  },
+  "pair": "Roudari · Claude Sonnet 5",
+  "agent": "21.9.2026",
+  "agentEdits": {
+   "fi": "29",
+   "en": "29"
+  },
+  "firstTech": {
+   "fi": [
+    "Claude Sonnet 5"
+   ],
+   "en": [
+    "Claude Sonnet 5"
+   ]
+  },
+  "thread": {
+   "fi": "Worker + R2 -arkkitehtuuri",
+   "en": "Worker + R2 architecture"
+  },
+  "image": "bandrock.jpg",
+  "imageW": 1280,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/BandRock/",
+  "repoUrl": "https://github.com/SamppaFIN/BandRock"
+ },
+ {
+  "id": "nutriscan",
+  "repo": "NutriScan",
+  "name": "NutriScan",
+  "top": 0,
+  "score": 73,
+  "parts": {
+   "R": 0.61,
+   "L": 0.88,
+   "D": 1.0,
+   "Doc": 1.0,
+   "T": 0.0,
+   "K": 1.0
+  },
+  "review": {
+   "fi": "Pitkäikäinen projekti, jonka ensimmäinen commit on maaliskuulta 2025: Expo ja React Native, kameraviivakoodi, allergeenipankki ja README:ssä kirjattu saavutettavuus. Heikkous: testejä ei ole, eikä README kerro, miten AI-tunnistus toimii tai kuinka tarkka se on.",
+   "en": "A long-lived project with its first commit in March 2025: Expo and React Native, camera barcodes, an allergen bank and accessibility recorded in the README. Weakness: there are no tests, and the README does not say how the AI recognition works or how accurate it is."
+  },
+  "recs": {
+   "fi": [
+    "Lisää testit allergeenien tunnistukselle tunnetuilla viivakoodeilla.",
+    "Kuvaa README:ssä AI-tunnistuksen malli ja tarkkuus.",
+    "Kokeile Clauden kuvantunnistusta tuoteselosteen lukemiseen."
+   ],
+   "en": [
+    "Add tests for allergen detection with known barcodes.",
+    "Describe the AI recognition model and its accuracy in the README.",
+    "Try Claude’s vision to read the ingredient label."
+   ]
+  },
+  "start": "2025-03-12",
+  "last": "2026-06-09",
+  "commits": 55,
+  "techAt": "2025-03-12",
+  "one": {
+   "fi": "Ravintoskanneri: viivakoodi kameralla, allergeenipankki ja reseptipankki.",
+   "en": "Food scanner: barcode via the camera, an allergen bank and a recipe bank."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-hyv",
+   "t-react",
+   "t-mob",
+   "t-test",
+   "a-prod",
+   "a-claude"
+  ],
+  "evidence": {
+   "p-hyv": {
+    "src": "V",
+    "q": "allergeenipankki ja reseptipankki"
+   },
+   "t-react": {
+    "src": "P",
+    "q": "react-native, expo"
+   },
+   "t-mob": {
+    "src": "R",
+    "q": "mobiili-first verkkosovellus"
+   },
+   "t-test": {
+    "src": "R",
+    "q": "Saavutettavuus: Semanttinen HTML, ARIA-labelit"
+   },
+   "a-prod": {
+    "src": "R",
+    "q": "Ota kuva tuotteesta — AI-tunnistaa tuotteen"
+   },
+   "a-claude": {
+    "src": "A",
+    "q": "malli: claude-sonnet-4-6"
+   }
+  },
+  "pair": "Aavistus · Claude Sonnet 4.6",
+  "agent": "7.6.2026",
+  "agentEdits": {
+   "fi": "1",
+   "en": "1"
+  },
+  "firstTech": {
+   "fi": [
+    "React Native (Expo)",
+    "Mobiili-ensin"
+   ],
+   "en": [
+    "React Native (Expo)",
+    "Mobile-first"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "nutriscan.jpg",
+  "imageW": 1104,
+  "imageH": 897,
+  "demoUrl": "https://samppafin.github.io/NutriScan/",
+  "repoUrl": "https://github.com/SamppaFIN/NutriScan"
+ },
+ {
+  "id": "sein",
+  "repo": "Sein-",
+  "name": "Seinä",
+  "top": 0,
+  "score": 72,
+  "parts": {
+   "R": 0.59,
+   "L": 0.8,
+   "D": 1.0,
+   "Doc": 0.64,
+   "T": 1.0,
+   "K": 0.0
+  },
+  "review": {
+   "fi": "Reaaliaikainen viestiseinä Reactilla, Konvalla ja Supabasella, ja Vitest on mukana. Koko projekti syntyi yhdessä päivässä (31 committia). Heikkous: työtä ei ole jatkettu kesäkuun 2026 jälkeen.",
+   "en": "A real-time message wall with React, Konva and Supabase, with Vitest included. The whole project was built in one day (31 commits). Weakness: the work has not continued since June 2026."
+  },
+  "recs": {
+   "fi": [
+    "Kuvaa README:ssä moderointi ja Supabasen tietoturvasäännöt.",
+    "Lisää e2e-testi viestin lähetykselle kahdesta selaimesta.",
+    "Kokeile AI-moderointia asiattomien viestien suodatukseen."
+   ],
+   "en": [
+    "Describe moderation and the Supabase security rules in the README.",
+    "Add an end-to-end test that posts a message from two browsers.",
+    "Try AI moderation to filter inappropriate messages."
+   ]
+  },
+  "start": "2026-06-04",
+  "last": "2026-06-04",
+  "commits": 31,
+  "techAt": "2026-06-04",
+  "one": {
+   "fi": "Ääretön anonyymi viestiseinä: Post-it-lappuja ja spraymaalia reaaliajassa.",
+   "en": "Endless anonymous message wall: Post-it notes and spray paint in real time."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-yht",
+   "t-react",
+   "t-ts",
+   "t-back",
+   "t-test",
+   "a-claude"
+  ],
+  "evidence": {
+   "p-yht": {
+    "src": "K",
+    "q": "Anonyymi Post-IT teemainen viestipalvelu"
+   },
+   "t-react": {
+    "src": "P",
+    "q": "react, react-konva"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "t-back": {
+    "src": "R",
+    "q": "Uudet viestit ilmestyvät kaikille livenä"
+   },
+   "t-test": {
+    "src": "P",
+    "q": "vitest"
+   },
+   "a-claude": {
+    "src": "A",
+    "q": "malli: claude-sonnet-4-6"
+   }
+  },
+  "pair": "Aavistus · Claude Sonnet 4.6",
+  "agent": "4.6.2026",
+  "agentEdits": {
+   "fi": "1",
+   "en": "1"
+  },
+  "firstTech": {
+   "fi": [
+    "Supabase-reaaliaika",
+    "Zustand",
+    "Konva"
+   ],
+   "en": [
+    "Supabase realtime",
+    "Zustand",
+    "Konva"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "sein.jpg",
+  "imageW": 1280,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/Sein-/",
+  "repoUrl": "https://github.com/SamppaFIN/Sein-"
+ },
+ {
+  "id": "globeciv",
+  "repo": "GlobeCiv",
+  "name": "GlobeCiv",
+  "top": 0,
+  "score": 72,
+  "parts": {
+   "R": 0.59,
+   "L": 0.86,
+   "D": 1.0,
+   "Doc": 1.0,
+   "T": 0.0,
+   "K": 1.0
+  },
+  "review": {
+   "fi": "Sarjan ensimmäinen versio: 3D-maapallo, 4X-mekaniikka, proseduraalinen Web Audio ja hyvä README. Siinä on vain 8 committia, ja seuraajat (2.0 ja 3) ovat jatkaneet ideaa. Heikkous: testejä ei ole.",
+   "en": "The first version of the series: a 3D globe, 4X mechanics, procedural Web Audio and a good README. It has only 8 commits, and its successors (2.0 and 3) have carried the idea on. Weakness: there are no tests."
+  },
+  "recs": {
+   "fi": [
+    "Merkitse README:hen, että GlobeCiv3 on sarjan uusin versio.",
+    "Siirrä Web Audio -toteutus GlobeCiv3:een."
+   ],
+   "en": [
+    "Note in the README that GlobeCiv3 is the latest version of the series.",
+    "Port the Web Audio implementation to GlobeCiv3."
+   ]
+  },
+  "start": "2026-01-24",
+  "last": "2026-06-03",
+  "commits": 8,
+  "techAt": "2026-01-24",
+  "one": {
+   "fi": "3D-sivilisaatiopeli maapallolla: kaupungit, teknologiapuu ja tekoälyvastustajat.",
+   "en": "3D civilisation game on a globe: cities, a tech tree and AI opponents."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-peli",
+   "t-3d",
+   "t-mob",
+   "a-ds"
+  ],
+  "evidence": {
+   "p-peli": {
+    "src": "R",
+    "q": "4X strategy game set on a full 3D globe"
+   },
+   "t-3d": {
+    "src": "P",
+    "q": "three"
+   },
+   "t-mob": {
+    "src": "R",
+    "q": "Playable on desktop and mobile."
+   },
+   "a-ds": {
+    "src": "A",
+    "q": "malli: deepseek-v4-pro"
+   }
+  },
+  "pair": "Kipinä · DeepSeek V4 Pro",
+  "agent": "3.6.2026",
+  "agentEdits": {
+   "fi": "1",
+   "en": "1"
+  },
+  "firstTech": {
+   "fi": [
+    "Web Audio"
+   ],
+   "en": [
+    "Web Audio"
+   ]
+  },
+  "thread": {
+   "fi": "GlobeCiv-sarja",
+   "en": "GlobeCiv series"
+  },
+  "image": "globeciv.jpg",
+  "imageW": 1280,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/GlobeCiv/",
+  "repoUrl": "https://github.com/SamppaFIN/GlobeCiv"
+ },
+ {
+  "id": "glow",
+  "repo": "Glow",
+  "name": "Glow",
+  "top": 0,
+  "score": 70,
+  "parts": {
+   "R": 0.76,
+   "L": 0.8,
+   "D": 1.0,
+   "Doc": 0.0,
+   "T": 1.0,
+   "K": 0.02
+  },
+  "review": {
+   "fi": "Nopea kokeilu (27 committia kahdessa päivässä), jossa on silti Vitest ja Playwright. Heikkous: README puuttuu, eikä pisteytystä tai tasoja ole kuvattu.",
+   "en": "A quick experiment (27 commits in two days) that still has Vitest and Playwright. Weakness: there is no README, and scoring and levels are not described."
+  },
+  "recs": {
+   "fi": [
+    "Kirjoita README ja lisää kuvakaappaus.",
+    "Synkronoi rytmi musiikkiin Web Audiolla, kuten Resonancessa."
+   ],
+   "en": [
+    "Write a README and add a screenshot.",
+    "Sync the rhythm to music with Web Audio, as in Resonance."
+   ]
+  },
+  "start": "2026-08-03",
+  "last": "2026-08-04",
+  "commits": 27,
+  "techAt": "2026-08-03",
+  "one": {
+   "fi": "Rytmipeli: napauta pulssaavia geometrisia kuvioita oikealla ajoituksella.",
+   "en": "Rhythm game: tap pulsing geometric shapes with the right timing."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-peli",
+   "p-taide",
+   "t-ts",
+   "t-test",
+   "a-ds"
+  ],
+  "evidence": {
+   "p-peli": {
+    "src": "P",
+    "q": "Sacred Geometry Rhythm Game"
+   },
+   "p-taide": {
+    "src": "P",
+    "q": "napauta pulssaavia geometrisia kuvioita oikealla ajoituksella"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "t-test": {
+    "src": "P",
+    "q": "@playwright/test, vitest"
+   },
+   "a-ds": {
+    "src": "A",
+    "q": "malli: DeepSeek V4 Pro"
+   }
+  },
+  "pair": "Sol · DeepSeek V4 Pro",
+  "agent": "3.8.2026",
+  "agentEdits": {
+   "fi": "3",
+   "en": "3"
+  },
+  "firstTech": {
+   "fi": [],
+   "en": []
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "https://samppafin.github.io/Glow/",
+  "repoUrl": "https://github.com/SamppaFIN/Glow"
+ },
+ {
+  "id": "ai-koulu",
+  "repo": "AI-Koulu",
+  "name": "AI-Koulu",
+  "top": 1,
+  "score": 69,
+  "parts": {
+   "R": 0.6,
+   "L": 0.88,
+   "D": 1.0,
+   "Doc": 0.0,
+   "T": 1.0,
+   "K": 0.12
+  },
+  "review": {
+   "fi": "Laaja suomenkielinen opetussivusto: Astro, MDX, React Flow, Pagefind-haku sekä axe-saavutettavuus- ja Playwright-testit. Sivun sisältö on itsessään dokumentaatiota, ja siitä alkoi nimettyjen AI-avustajien käytäntö (30.5.2026). Heikkous: repossa ei ole README:tä, ja viimeisin commit on kesäkuulta 2026.",
+   "en": "An extensive Finnish-language course site: Astro, MDX, React Flow, Pagefind search and axe accessibility and Playwright tests. The content itself is documentation, and the practice of named AI assistants started here (30 May 2026). Weakness: the repo has no README, and the last commit is from June 2026."
+  },
+  "recs": {
+   "fi": [
+    "Lisää README, josta selviää sisältö, rakenne ja testien ajo.",
+    "Päivitä mallit ja esimerkit syksyn 2026 tilanteeseen, kuten Claude Opus 5.5 ja agenttityönkulut.",
+    "Lisää jokaiseen lukuun lyhyt interaktiivinen tehtävä, jonka AI arvioi."
+   ],
+   "en": [
+    "Add a README covering the content, structure and how to run the tests.",
+    "Update the models and examples to autumn 2026, such as Claude Opus 5.5 and agent workflows.",
+    "Add a short interactive exercise to each chapter, assessed by AI."
+   ]
+  },
+  "start": "2026-05-30",
+  "last": "2026-06-07",
+  "commits": 39,
+  "techAt": "2026-05-30",
+  "one": {
+   "fi": "Suomenkielinen opetussivusto tekoälykonsepteista: React Flow, visailut ja sanasto.",
+   "en": "Finnish-language course site on AI concepts: React Flow, quizzes and a glossary."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-opp",
+   "t-react",
+   "t-ts",
+   "t-test",
+   "a-aihe",
+   "a-ds"
+  ],
+  "evidence": {
+   "p-opp": {
+    "src": "K",
+    "q": "kaikki tekoälykonseptit opetusmuodossa"
+   },
+   "t-react": {
+    "src": "P",
+    "q": "@astrojs/react, @xyflow/react"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "t-test": {
+    "src": "P",
+    "q": "@axe-core/playwright"
+   },
+   "a-aihe": {
+    "src": "K",
+    "q": "tekoälykonseptit opetusmuodossa"
+   },
+   "a-ds": {
+    "src": "A",
+    "q": "malli: DeepSeek V4 Flash"
+   }
+  },
+  "pair": "Piirtäjä · DeepSeek V4 Flash",
+  "agent": "30.5.2026",
+  "agentEdits": {
+   "fi": "4",
+   "en": "4"
+  },
+  "firstTech": {
+   "fi": [
+    "Astro",
+    "Vitest",
+    "axe-core",
+    "Agenttitiedosto"
+   ],
+   "en": [
+    "Astro",
+    "Vitest",
+    "axe-core",
+    "Agent file"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "ai-koulu.jpg",
+  "imageW": 1180,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/AI-Koulu/",
+  "repoUrl": "https://github.com/SamppaFIN/AI-Koulu"
+ },
+ {
+  "id": "nlp-ai",
+  "repo": "NLP-AI",
+  "name": "TerapiaAI",
+  "top": 0,
+  "score": 66,
+  "parts": {
+   "R": 0.59,
+   "L": 0.81,
+   "D": 1.0,
+   "Doc": 0.56,
+   "T": 0.0,
+   "K": 1.0
+  },
+  "review": {
+   "fi": "Varhainen ja rohkea AI-kokeilu: kahdeksan terapiapersoonaa, OpenRouter ja puheentunnistus. Heikkous: testejä ei ole, ja mielenterveysaiheessa vastuullisuusrajat kannattaa tuoda näkyviin.",
+   "en": "An early, bold AI experiment: eight therapy personas, OpenRouter and speech recognition. Weakness: there are no tests, and with a mental health topic the safety limits should be made visible."
+  },
+  "recs": {
+   "fi": [
+    "Lisää näkyvä huomautus, ettei chat korvaa ammattiapua, sekä kriisinumero.",
+    "Päivitä mallit ja testaa persoonien vastaukset vakiokysymyksillä.",
+    "Pidä keskustelut vain selaimessa ja kerro se käyttäjälle."
+   ],
+   "en": [
+    "Add a visible note that the chat does not replace professional help, plus a crisis number.",
+    "Update the models and test the personas’ answers with standard questions.",
+    "Keep conversations in the browser only and tell the user so."
+   ]
+  },
+  "start": "2025-09-16",
+  "last": "2026-06-02",
+  "commits": 27,
+  "techAt": "2025-09-16",
+  "one": {
+   "fi": "Terapia-chat kahdeksalla AI-persoonalla ja puheentunnistuksella.",
+   "en": "Therapy chat with eight AI personas and speech recognition."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-hyv",
+   "a-prod"
+  ],
+  "evidence": {
+   "p-hyv": {
+    "src": "V",
+    "q": "terapia-chat kahdeksalla tekoälypersoonalla"
+   },
+   "a-prod": {
+    "src": "R",
+    "q": "AI-tila (OpenRouter)"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [
+    "OpenRouter",
+    "Puheentunnistus"
+   ],
+   "en": [
+    "OpenRouter",
+    "Speech recognition"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "nlp-ai.jpg",
+  "imageW": 1180,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/NLP-AI/",
+  "repoUrl": "https://github.com/SamppaFIN/NLP-AI"
+ },
+ {
+  "id": "ai-pasianssi",
+  "repo": "AI-pasianssi",
+  "name": "AI-Pasianssi",
+  "top": 0,
+  "score": 57,
+  "parts": {
+   "R": 0.48,
+   "L": 0.79,
+   "D": 1.0,
+   "Doc": 0.88,
+   "T": 0.0,
+   "K": 0.0
+  },
+  "review": {
+   "fi": "Hauska demo, jossa AI pelaa Klondikea OpenRouterin tai Groqin kautta, ja README on hyvä. Tehty kahdessa päivässä. Heikkous: testejä ei ole, eikä AI:n voittoprosenttia ole mitattu.",
+   "en": "A fun demo where an AI plays Klondike via OpenRouter or Groq, with a good README. Built in two days. Weakness: there are no tests, and the AI’s win rate has not been measured."
+  },
+  "recs": {
+   "fi": [
+    "Mittaa voittoprosentti malleittain.",
+    "Vertaa malleja rinnakkain samalla jaolla."
+   ],
+   "en": [
+    "Measure the win rate per model.",
+    "Compare models side by side on the same deal."
+   ]
+  },
+  "start": "2026-04-24",
+  "last": "2026-04-25",
+  "commits": 15,
+  "techAt": "2026-04-24",
+  "one": {
+   "fi": "Klondike-pasianssi, jota tekoäly pelaa puolestasi (OpenRouter tai Groq).",
+   "en": "Klondike solitaire that an AI plays for you (OpenRouter or Groq)."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-peli",
+   "a-prod"
+  ],
+  "evidence": {
+   "p-peli": {
+    "src": "K",
+    "q": "pelaa puolestasi pasianssia"
+   },
+   "a-prod": {
+    "src": "K",
+    "q": "Tekoäly pelaa puolestasi pasianssia"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [
+    "Groq"
+   ],
+   "en": [
+    "Groq"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "ai-pasianssi.jpg",
+  "imageW": 1180,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/AI-pasianssi/",
+  "repoUrl": "https://github.com/SamppaFIN/AI-pasianssi"
+ },
+ {
+  "id": "eldrichhorror",
+  "repo": "EldrichHorror",
+  "name": "EldrichHorror",
+  "top": 0,
+  "score": 57,
+  "parts": {
+   "R": 0.0,
+   "L": 0.83,
+   "D": 1.0,
+   "Doc": 1.0,
+   "T": 0.0,
+   "K": 1.0
+  },
+  "review": {
+   "fi": "Laaja README ja GPS-pohjainen pelikonsepti. Heikkous: kaikki 19 committia ovat kahdelta päivältä (10/2025), ja Eldritch on korvannut sen (päätelty).",
+   "en": "An extensive README and a GPS-based game concept. Weakness: all 19 commits are from two days (10/2025), and Eldritch has replaced it (inferred)."
+  },
+  "recs": {
+   "fi": [
+    "Merkitse repo edeltäjäksi ja linkitä Eldritchiin."
+   ],
+   "en": [
+    "Mark the repo as the predecessor and link it to Eldritch."
+   ]
+  },
+  "start": "2025-10-07",
+  "last": "2025-10-08",
+  "commits": 19,
+  "techAt": "2025-10-07",
+  "one": {
+   "fi": "Sijaintipohjainen Lovecraft-tutkimuspeli. Päätelty: Eldritchin edeltäjä.",
+   "en": "Location-based Lovecraftian exploration game. Inferred: the predecessor of Eldritch."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "Repo luotiin 5/2025, ja commitit ovat lokakuulta 2025.",
+   "en": "The repo was created in 5/2025; its commits are from October 2025."
+  },
+  "tags": [
+   "p-peli",
+   "t-mob"
+  ],
+  "evidence": {
+   "p-peli": {
+    "src": "R",
+    "q": "location-based mystical exploration game"
+   },
+   "t-mob": {
+    "src": "R",
+    "q": "Real-world GPS-based gameplay"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [
+    "GPS-pelaaminen"
+   ],
+   "en": [
+    "GPS gameplay"
+   ]
+  },
+  "thread": {
+   "fi": "Eldritch-sarja",
+   "en": "Eldritch series"
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "https://samppafin.github.io/EldrichHorror/",
+  "repoUrl": "https://github.com/SamppaFIN/EldrichHorror"
+ },
+ {
+  "id": "newsscaper",
+  "repo": "NewsScaper",
+  "name": "NewsScaper",
+  "top": 0,
+  "score": 57,
+  "parts": {
+   "R": 0.6,
+   "L": 0.77,
+   "D": 1.0,
+   "Doc": 0.61,
+   "T": 0.0,
+   "K": 0.0
+  },
+  "review": {
+   "fi": "Hyödyllinen käyttöliittymä last30days-työkalulle: FastAPI-tausta ja haku monesta lähteestä. Heikkous: viisi committia yhdeltä päivältä, eikä testejä ole.",
+   "en": "A useful interface for the last30days tool: a FastAPI backend and search across many sources. Weakness: five commits from a single day, and no tests."
+  },
+  "recs": {
+   "fi": [
+    "Lisää ohje taustapalvelimen ajamiseen paikallisesti.",
+    "Tiivistä hakutulokset AI:lla lähdeviittein."
+   ],
+   "en": [
+    "Add instructions for running the backend locally.",
+    "Summarise the search results with AI, with citations."
+   ]
+  },
+  "start": "2026-06-07",
+  "last": "2026-06-07",
+  "commits": 5,
+  "techAt": "2026-06-07",
+  "one": {
+   "fi": "Uutistutkimus Redditistä, X:stä, YouTubesta, Hacker Newsistä ja Blueskysta yhdestä paikasta.",
+   "en": "News research across Reddit, X, YouTube, Hacker News and Bluesky from one place."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-data",
+   "t-back",
+   "t-py",
+   "a-claude"
+  ],
+  "evidence": {
+   "p-data": {
+    "src": "V",
+    "q": "Monilähteinen uutistutkimusmoottori"
+   },
+   "t-back": {
+    "src": "R",
+    "q": "FastAPI (backend/)"
+   },
+   "t-py": {
+    "src": "R",
+    "q": "FastAPI (backend/)"
+   },
+   "a-claude": {
+    "src": "A",
+    "q": "malli: claude-sonnet-4-6"
+   }
+  },
+  "pair": "Aavistus · Claude Sonnet 4.6",
+  "agent": "7.6.2026",
+  "agentEdits": {
+   "fi": "1",
+   "en": "1"
+  },
+  "firstTech": {
+   "fi": [],
+   "en": []
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "newsscaper.jpg",
+  "imageW": 1104,
+  "imageH": 897,
+  "demoUrl": "https://samppafin.github.io/NewsScaper/",
+  "repoUrl": "https://github.com/SamppaFIN/NewsScaper"
+ },
+ {
+  "id": "hallituspaatokset",
+  "repo": "Hallituspaatokset",
+  "name": "Hallituspäätökset",
+  "top": 0,
+  "score": 53,
+  "parts": {
+   "R": 0.58,
+   "L": 0.8,
+   "D": 1.0,
+   "Doc": 0.03,
+   "T": 0.0,
+   "K": 0.25
+  },
+  "review": {
+   "fi": "Selkeä infografiikka hallituksen lupauksista. Heikkous: README:ssä on 88 merkkiä, eikä se kerro lähteitä tai päivitystapaa.",
+   "en": "A clear infographic of the government’s promises. Weakness: the README has 88 characters and says nothing about sources or how the data is updated."
+  },
+  "recs": {
+   "fi": [
+    "Tuo lähteet ja päivityspäivä näkyviin.",
+    "Automatisoi päivitys julkisista lähteistä."
+   ],
+   "en": [
+    "Show the sources and the update date.",
+    "Automate updates from public sources."
+   ]
+  },
+  "start": "2026-05-14",
+  "last": "2026-05-29",
+  "commits": 5,
+  "techAt": "2026-05-14",
+  "one": {
+   "fi": "Infografiikka hallituksen lupauksista ja niiden toteutumisesta.",
+   "en": "Infographic of the Finnish government’s promises and how they were kept."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-yhk",
+   "p-data"
+  ],
+  "evidence": {
+   "p-yhk": {
+    "src": "K",
+    "q": "hallituksen lupauksista ja niiden toteutumisista"
+   },
+   "p-data": {
+    "src": "K",
+    "q": "Infograafinen sivu"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [],
+   "en": []
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "hallituspaatokset.jpg",
+  "imageW": 1180,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/Hallituspaatokset/",
+  "repoUrl": "https://github.com/SamppaFIN/Hallituspaatokset"
+ },
+ {
+  "id": "globeciv2-0",
+  "repo": "GlobeCiv2.0",
+  "name": "GlobeCiv2.0",
+  "top": 0,
+  "score": 52,
+  "parts": {
+   "R": 0.62,
+   "L": 0.82,
+   "D": 1.0,
+   "Doc": 0.0,
+   "T": 0.0,
+   "K": 0.0
+  },
+  "review": {
+   "fi": "Sarjan välivaihe: Svelte, Phaser, Comlink ja Dexie. Siinä on yksi commit, joten se on enemmän luonnos kuin projekti.",
+   "en": "An intermediate step in the series: Svelte, Phaser, Comlink and Dexie. It has a single commit, so it is more a sketch than a project."
+  },
+  "recs": {
+   "fi": [
+    "Siirrä opit GlobeCiv3:een ja merkitse repo arkistoksi."
+   ],
+   "en": [
+    "Carry the lessons into GlobeCiv3 and mark the repo as archived."
+   ]
+  },
+  "start": "2026-06-14",
+  "last": "2026-06-14",
+  "commits": 1,
+  "techAt": "2026-06-14",
+  "one": {
+   "fi": "Autonominen sivilisaatiosimulaatio, GlobeCivin toinen iteraatio.",
+   "en": "Autonomous civilisation simulation, the second iteration of GlobeCiv."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-peli",
+   "t-svelte",
+   "t-ts",
+   "a-ds"
+  ],
+  "evidence": {
+   "p-peli": {
+    "src": "P",
+    "q": "Autonominen sivilisaatiosimulaatio (CivSim)"
+   },
+   "t-svelte": {
+    "src": "P",
+    "q": "svelte"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "a-ds": {
+    "src": "A",
+    "q": "malli: DeepSeek V4 Pro · alusta: GitHub Copilot"
+   }
+  },
+  "pair": "Syvyys · DeepSeek V4 Pro",
+  "agent": "14.6.2026",
+  "agentEdits": {
+   "fi": "1",
+   "en": "1"
+  },
+  "firstTech": {
+   "fi": [
+    "Svelte",
+    "Phaser",
+    "Dexie"
+   ],
+   "en": [
+    "Svelte",
+    "Phaser",
+    "Dexie"
+   ]
+  },
+  "thread": {
+   "fi": "GlobeCiv-sarja",
+   "en": "GlobeCiv series"
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "https://samppafin.github.io/GlobeCiv2.0/",
+  "repoUrl": "https://github.com/SamppaFIN/GlobeCiv2.0"
+ },
+ {
+  "id": "resonance",
+  "repo": "Resonance",
+  "name": "Resonance",
+  "top": 0,
+  "score": 51,
+  "parts": {
+   "R": 0.6,
+   "L": 0.77,
+   "D": 1.0,
+   "Doc": 0.0,
+   "T": 0.0,
+   "K": 0.05
+  },
+  "review": {
+   "fi": "Visuaalinen ja äänellinen kokeilu Solfeggio-taajuuksilla ja Web Audiolla. Heikkous: README puuttuu, ja commiteja on viisi.",
+   "en": "A visual and audio experiment with Solfeggio frequencies and Web Audio. Weakness: there is no README, and it has five commits."
+  },
+  "recs": {
+   "fi": [
+    "Lisää README ja ääniohje (kuulokkeet ja äänenvoimakkuus).",
+    "Lisää reduced motion -tila ja äänen mykistys."
+   ],
+   "en": [
+    "Add a README and audio guidance (headphones and volume).",
+    "Add a reduced motion mode and a mute control."
+   ]
+  },
+  "start": "2026-06-05",
+  "last": "2026-06-08",
+  "commits": 5,
+  "techAt": "2026-06-05",
+  "one": {
+   "fi": "Geometrinen audiovisuaalinen meditaatio Solfeggio-taajuuksilla (432/528/963 Hz).",
+   "en": "Geometric audiovisual meditation with Solfeggio frequencies (432/528/963 Hz)."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-hyv",
+   "p-taide",
+   "a-ds"
+  ],
+  "evidence": {
+   "p-hyv": {
+    "src": "V",
+    "q": "audiovisuaalinen meditaatiokokemus"
+   },
+   "p-taide": {
+    "src": "V",
+    "q": "Solfeggio-taajuuksilla (432/528/963 Hz)"
+   },
+   "a-ds": {
+    "src": "A",
+    "q": "malli: DeepSeek V4 Pro"
+   }
+  },
+  "pair": "Aavistus · DeepSeek V4 Pro",
+  "agent": "5.6.2026",
+  "agentEdits": {
+   "fi": "1",
+   "en": "1"
+  },
+  "firstTech": {
+   "fi": [],
+   "en": []
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "resonance.jpg",
+  "imageW": 1280,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/Resonance/",
+  "repoUrl": "https://github.com/SamppaFIN/Resonance"
+ },
+ {
+  "id": "j-rjestelm-nvarjot",
+  "repo": "J-rjestelm-nVarjot",
+  "name": "Järjestelmän Varjot",
+  "top": 0,
+  "score": 48,
+  "parts": {
+   "R": 0.58,
+   "L": 0.7,
+   "D": 1.0,
+   "Doc": 0.0,
+   "T": 0.0,
+   "K": 0.0
+  },
+  "review": {
+   "fi": "Jäsennelty katsaus epäkohtiin ja virallisiin oikeuskanaviin, ja lähteinä ovat Finlex, Kilpailu- ja kuluttajavirasto ja FINE. Heikkous: kaksi committia, eikä README:tä ole.",
+   "en": "A structured review of problems and the official channels for redress, citing Finlex, the Finnish Competition and Consumer Authority and FINE. Weakness: two commits, and no README."
+  },
+  "recs": {
+   "fi": [
+    "Lisää jokaiseen tapaukseen päivityspäivä ja lähdelinkit.",
+    "Pyydä faktoihin vertaisarvio ennen laajempaa jakamista."
+   ],
+   "en": [
+    "Add an update date and source links to every case.",
+    "Ask for a peer review of the facts before wider sharing."
+   ]
+  },
+  "start": "2026-05-31",
+  "last": "2026-05-31",
+  "commits": 2,
+  "techAt": "2026-05-31",
+  "one": {
+   "fi": "Kansalaisen käsikirja suomalaisen yhteiskunnan epäkohdista ja oikeuskanavista.",
+   "en": "A citizen’s handbook to structural problems in Finnish society and the official channels for redress."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-yhk"
+  ],
+  "evidence": {
+   "p-yhk": {
+    "src": "D",
+    "q": "Kansalaisen käsikirja epäkohdista"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [],
+   "en": []
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "jarjestelman-varjot.jpg",
+  "imageW": 1180,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/J-rjestelm-nVarjot/",
+  "repoUrl": "https://github.com/SamppaFIN/J-rjestelm-nVarjot"
+ },
+ {
+  "id": "suomisimulaattori",
+  "repo": "Suomisimulaattori",
+  "name": "Suomisimulaattori",
+  "top": 0,
+  "score": 48,
+  "parts": {
+   "R": 0.53,
+   "L": 0.71,
+   "D": 1.0,
+   "Doc": 0.0,
+   "T": 0.0,
+   "K": 0.0
+  },
+  "review": {
+   "fi": "Kunnianhimoinen yhteiskuntasimulaatio vuosille 1800–2024: väestöpyramidi ja valtion talous. Heikkous: kuusi committia kahdessa päivässä, eikä mallin oletuksia ole kuvattu.",
+   "en": "An ambitious society simulation for 1800–2024: a population pyramid and state finances. Weakness: six commits in two days, and the model’s assumptions are not described."
+  },
+  "recs": {
+   "fi": [
+    "Dokumentoi mallin oletukset ja datalähteet.",
+    "Vertaa simulaatiota toteutuneeseen dataan."
+   ],
+   "en": [
+    "Document the model’s assumptions and data sources.",
+    "Compare the simulation with actual data."
+   ]
+  },
+  "start": "2026-05-14",
+  "last": "2026-05-15",
+  "commits": 6,
+  "techAt": "2026-05-14",
+  "one": {
+   "fi": "Yhteiskuntasimulaatio: väestöpyramidi ja valtion talous 1800–2024.",
+   "en": "Society simulation: population pyramid and state finances 1800–2024."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-yhk",
+   "p-peli"
+  ],
+  "evidence": {
+   "p-yhk": {
+    "src": "K",
+    "q": "tarkastellaan suomalaista yhteiskuntaa"
+   },
+   "p-peli": {
+    "src": "K",
+    "q": "Simulaatio"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [],
+   "en": []
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "https://samppafin.github.io/Suomisimulaattori/",
+  "repoUrl": "https://github.com/SamppaFIN/Suomisimulaattori"
+ },
+ {
+  "id": "factory-ultra",
+  "repo": "factory-ultra",
+  "name": "factory-ultra",
+  "top": 0,
+  "score": 40,
+  "parts": {
+   "R": 0.48,
+   "L": 0.87,
+   "D": 0.0,
+   "Doc": 1.0,
+   "T": 0.0,
+   "K": 0.02
+  },
+  "review": {
+   "fi": "Laaja README (yli 20 000 merkkiä) AI-kehityksen tehdaspohjasta. Sen BRDC-työnkulku näkyy myöhemmin Eldritchin tiketeissä. Heikkous: demoa ei ole, ja commiteja on kolme.",
+   "en": "An extensive README (over 20,000 characters) for an AI development factory template. Its BRDC workflow later shows up in Eldritch’s tickets. Weakness: there is no demo, and it has three commits."
+  },
+  "recs": {
+   "fi": [
+    "Päivitä pohja vastaamaan Eldritchin ja GlobeCiv3:n agenttityönkulkua.",
+    "Lisää lyhyt esimerkkiprojekti, joka käyttää pohjaa."
+   ],
+   "en": [
+    "Update the template to match the agent workflow of Eldritch and GlobeCiv3.",
+    "Add a short example project that uses the template."
+   ]
+  },
+  "start": "2026-04-22",
+  "last": "2026-04-24",
+  "commits": 3,
+  "techAt": "2026-04-22",
+  "one": {
+   "fi": "Tekoälykehityksen tehdaspohja: BRDC-työnkulku, auditointi ja kustannusseuranta.",
+   "en": "Template for an AI development factory: BRDC workflow, audit trail and cost tracking."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-tyo",
+   "t-py",
+   "a-aihe"
+  ],
+  "evidence": {
+   "p-tyo": {
+    "src": "V",
+    "q": "tekoälykehityksen tehdaspohja"
+   },
+   "t-py": {
+    "src": "L",
+    "q": "Python GitHubin kielitilastossa"
+   },
+   "a-aihe": {
+    "src": "V",
+    "q": "Rakennettu vakaviin tekoälyprojekteihin"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [
+    "BRDC-työnkulku"
+   ],
+   "en": [
+    "BRDC workflow"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "",
+  "repoUrl": "https://github.com/SamppaFIN/factory-ultra"
+ },
+ {
+  "id": "insurance-gap-review",
+  "repo": "Insurance-Gap-Review",
+  "name": "Insurance-Gap-Review",
+  "top": 0,
+  "score": 38,
+  "parts": {
+   "R": 0.0,
+   "L": 0.7,
+   "D": 1.0,
+   "Doc": 0.39,
+   "T": 0.0,
+   "K": 0.0
+  },
+  "review": {
+   "fi": "Yksityisyys on huomioitu hyvin, sillä tiedostot pysyvät selaimen muistissa. Heikkous: kolme committia yhdeltä päivältä, ja PDF.js ladataan CDN:stä.",
+   "en": "Privacy is handled well, since files stay in the browser’s memory. Weakness: three commits from a single day, and PDF.js is loaded from a CDN."
+  },
+  "recs": {
+   "fi": [
+    "Lisää testiaineisto ja kerro tunnistuksen tarkkuus.",
+    "Kokeile paikallista LLM:ää vakuutusehtojen tulkintaan."
+   ],
+   "en": [
+    "Add test documents and report the detection accuracy.",
+    "Try a local LLM for interpreting policy terms."
+   ]
+  },
+  "start": "2025-10-20",
+  "last": "2025-10-20",
+  "commits": 3,
+  "techAt": "2025-10-20",
+  "one": {
+   "fi": "Vakuutusten aukkoanalyysi selaimessa. Tiedostot pysyvät muistissa eivätkä lähde koneelta.",
+   "en": "Insurance gap analysis in the browser. Files stay in memory and never leave the machine."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-data"
+  ],
+  "evidence": {
+   "p-data": {
+    "src": "R",
+    "q": "extract coverage, and compare against Finnish baselines"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [
+    "PDF.js"
+   ],
+   "en": [
+    "PDF.js"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "https://samppafin.github.io/Insurance-Gap-Review/",
+  "repoUrl": "https://github.com/SamppaFIN/Insurance-Gap-Review"
+ },
+ {
+  "id": "rag-demo",
+  "repo": "RAG-Demo",
+  "name": "RAG-Demo",
+  "top": 0,
+  "score": 32,
+  "parts": {
+   "R": 0.0,
+   "L": 0.83,
+   "D": 0.0,
+   "Doc": 1.0,
+   "T": 0.0,
+   "K": 0.55
+  },
+  "review": {
+   "fi": "Hyvä opetusidea (AI Candy Store) ja kaksikielinen README. Heikkous: demoa ei ole, ja viimeisin commit on elokuulta 2025.",
+   "en": "A good teaching idea (AI Candy Store) with a bilingual README. Weakness: there is no demo, and the last commit is from August 2025."
+  },
+  "recs": {
+   "fi": [
+    "Julkaise selainversio tai video.",
+    "Päivitä upotus- ja kielimallit nykyisiin."
+   ],
+   "en": [
+    "Publish a browser version or a video.",
+    "Update the embedding and language models to current ones."
+   ]
+  },
+  "start": "2025-07-26",
+  "last": "2025-08-28",
+  "commits": 6,
+  "techAt": "2025-07-26",
+  "one": {
+   "fi": "AI Candy Store: interaktiivinen RAG-opetusdemo.",
+   "en": "AI Candy Store: an interactive teaching demo of RAG."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-opp",
+   "t-ts",
+   "t-py",
+   "a-prod",
+   "a-aihe"
+  ],
+  "evidence": {
+   "p-opp": {
+    "src": "R",
+    "q": "educational demonstration of Retrieval-Augmented Generation"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "t-py": {
+    "src": "L",
+    "q": "Python GitHubin kielitilastossa"
+   },
+   "a-prod": {
+    "src": "R",
+    "q": "Retrieval-Augmented Generation (RAG)"
+   },
+   "a-aihe": {
+    "src": "R",
+    "q": "educational demonstration of Retrieval-Augmented Generation"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [
+    "Python",
+    "RAG"
+   ],
+   "en": [
+    "Python",
+    "RAG"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "",
+  "repoUrl": "https://github.com/SamppaFIN/RAG-Demo"
+ },
+ {
+  "id": "mergemaster",
+  "repo": "MergeMaster",
+  "name": "MergeMaster",
+  "top": 0,
+  "score": 28,
+  "parts": {
+   "R": 0.0,
+   "L": 0.91,
+   "D": 0.0,
+   "Doc": 1.0,
+   "T": 0.0,
+   "K": 0.0
+  },
+  "review": {
+   "fi": "Hauska tunnin projekti yhdessä 8-vuotiaan kanssa, ja README on laaja. Heikkous: demoa ei ole.",
+   "en": "A fun one-hour project made with an 8-year-old, with an extensive README. Weakness: there is no demo."
+  },
+  "recs": {
+   "fi": [
+    "Julkaise peli GitHub Pagesiin, niin sitä voi pelata."
+   ],
+   "en": [
+    "Publish the game on GitHub Pages so it can be played."
+   ]
+  },
+  "start": "2025-03-05",
+  "last": "2025-08-27",
+  "commits": 32,
+  "techAt": "2025-03-05",
+  "one": {
+   "fi": "Selainpeli, joka tehtiin tunnissa yhdessä 8-vuotiaan pojan kanssa.",
+   "en": "Small browser game made in an hour together with an 8-year-old son."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-peli",
+   "t-ts"
+  ],
+  "evidence": {
+   "p-peli": {
+    "src": "K",
+    "q": "Small browser game"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [
+    "TypeScript"
+   ],
+   "en": [
+    "TypeScript"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "",
+  "repoUrl": "https://github.com/SamppaFIN/MergeMaster"
+ },
+ {
+  "id": "aurora-security-dojo",
+  "repo": "Aurora-security-dojo",
+  "name": "Aurora-security-dojo",
+  "top": 0,
+  "score": 27,
+  "parts": {
+   "R": 0.0,
+   "L": 0.86,
+   "D": 0.0,
+   "Doc": 1.0,
+   "T": 0.0,
+   "K": 0.0
+  },
+  "review": {
+   "fi": "Laaja README tietoturvatestaustyökalusta (Flask). Heikkous: kaikki 13 committia ovat samalta päivältä, eikä demoa tai testejä ole.",
+   "en": "An extensive README for a security testing tool (Flask). Weakness: all 13 commits are from the same day, and there is no demo and no tests."
+  },
+  "recs": {
+   "fi": [
+    "Lisää selkeä varoitus: käytä vain omiin tai luvallisiin kohteisiin.",
+    "Lisää testit ja esimerkkiraportti."
+   ],
+   "en": [
+    "Add a clear warning: use only against your own or authorised targets.",
+    "Add tests and a sample report."
+   ]
+  },
+  "start": "2025-10-01",
+  "last": "2025-10-01",
+  "commits": 13,
+  "techAt": "2025-10-01",
+  "one": {
+   "fi": "Työkalu haavoittuvuuksien testaamiseen.",
+   "en": "Tool for testing vulnerabilities."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-tyo",
+   "t-back",
+   "t-py"
+  ],
+  "evidence": {
+   "p-tyo": {
+    "src": "K",
+    "q": "Tool to test vurlnabilities"
+   },
+   "t-back": {
+    "src": "Q",
+    "q": "Flask, gunicorn"
+   },
+   "t-py": {
+    "src": "Q",
+    "q": "Flask"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [
+    "Flask"
+   ],
+   "en": [
+    "Flask"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "",
+  "repoUrl": "https://github.com/SamppaFIN/Aurora-security-dojo"
+ },
+ {
+  "id": "tarot-game",
+  "repo": "tarot-game",
+  "name": "Cosmic Tarot",
+  "top": 0,
+  "score": 20,
+  "parts": {
+   "R": 0.0,
+   "L": 0,
+   "D": 1.0,
+   "Doc": 0.01,
+   "T": 0.0,
+   "K": 0.0
+  },
+  "review": {
+   "fi": "Mobiili-ensin tarotkokemus. Heikkous: GitHub ei tunnista repossa koodia, README:ssä on 28 merkkiä, ja commiteja on kaksi.",
+   "en": "A mobile-first tarot experience. Weakness: GitHub detects no code in the repo, the README has 28 characters, and there are two commits."
+  },
+  "recs": {
+   "fi": [
+    "Siirrä lähdekoodi repoon ja lisää README."
+   ],
+   "en": [
+    "Move the source code into the repo and add a README."
+   ]
+  },
+  "start": "2025-10-06",
+  "last": "2025-10-06",
+  "commits": 2,
+  "techAt": "2025-10-06",
+  "one": {
+   "fi": "Mobiili-ensin tarotmatka tunnekysymyksillä.",
+   "en": "Mobile-first tarot journey with emotional questions."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-peli",
+   "t-mob"
+  ],
+  "evidence": {
+   "p-peli": {
+    "src": "K",
+    "q": "fun tarot game"
+   },
+   "t-mob": {
+    "src": "V",
+    "q": "Mobiili ensin -tarotmatka"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [],
+   "en": []
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "tarot-game.jpg",
+  "imageW": 1180,
+  "imageH": 720,
+  "demoUrl": "https://samppafin.github.io/tarot-game/",
+  "repoUrl": "https://github.com/SamppaFIN/tarot-game"
+ },
+ {
+  "id": "healthconnectai",
+  "repo": "HealthConnectAI",
+  "name": "HealthConnectAI",
+  "top": 0,
+  "score": 17,
+  "parts": {
+   "R": 0.0,
+   "L": 0.86,
+   "D": 0.0,
+   "Doc": 0.0,
+   "T": 0.0,
+   "K": 0.0
+  },
+  "review": {
+   "fi": "Varhainen kokeilu terveyskysymyksistä Perplexity AI:lle. Heikkous: README:tä tai demoa ei ole.",
+   "en": "An early experiment with health questions to Perplexity AI. Weakness: there is no README and no demo."
+  },
+  "recs": {
+   "fi": [
+    "Lisää vastauksiin vastuuvapauslauseke ja lähdeviitteet.",
+    "Julkaise demo tai arkistoi repo."
+   ],
+   "en": [
+    "Add a disclaimer and citations to the answers.",
+    "Publish a demo or archive the repo."
+   ]
+  },
+  "start": "2025-05-21",
+  "last": "2025-08-29",
+  "commits": 15,
+  "techAt": "2025-05-21",
+  "one": {
+   "fi": "Terveyskysymykset Perplexity AI:lle.",
+   "en": "Health questions to Perplexity AI."
+  },
+  "result": {
+   "fi": "",
+   "en": ""
+  },
+  "note": {
+   "fi": "",
+   "en": ""
+  },
+  "tags": [
+   "p-hyv",
+   "t-ts",
+   "a-prod"
+  ],
+  "evidence": {
+   "p-hyv": {
+    "src": "K",
+    "q": "health related questions"
+   },
+   "t-ts": {
+    "src": "L",
+    "q": "TypeScript GitHubin kielitilastossa"
+   },
+   "a-prod": {
+    "src": "K",
+    "q": "ask health related questions from perplexity AI"
+   }
+  },
+  "pair": "",
+  "agent": "",
+  "agentEdits": {
+   "fi": "",
+   "en": ""
+  },
+  "firstTech": {
+   "fi": [
+    "LLM-rajapinta (Perplexity)"
+   ],
+   "en": [
+    "LLM API (Perplexity)"
+   ]
+  },
+  "thread": {
+   "fi": "",
+   "en": ""
+  },
+  "image": "",
+  "imageW": 0,
+  "imageH": 0,
+  "demoUrl": "",
+  "repoUrl": "https://github.com/SamppaFIN/HealthConnectAI"
+ }
 ]

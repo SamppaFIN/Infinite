@@ -1,0 +1,1329 @@
+{
+ "total": 2418,
+ "months": [
+  67,
+  6,
+  38,
+  2,
+  5,
+  3,
+  346,
+  111,
+  0,
+  0,
+  29,
+  15,
+  3,
+  38,
+  72,
+  98,
+  0,
+  347,
+  613,
+  623,
+  2
+ ],
+ "chapters": [
+  {
+   "n": 1,
+   "from": 0,
+   "to": 3,
+   "period": "03–06/2025",
+   "key": "mergemaster",
+   "title": {
+    "fi": "Alku",
+    "en": "Beginnings"
+   },
+   "paras": {
+    "fi": [
+     "Ensimmäiset commitit tehtiin maaliskuussa 2025. MergeMaster on selainpeli, joka tehtiin yhdessä 8-vuotiaan pojan kanssa, ja NutriScan on Expo- ja React Native -pohjainen ruokaskanneri.",
+     "GitHub-profiili ja Infinite-repo syntyivät 1.4.2025. Toukokuussa tulivat CV ja HealthConnectAI, ensimmäinen kokeilu, joka kysyy tekoälyltä (Perplexity)."
+    ],
+    "en": [
+     "The first commits were made in March 2025. MergeMaster is a browser game made together with an 8-year-old son, and NutriScan is a food scanner built on Expo and React Native.",
+     "The GitHub profile and the Infinite repo were created on 1 April 2025. May brought a CV and HealthConnectAI, the first experiment that asks an AI (Perplexity)."
+    ]
+   },
+   "ai": {
+    "fi": "Ei agenttitiedostoja.",
+    "en": "No agent files."
+   }
+  },
+  {
+   "n": 2,
+   "from": 4,
+   "to": 7,
+   "period": "07–10/2025",
+   "key": "nlp-ai",
+   "title": {
+    "fi": "Tekoäly tuotteeseen",
+    "en": "AI into the product"
+   },
+   "paras": {
+    "fi": [
+     "Heinäkuussa RAG-Demo opetti hakuun perustuvaa generointia Pythonilla. Syyskuussa TerapiaAI sai kahdeksan AI-persoonaa ja puheentunnistuksen.",
+     "Syyskuu oli vuoden 2025 kiireisin kuukausi (346 commitia), ja suurin osa tuli Klitoritarista. Lokakuussa syntyi seitsemän repoa: muun muassa tietoturvatyökalu Aurora (Flask), Cosmic Tarot, vakuutusten aukkoanalyysi PDF.js:llä ja EldrichHorror, sijaintipohjainen Lovecraft-peli."
+    ],
+    "en": [
+     "In July RAG-Demo taught retrieval-augmented generation with Python. In September TerapiaAI got eight AI personas and speech recognition.",
+     "September was the busiest month of 2025 (346 commits), most of them in Klitoritari. October saw seven new repos, among them the security tool Aurora (Flask), Cosmic Tarot, an insurance gap analysis with PDF.js and EldrichHorror, a location-based Lovecraftian game."
+    ]
+   },
+   "ai": {
+    "fi": "Ei agenttitiedostoja. AI on tuotteen osa RAG-Demossa ja TerapiaAI:ssa.",
+    "en": "No agent files. AI is part of the product in RAG-Demo and TerapiaAI."
+   }
+  },
+  {
+   "n": 3,
+   "from": 8,
+   "to": 12,
+   "period": "11/2025–03/2026",
+   "key": "spatial-3d-ui-framework",
+   "title": {
+    "fi": "Tauko ja kolmas ulottuvuus",
+    "en": "A pause and the third dimension"
+   },
+   "paras": {
+    "fi": [
+     "Marras- ja joulukuussa 2025 ei tehty yhtään julkista committia.",
+     "Tammikuussa työ jatkui 3D:llä. Spatial-3D-UI on Three.js-käyttöliittymäkirjasto, jossa on 26+ komponenttia ja Playwright-testit, ja se on ainoa repo, jolla on GitHub-tähtiä. GlobeCiv vei sivilisaatiopelin 3D-maapallolle ja toi mukaan proseduraalisen Web Audion. Maaliskuussa alkoi RogueReborn, TomeNetin innoittama roguelike."
+    ],
+    "en": [
+     "No public commits were made in November or December 2025.",
+     "In January the work continued in 3D. Spatial-3D-UI is a Three.js UI library with 26+ components and Playwright tests, and it is the only repo with GitHub stars. GlobeCiv took a civilisation game onto a 3D globe and brought procedural Web Audio. In March came RogueReborn, a roguelike inspired by TomeNet."
+    ]
+   },
+   "ai": {
+    "fi": "Ei agenttitiedostoja.",
+    "en": "No agent files."
+   }
+  },
+  {
+   "n": 4,
+   "from": 13,
+   "to": 16,
+   "period": "04–07/2026",
+   "key": "ai-koulu",
+   "title": {
+    "fi": "Kokeilujen kevät ja ensimmäinen agenttitiedosto",
+    "en": "A spring of experiments and the first agent file"
+   },
+   "paras": {
+    "fi": [
+     "Huhti–kesäkuussa syntyi kymmenen projektia, ja aiheet laajenivat yhteiskuntaan: Hallituspäätökset, Järjestelmän Varjot ja Suomisimulaattori.",
+     "AI-Kouluun tuli 30.5.2026 ensimmäinen agenttitiedosto: ohjetiedosto, joka antaa tekoälyavustajalle nimen, mallin ja säännöt. Kolme päivää myöhemmin tämä sivu rakennettiin uudelleen Astrolla ja sai nimen Infinite, ja seuraavan viikon aikana agenttitiedosto lisättiin myös vanhoihin repoihin.",
+     "Kesäkuussa mukaan tulivat Supabase-reaaliaika (Seinä), Svelte (GlobeCiv2.0) sekä Next.js ja Stripe (WebShop). Heinäkuussa ei tehty yhtään committia."
+    ],
+    "en": [
+     "From April to June ten projects were started, and the subjects widened to society: Hallituspäätökset, Järjestelmän Varjot and Suomisimulaattori.",
+     "On 30 May 2026 AI-Koulu got the first agent file: an instruction file that gives the AI assistant a name, a model and rules. Three days later this site was rebuilt with Astro and named Infinite, and during the following week the agent file was added to older repos too.",
+     "June brought Supabase realtime (Seinä), Svelte (GlobeCiv2.0) and Next.js with Stripe (WebShop). No commits were made in July."
+    ]
+   },
+   "ai": {
+    "fi": "Ensimmäinen AI-pari on Piirtäjä (DeepSeek V4 Flash) 30.5.2026. Kesäkuun loppuun mennessä agenttitiedosto on 9 repossa: Aavistus (Claude Sonnet 4.6) sekä Kipinä ja Syvyys (DeepSeek V4 Pro).",
+    "en": "The first AI partner is Piirtäjä (DeepSeek V4 Flash), on 30 May 2026. By the end of June 9 repos have an agent file: Aavistus (Claude Sonnet 4.6) and Kipinä and Syvyys (DeepSeek V4 Pro)."
+   }
+  },
+  {
+   "n": 5,
+   "from": 17,
+   "to": 18,
+   "period": "08–09/2026",
+   "key": "eldritch",
+   "title": {
+    "fi": "Testattu tuote",
+    "en": "A tested product"
+   },
+   "paras": {
+    "fi": [
+     "Toni1.0, Glow ja SpotifyPlaylistTherapist alkoivat samana päivänä 3.8.2026. Toni1.0:sta tuli koko historian suurin repo (652 commitia).",
+     "Harakka toi Cloudflare Workerin, R2:n ja ensimmäisen tuotanto-osoitteen. Eldritch kirjoitettiin uudelleen monorepona: WCAG 2.2 AA, mobiili-ensin Playwright ja Claude Code. Sen claude.md:tä on muutettu vähintään 100 kertaa.",
+     "Syyskuussa tehtiin 613 committia, ja mukaan tuli BandRock."
+    ],
+    "en": [
+     "Toni1.0, Glow and SpotifyPlaylistTherapist all started on 3 August 2026. Toni1.0 became the largest repo in the whole history (652 commits).",
+     "Harakka brought a Cloudflare Worker, R2 and the first production address. Eldritch was rewritten as a monorepo: WCAG 2.2 AA, mobile-first Playwright and Claude Code. Its claude.md has been changed at least 100 times.",
+     "September saw 613 commits, and BandRock joined."
+    ]
+   },
+   "ai": {
+    "fi": "Agenttitiedosto on 15 repossa. Uudet parit ovat Kajo, Psyko ja Sol (DeepSeek V4 Pro, GitHub Copilot), Aavistus Harakassa ja Eldritchissä sekä Roudari (Claude Sonnet 5).",
+    "en": "15 repos have an agent file. New partners are Kajo, Psyko and Sol (DeepSeek V4 Pro, GitHub Copilot), Aavistus in Harakka and Eldritch, and Roudari (Claude Sonnet 5)."
+   }
+  },
+  {
+   "n": 6,
+   "from": 19,
+   "to": 20,
+   "period": "10–11/2026",
+   "key": "globeciv3",
+   "title": {
+    "fi": "Kiireisin kuukausi ja yhteiset palikat",
+    "en": "The busiest month and shared building blocks"
+   },
+   "paras": {
+    "fi": [
+     "Lokakuu on historian kiireisin kuukausi (623 commitia). Kolme uutta projektia alkoi viikon sisällä: Lihastohtori (React Three Fiber ja glTF-putki), Vaihtokaupat (Worker ja R2, axe-testit) ja GlobeCiv3, sarjan kolmas versio, jossa on 241 committia kuukaudessa.",
+     "Projektit alkoivat kytkeytyä toisiinsa: Vaihtokaupat käyttää samaa Worker + R2 -mallia kuin BandRock ja Harakka. Marraskuussa tämä sivu saa uuden ilmeen."
+    ],
+    "en": [
+     "October is the busiest month in the history (623 commits). Three new projects started within a week: Lihastohtori (React Three Fiber and a glTF pipeline), Vaihtokaupat (Worker and R2, axe tests) and GlobeCiv3, the third version of the series, with 241 commits in a month.",
+     "The projects started to connect: Vaihtokaupat uses the same Worker + R2 pattern as BandRock and Harakka. In November this site gets a new look."
+    ]
+   },
+   "ai": {
+    "fi": "Agenttitiedosto on 18 repossa. Delta, Hermes ja Linssi ovat kaikki Claude Opus 5.5 -pareja. GlobeCiv3:n CLAUDE.md:n mukaan AI-parit nimetään suomenkielisillä aistimus- ja ilmiösanoilla (Aavistus, Syvyys, Kipinä).",
+    "en": "18 repos have an agent file. Delta, Hermes and Linssi are all Claude Opus 5.5 partners. According to GlobeCiv3’s CLAUDE.md, AI partners are named with Finnish words for sensations and phenomena (Aavistus, Syvyys, Kipinä)."
+   }
+  }
+ ],
+ "milestones": [
+  {
+   "date": "2025-04-01",
+   "row": 0,
+   "label": {
+    "fi": "Profiili ja Infinite-repo",
+    "en": "Profile and Infinite repo"
+   }
+  },
+  {
+   "date": "2026-05-30",
+   "row": 0,
+   "label": {
+    "fi": "Ensimmäinen AI-pari",
+    "en": "First AI partner"
+   }
+  },
+  {
+   "date": "2026-06-02",
+   "row": 1,
+   "label": {
+    "fi": "Infinite uudelleen Astrolla",
+    "en": "Infinite rebuilt with Astro"
+   }
+  },
+  {
+   "date": "2026-10-01",
+   "row": 0,
+   "label": {
+    "fi": "Kolme uutta korttia",
+    "en": "Three new cards"
+   }
+  },
+  {
+   "date": "2026-11-01",
+   "row": 1,
+   "label": {
+    "fi": "Uusi ilme",
+    "en": "New look"
+   }
+  }
+ ],
+ "others": [
+  {
+   "repo": "CV",
+   "name": "CV",
+   "start": "2025-05-07",
+   "last": "2025-06-24",
+   "commits": 23,
+   "one": {
+    "fi": "Ensimmäinen CV-sivu.",
+    "en": "First CV site."
+   },
+   "repoUrl": "https://github.com/SamppaFIN/CV",
+   "id": "cv"
+  },
+  {
+   "repo": "Klitoritari",
+   "name": "Klitoritari",
+   "start": "2025-09-17",
+   "last": "2025-10-02",
+   "commits": 364,
+   "one": {
+    "fi": "Moninpeliseikkailu. GitHub ei tunnista kieltä, mutta commiteja on 364.",
+    "en": "Multiplayer adventure. GitHub detects no language, but it has 364 commits."
+   },
+   "repoUrl": "https://github.com/SamppaFIN/Klitoritari",
+   "id": "klitoritari"
+  },
+  {
+   "repo": "CV-Site",
+   "name": "CV-Site",
+   "start": "2025-09-24",
+   "last": "2025-10-20",
+   "commits": 24,
+   "one": {
+    "fi": "CV-sivu: \"Software Engineer — UI/UX & AI\".",
+    "en": "CV site: “Software Engineer — UI/UX & AI”."
+   },
+   "repoUrl": "https://github.com/SamppaFIN/CV-Site",
+   "id": "cv-site"
+  },
+  {
+   "repo": "PokerMaster",
+   "name": "PokerMaster",
+   "start": "2025-10-04",
+   "last": "2025-10-04",
+   "commits": 1,
+   "one": {
+    "fi": "Sit’n go -pokerisimulaattori, yksi commit.",
+    "en": "Sit’n go poker simulator, one commit."
+   },
+   "repoUrl": "https://github.com/SamppaFIN/PokerMaster",
+   "id": "pokermaster"
+  },
+  {
+   "repo": "AngelicWaves",
+   "name": "AngelicWaves",
+   "start": "2025-10-07",
+   "last": "2025-10-08",
+   "commits": 8,
+   "one": {
+    "fi": "Taajuusdetektori. Poistettiin portfoliosta 2.6.2026.",
+    "en": "Frequency detector. Removed from the portfolio on 2 June 2026."
+   },
+   "repoUrl": "https://github.com/SamppaFIN/AngelicWaves",
+   "id": "angelicwaves"
+  }
+ ],
+ "threads": [
+  [
+   "globeciv",
+   "globeciv2-0",
+   "globeciv3"
+  ],
+  [
+   "eldrichhorror",
+   "eldritch"
+  ],
+  [
+   "harakka",
+   "bandrock",
+   "vaihtokaupat"
+  ]
+ ],
+ "lanes": [
+  {
+   "id": "m-ds-flash",
+   "group": "model",
+   "label": {
+    "fi": "DeepSeek V4 Flash",
+    "en": "DeepSeek V4 Flash"
+   },
+   "src": "A",
+   "uses": [
+    {
+     "id": "ai-koulu",
+     "date": "2026-05-30"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "m-ds-pro",
+   "group": "model",
+   "label": {
+    "fi": "DeepSeek V4 Pro",
+    "en": "DeepSeek V4 Pro"
+   },
+   "src": "A",
+   "uses": [
+    {
+     "id": "globeciv",
+     "date": "2026-06-03"
+    },
+    {
+     "id": "resonance",
+     "date": "2026-06-05"
+    },
+    {
+     "id": "webshop",
+     "date": "2026-06-09"
+    },
+    {
+     "id": "globeciv2-0",
+     "date": "2026-06-14"
+    },
+    {
+     "id": "toni1-0",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "spotifyplaylisttherapist",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "glow",
+     "date": "2026-08-03"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "m-sonnet46",
+   "group": "model",
+   "label": {
+    "fi": "Claude Sonnet 4.6",
+    "en": "Claude Sonnet 4.6"
+   },
+   "src": "A",
+   "uses": [
+    {
+     "id": "sein",
+     "date": "2026-06-04"
+    },
+    {
+     "id": "spatial-3d-ui-framework",
+     "date": "2026-06-06"
+    },
+    {
+     "id": "nutriscan",
+     "date": "2026-06-07"
+    },
+    {
+     "id": "newsscaper",
+     "date": "2026-06-07"
+    },
+    {
+     "id": "harakka",
+     "date": "2026-08-25"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "m-sonnet5",
+   "group": "model",
+   "label": {
+    "fi": "Claude Sonnet 5",
+    "en": "Claude Sonnet 5"
+   },
+   "src": "A",
+   "uses": [
+    {
+     "id": "bandrock",
+     "date": "2026-09-21"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "m-opus55",
+   "group": "model",
+   "label": {
+    "fi": "Claude Opus 5.5",
+    "en": "Claude Opus 5.5"
+   },
+   "src": "A",
+   "uses": [
+    {
+     "id": "3dihminen",
+     "date": "2026-10-04"
+    },
+    {
+     "id": "vaihtokaupat",
+     "date": "2026-10-05"
+    },
+    {
+     "id": "globeciv3",
+     "date": "2026-10-09"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "m-copilot",
+   "group": "model",
+   "label": {
+    "fi": "GitHub Copilot (alusta)",
+    "en": "GitHub Copilot (platform)"
+   },
+   "src": "A",
+   "uses": [
+    {
+     "id": "globeciv",
+     "date": "2026-06-03"
+    },
+    {
+     "id": "resonance",
+     "date": "2026-06-05"
+    },
+    {
+     "id": "globeciv2-0",
+     "date": "2026-06-14"
+    },
+    {
+     "id": "toni1-0",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "spotifyplaylisttherapist",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "glow",
+     "date": "2026-08-03"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "m-claudecode",
+   "group": "model",
+   "label": {
+    "fi": "Claude Code (alusta)",
+    "en": "Claude Code (platform)"
+   },
+   "src": "A",
+   "uses": [
+    {
+     "id": "eldritch",
+     "date": "2026-09-01"
+    },
+    {
+     "id": "bandrock",
+     "date": "2026-09-21"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "a-llm",
+   "group": "aitech",
+   "label": {
+    "fi": "LLM-rajapinta tuotteessa",
+    "en": "LLM API in the product"
+   },
+   "src": "K, R, P",
+   "uses": [
+    {
+     "id": "healthconnectai",
+     "date": "2025-05-21"
+    },
+    {
+     "id": "nlp-ai",
+     "date": "2025-09-16"
+    },
+    {
+     "id": "ai-pasianssi",
+     "date": "2026-04-24"
+    },
+    {
+     "id": "webshop",
+     "date": "2026-06-09"
+    },
+    {
+     "id": "spotifyplaylisttherapist",
+     "date": "2026-08-03"
+    }
+   ],
+   "note": {
+    "fi": "Perplexity, OpenRouter, Groq ja OpenAI. SpotifyPlaylistTherapist on vielä suunnitteluvaiheessa.",
+    "en": "Perplexity, OpenRouter, Groq and OpenAI. SpotifyPlaylistTherapist is still at the planning stage."
+   }
+  },
+  {
+   "id": "a-rag",
+   "group": "aitech",
+   "label": {
+    "fi": "RAG (hakuun perustuva generointi)",
+    "en": "RAG (retrieval-augmented generation)"
+   },
+   "src": "R",
+   "uses": [
+    {
+     "id": "rag-demo",
+     "date": "2025-07-26"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "a-speech",
+   "group": "aitech",
+   "label": {
+    "fi": "Puheentunnistus",
+    "en": "Speech recognition"
+   },
+   "src": "V",
+   "uses": [
+    {
+     "id": "nlp-ai",
+     "date": "2025-09-16"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "a-personas",
+   "group": "aitech",
+   "label": {
+    "fi": "AI-persoonat",
+    "en": "AI personas"
+   },
+   "src": "V",
+   "uses": [
+    {
+     "id": "nlp-ai",
+     "date": "2025-09-16"
+    }
+   ],
+   "note": {
+    "fi": "Kahdeksan terapiapersoonaa. Myös tällä sivulla on kolme persoonaa.",
+    "en": "Eight therapy personas. This site has three personas too."
+   }
+  },
+  {
+   "id": "a-vision",
+   "group": "aitech",
+   "label": {
+    "fi": "AI-kuvantunnistus",
+    "en": "AI image recognition"
+   },
+   "src": "R",
+   "uses": [
+    {
+     "id": "nutriscan",
+     "date": "2026-06-07"
+    }
+   ],
+   "note": {
+    "fi": "Päivä on README:n ensimmäinen commit.",
+    "en": "The date is the first commit of the README."
+   }
+  },
+  {
+   "id": "a-semantic",
+   "group": "aitech",
+   "label": {
+    "fi": "Semanttinen haku",
+    "en": "Semantic search"
+   },
+   "src": "P",
+   "uses": [
+    {
+     "id": "webshop",
+     "date": "2026-06-09"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "a-agentfile",
+   "group": "aitech",
+   "label": {
+    "fi": "Agenttitiedosto ja nimetty AI-pari",
+    "en": "Agent file and named AI partner"
+   },
+   "src": "A",
+   "uses": [
+    {
+     "id": "ai-koulu",
+     "date": "2026-05-30"
+    },
+    {
+     "id": "globeciv",
+     "date": "2026-06-03"
+    },
+    {
+     "id": "sein",
+     "date": "2026-06-04"
+    },
+    {
+     "id": "resonance",
+     "date": "2026-06-05"
+    },
+    {
+     "id": "spatial-3d-ui-framework",
+     "date": "2026-06-06"
+    },
+    {
+     "id": "nutriscan",
+     "date": "2026-06-07"
+    },
+    {
+     "id": "newsscaper",
+     "date": "2026-06-07"
+    },
+    {
+     "id": "webshop",
+     "date": "2026-06-09"
+    },
+    {
+     "id": "globeciv2-0",
+     "date": "2026-06-14"
+    },
+    {
+     "id": "toni1-0",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "spotifyplaylisttherapist",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "glow",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "harakka",
+     "date": "2026-08-25"
+    },
+    {
+     "id": "eldritch",
+     "date": "2026-09-01"
+    },
+    {
+     "id": "bandrock",
+     "date": "2026-09-21"
+    },
+    {
+     "id": "3dihminen",
+     "date": "2026-10-04"
+    },
+    {
+     "id": "vaihtokaupat",
+     "date": "2026-10-05"
+    },
+    {
+     "id": "globeciv3",
+     "date": "2026-10-09"
+    }
+   ],
+   "note": {
+    "fi": "CLAUDE.md, claude.md tai AGENTS.md, jossa AI-parilla on nimi, malli ja säännöt. Päivä on tiedoston ensimmäinen commit.",
+    "en": "CLAUDE.md, claude.md or AGENTS.md that gives the AI partner a name, a model and rules. The date is the first commit of the file."
+   }
+  },
+  {
+   "id": "a-brdc",
+   "group": "aitech",
+   "label": {
+    "fi": "Tikettivetoinen AI-kehitys (BRDC)",
+    "en": "Ticket-driven AI development (BRDC)"
+   },
+   "src": "V, R",
+   "uses": [
+    {
+     "id": "factory-ultra",
+     "date": "2026-04-22"
+    },
+    {
+     "id": "eldritch",
+     "date": "2026-08-26"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "a-teach",
+   "group": "aitech",
+   "label": {
+    "fi": "AI opetuksen aiheena",
+    "en": "AI as a teaching subject"
+   },
+   "src": "R, K",
+   "uses": [
+    {
+     "id": "rag-demo",
+     "date": "2025-07-26"
+    },
+    {
+     "id": "ai-koulu",
+     "date": "2026-05-30"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-ts",
+   "group": "tech",
+   "label": {
+    "fi": "TypeScript",
+    "en": "TypeScript"
+   },
+   "src": "L",
+   "uses": [
+    {
+     "id": "mergemaster",
+     "date": "2025-03-05"
+    },
+    {
+     "id": "healthconnectai",
+     "date": "2025-05-21"
+    },
+    {
+     "id": "rag-demo",
+     "date": "2025-07-26"
+    },
+    {
+     "id": "ai-koulu",
+     "date": "2026-05-30"
+    },
+    {
+     "id": "sein",
+     "date": "2026-06-04"
+    },
+    {
+     "id": "webshop",
+     "date": "2026-06-09"
+    },
+    {
+     "id": "globeciv2-0",
+     "date": "2026-06-14"
+    },
+    {
+     "id": "toni1-0",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "spotifyplaylisttherapist",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "glow",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "harakka",
+     "date": "2026-08-25"
+    },
+    {
+     "id": "eldritch",
+     "date": "2026-08-26"
+    },
+    {
+     "id": "3dihminen",
+     "date": "2026-10-04"
+    },
+    {
+     "id": "globeciv3",
+     "date": "2026-10-09"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-react",
+   "group": "tech",
+   "label": {
+    "fi": "React ja React Native",
+    "en": "React and React Native"
+   },
+   "src": "P, R",
+   "uses": [
+    {
+     "id": "nutriscan",
+     "date": "2025-03-12"
+    },
+    {
+     "id": "ai-koulu",
+     "date": "2026-05-30"
+    },
+    {
+     "id": "sein",
+     "date": "2026-06-04"
+    },
+    {
+     "id": "webshop",
+     "date": "2026-06-09"
+    },
+    {
+     "id": "harakka",
+     "date": "2026-08-25"
+    },
+    {
+     "id": "eldritch",
+     "date": "2026-08-26"
+    },
+    {
+     "id": "3dihminen",
+     "date": "2026-10-04"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-mobile",
+   "group": "tech",
+   "label": {
+    "fi": "Mobiili ja PWA",
+    "en": "Mobile and PWA"
+   },
+   "src": "R, V",
+   "uses": [
+    {
+     "id": "nutriscan",
+     "date": "2025-03-12"
+    },
+    {
+     "id": "tarot-game",
+     "date": "2025-10-06"
+    },
+    {
+     "id": "eldrichhorror",
+     "date": "2025-10-07"
+    },
+    {
+     "id": "globeciv",
+     "date": "2026-01-24"
+    },
+    {
+     "id": "harakka",
+     "date": "2026-08-25"
+    },
+    {
+     "id": "eldritch",
+     "date": "2026-08-26"
+    },
+    {
+     "id": "globeciv3",
+     "date": "2026-10-09"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-python",
+   "group": "tech",
+   "label": {
+    "fi": "Python",
+    "en": "Python"
+   },
+   "src": "L, R, Q",
+   "uses": [
+    {
+     "id": "rag-demo",
+     "date": "2025-07-26"
+    },
+    {
+     "id": "aurora-security-dojo",
+     "date": "2025-10-01"
+    },
+    {
+     "id": "factory-ultra",
+     "date": "2026-04-22"
+    },
+    {
+     "id": "newsscaper",
+     "date": "2026-06-07"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-pyback",
+   "group": "tech",
+   "label": {
+    "fi": "Python-tausta (Flask, FastAPI)",
+    "en": "Python backend (Flask, FastAPI)"
+   },
+   "src": "Q, R",
+   "uses": [
+    {
+     "id": "aurora-security-dojo",
+     "date": "2025-10-01"
+    },
+    {
+     "id": "newsscaper",
+     "date": "2026-06-07"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-three",
+   "group": "tech",
+   "label": {
+    "fi": "Three.js ja WebGL",
+    "en": "Three.js and WebGL"
+   },
+   "src": "P, V",
+   "uses": [
+    {
+     "id": "spatial-3d-ui-framework",
+     "date": "2026-01-20"
+    },
+    {
+     "id": "globeciv",
+     "date": "2026-01-24"
+    },
+    {
+     "id": "3dihminen",
+     "date": "2026-10-04"
+    },
+    {
+     "id": "globeciv3",
+     "date": "2026-10-09"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-audio",
+   "group": "tech",
+   "label": {
+    "fi": "Web Audio",
+    "en": "Web Audio"
+   },
+   "src": "R, V",
+   "uses": [
+    {
+     "id": "globeciv",
+     "date": "2026-01-24"
+    },
+    {
+     "id": "resonance",
+     "date": "2026-06-05"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-pw",
+   "group": "tech",
+   "label": {
+    "fi": "Playwright",
+    "en": "Playwright"
+   },
+   "src": "P, R",
+   "uses": [
+    {
+     "id": "spatial-3d-ui-framework",
+     "date": "2026-01-20"
+    },
+    {
+     "id": "roguereborn",
+     "date": "2026-03-11"
+    },
+    {
+     "id": "ai-koulu",
+     "date": "2026-05-30"
+    },
+    {
+     "id": "toni1-0",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "spotifyplaylisttherapist",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "glow",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "eldritch",
+     "date": "2026-08-26"
+    },
+    {
+     "id": "vaihtokaupat",
+     "date": "2026-10-05"
+    },
+    {
+     "id": "globeciv3",
+     "date": "2026-10-09"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-vitest",
+   "group": "tech",
+   "label": {
+    "fi": "Vitest",
+    "en": "Vitest"
+   },
+   "src": "P",
+   "uses": [
+    {
+     "id": "ai-koulu",
+     "date": "2026-05-30"
+    },
+    {
+     "id": "sein",
+     "date": "2026-06-04"
+    },
+    {
+     "id": "webshop",
+     "date": "2026-06-09"
+    },
+    {
+     "id": "toni1-0",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "spotifyplaylisttherapist",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "glow",
+     "date": "2026-08-03"
+    },
+    {
+     "id": "eldritch",
+     "date": "2026-08-26"
+    },
+    {
+     "id": "3dihminen",
+     "date": "2026-10-04"
+    },
+    {
+     "id": "globeciv3",
+     "date": "2026-10-09"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-a11y",
+   "group": "tech",
+   "label": {
+    "fi": "Saavutettavuus (axe, WCAG, ARIA)",
+    "en": "Accessibility (axe, WCAG, ARIA)"
+   },
+   "src": "P, R",
+   "uses": [
+    {
+     "id": "ai-koulu",
+     "date": "2026-05-30"
+    },
+    {
+     "id": "nutriscan",
+     "date": "2026-06-07"
+    },
+    {
+     "id": "eldritch",
+     "date": "2026-08-26"
+    },
+    {
+     "id": "vaihtokaupat",
+     "date": "2026-10-05"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-astro",
+   "group": "tech",
+   "label": {
+    "fi": "Astro ja MDX",
+    "en": "Astro and MDX"
+   },
+   "src": "P",
+   "uses": [
+    {
+     "id": "ai-koulu",
+     "date": "2026-05-30"
+    }
+   ],
+   "note": {
+    "fi": "Myös tämä sivu on rakennettu Astrolla (2.6.2026).",
+    "en": "This site is built with Astro too (2 June 2026)."
+   }
+  },
+  {
+   "id": "t-supabase",
+   "group": "tech",
+   "label": {
+    "fi": "Supabase",
+    "en": "Supabase"
+   },
+   "src": "P",
+   "uses": [
+    {
+     "id": "sein",
+     "date": "2026-06-04"
+    },
+    {
+     "id": "webshop",
+     "date": "2026-06-09"
+    },
+    {
+     "id": "toni1-0",
+     "date": "2026-08-03"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-svelte",
+   "group": "tech",
+   "label": {
+    "fi": "Svelte",
+    "en": "Svelte"
+   },
+   "src": "P",
+   "uses": [
+    {
+     "id": "globeciv2-0",
+     "date": "2026-06-14"
+    },
+    {
+     "id": "globeciv3",
+     "date": "2026-10-09"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-next",
+   "group": "tech",
+   "label": {
+    "fi": "Next.js, Prisma ja Stripe",
+    "en": "Next.js, Prisma and Stripe"
+   },
+   "src": "P",
+   "uses": [
+    {
+     "id": "webshop",
+     "date": "2026-06-09"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-workers",
+   "group": "tech",
+   "label": {
+    "fi": "Cloudflare Workers ja R2",
+    "en": "Cloudflare Workers and R2"
+   },
+   "src": "R, P",
+   "uses": [
+    {
+     "id": "harakka",
+     "date": "2026-08-25"
+    },
+    {
+     "id": "bandrock",
+     "date": "2026-09-21"
+    },
+    {
+     "id": "vaihtokaupat",
+     "date": "2026-10-05"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-realtime",
+   "group": "tech",
+   "label": {
+    "fi": "Reaaliaika (Supabase, ntfy.sh)",
+    "en": "Realtime (Supabase, ntfy.sh)"
+   },
+   "src": "R",
+   "uses": [
+    {
+     "id": "sein",
+     "date": "2026-06-04"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  },
+  {
+   "id": "t-gltf",
+   "group": "tech",
+   "label": {
+    "fi": "3D-putki (R3F, glTF, Draco)",
+    "en": "3D pipeline (R3F, glTF, Draco)"
+   },
+   "src": "P",
+   "uses": [
+    {
+     "id": "3dihminen",
+     "date": "2026-10-04"
+    }
+   ],
+   "note": {
+    "fi": "",
+    "en": ""
+   }
+  }
+ ],
+ "fetched": "2026-11-01"
+}
