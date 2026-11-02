@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import projectData from '../data/projects.json';
 import storyData from '../data/story.json';
-import { TAGS, PURPOSE_ORDER, SOURCES, SECTIONS, POINTS, PERSONAS, TECH, SEO, REDIRECTS, UI, SITE, BASE, FETCHED, LANGS, CONTACT, CONTACT_REASONS, type Lang } from '../data/content';
+import { TAGS, PURPOSE_ORDER, SOURCES, SECTIONS, POINTS, PERSONAS, TECH, SEO, REDIRECTS, UI, SITE, BASE, FETCHED, LANGS, CONTACT, CONTACT_REASONS, CREW, type Lang } from '../data/content';
 import { ANALYSIS } from '../data/analysis';
 
 const l10n = z.object({ fi: z.string(), en: z.string() });
@@ -42,6 +42,37 @@ for (const p of projects) {
 export const pageUrl = (lang: Lang) => SITE + SEO[lang].path;
 export const asset = (file: string) => `${BASE}/images/projects/${file}`;
 const mm = (d: string) => `${d.slice(5, 7)}/${d.slice(0, 4)}`;
+const mIdx = (d: string) => (+d.slice(0, 4) - 2025) * 12 + +d.slice(5, 7) - 3;
+const fill = (s: string, o: Record<string, string | number>) => s.replace(/\{(\w+)\}/g, (_, k) => String(o[k]));
+
+// Matojen keskustelu projektista: aika, uusi tekniikka, sukulaiset ja agenttitiedosto. Kaikki tulee datasta, eikä mikään toista korttia.
+function crewTalk(lang: Lang) {
+  const C = CREW[lang], n = projects.length, nf = (v: number) => v.toLocaleString(lang === 'fi' ? 'fi-FI' : 'en-GB');
+  const and = (xs: string[]) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} ${lang === 'fi' ? 'ja' : 'and'} ${xs[xs.length - 1]}`);
+  const label = (id: string) => TAGS.find((t) => t.id === id)!.label[lang];
+  const order = projects.slice().sort((a, b) => a.start.localeCompare(b.start)), byId = Object.fromEntries(projects.map((p) => [p.id, p]));
+  const days = (p: (typeof projects)[number]) => Math.round((Date.parse(p.last) - Date.parse(p.start)) / 864e5);
+  // Lähin sukulainen: eniten yhteisiä aiheita suhteessa kaikkiin (Jaccard), tasatilanteessa paremmat pisteet
+  const kin = (p: (typeof projects)[number]) => projects.filter((q) => q !== p).map((q) => {
+    const both = p.tags.filter((t) => q.tags.includes(t)); return { q, both, j: both.length / new Set([...p.tags, ...q.tags]).size };
+  }).sort((a, b) => b.j - a.j || b.q.score - a.q.score)[0];
+  const talk = Object.fromEntries(projects.map((p) => {
+    const ch = story.chapters.find((c) => mIdx(p.start) >= c.from && mIdx(p.start) <= c.to)!, d = days(p);
+    const lines: { who: 'loiste' | 'hionta' | 'kirkkaus'; text: string }[] = [
+      { who: 'loiste', text: fill(C.when, { name: p.name, mm: mm(p.start), ch: ch.title[lang], n, k: order.indexOf(p) + 1 }) + ' ' + (d ? fill(C.span, { d: nf(d) }) : C.day) },
+      { who: 'hionta', text: p.firstTech[lang].length ? fill(C.first, { list: and(p.firstTech[lang]) }) : fill(C.pace, { r: nf(+(p.commits / Math.max(1, d / 7)).toFixed(1)) }) }];
+    const sib = story.threads.find((t) => t.includes(p.id));
+    const kids = sib ? sib.filter((id) => id !== p.id && byId[id]).map((id) => byId[id].name) : [];
+    if (p.thread[lang] && kids.length) lines.push({ who: 'kirkkaus', text: fill(kids.length > 1 ? C.thread : C.thread1, { thread: p.thread[lang], list: and(kids) }) });
+    else { const k = kin(p); lines.push({ who: 'kirkkaus', text: fill(C.kin, { name: k.q.name, c: k.both.length, list: and(k.both.slice(0, 2).map(label)) }) }); }
+    if (p.agent) lines.push({ who: 'hionta', text: fill(C.agent, { date: p.agent, edits: p.agentEdits[lang] }) });
+    return ['p-' + p.id, { label: p.name, lines }];
+  }));
+  const most = projects.reduce((a, b) => (b.commits > a.commits ? b : a)), who = ['loiste', 'kirkkaus', 'hionta'] as const;
+  const v = { n, first: order[0].name, firstMm: mm(order[0].start), commits: nf(projects.reduce((a, p) => a + p.commits, 0)), agents: projects.filter((p) => p.agent).length,
+    models: story.lanes.filter((x) => x.group === 'model').length, games: projects.filter((p) => p.tags.includes('p-peli')).length, most: most.name, mostN: nf(most.commits) };
+  return { ...talk, infinite: { label: 'Infinite', lines: C.facts.map((f, i) => ({ who: who[i % 3], text: fill(f, v) })) } };
+}
 
 export function page(lang: Lang) {
   const ui = UI[lang];
@@ -64,12 +95,10 @@ export function page(lang: Lang) {
       chapters: story.chapters.map((c) => ({ n: c.n, from: c.from, to: c.to, period: c.period, key: c.key, title: c.title[lang], paras: c.paras[lang], ai: c.ai[lang] })),
       others: story.others.map((o) => ({ id: o.id, name: o.name, start: o.start, last: o.last, commits: o.commits, one: o.one[lang], code: o.repoUrl })) },
     sections: SECTIONS.map((s) => ({ id: s.id, name: s.nav[lang], summary: s.summary[lang], status: s.status === 'new' ? ui.statusNew : ui.statusUpdated })),
-    personas: Object.fromEntries(Object.entries(PERSONAS).map(([k, v]) => [k, { name: v.name, role: v.role[lang] }])),
+    personas: Object.fromEntries(Object.entries(PERSONAS).map(([k, v]) => [k, { name: v.name, bird: v.bird.name, role: v.role[lang] }])),
     points: Object.fromEntries([
       ...POINTS.map((pt) => [pt.id, { label: pt.label[lang], lines: pt.lines.map((x) => ({ who: x.who, text: x.text[lang] })) }]),
-      // Projektin keskustelu: esittely, tekninen, filosofinen, hauska, heikkous ja ehdotus
-      ...projects.map((p) => { const a = ANALYSIS[p.id]; return ['p-' + p.id, { label: p.name, lines: ([
-        ['loiste', a.intro], ['hionta', a.tech], ['kirkkaus', a.philo], ['loiste', a.fun], ['kirkkaus', a.critic], ['hionta', a.next]] as const).map(([who, s]) => ({ who, text: s[lang] })) }]; }),
+      ...Object.entries(crewTalk(lang)),
     ]),
     langs: LANGS,
     // Yhteystiedot base64-koodattuina, jotta yksinkertaiset haravat eivät poimi niitä HTML:stä

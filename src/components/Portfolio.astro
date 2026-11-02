@@ -54,13 +54,12 @@ const otherUrl = `${BASE}${other === 'fi' ? '/' : '/en/'}`;
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={seo.title} />
   <meta name="twitter:description" content={seo.description} />
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f6f9" />
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#12151c" />
+  <meta name="theme-color" content="#09141b" />
   <link rel="icon" type="image/svg+xml" href={`${BASE}/favicon.svg`} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
-  <script is:inline>(function(){try{var t=localStorage.getItem('infinite-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <script is:inline>(function(){var t='winter';try{var s=localStorage.getItem('infinite-theme');if(s==='dark'||s==='light'||s==='winter')t=s;}catch(e){}document.documentElement.setAttribute('data-theme',t);})();</script>
   <style is:inline set:html={css}></style>
   <script type="application/ld+json" is:inline set:html={ld}></script>
 </head>
@@ -111,7 +110,7 @@ const otherUrl = `${BASE}${other === 'fi' ? '/' : '/en/'}`;
     <div class="wrap sections">
       <section id="top5" aria-labelledby="h-top5">
         <div class="scape scape-crystal" aria-hidden="true"><i class="neb"></i><i class="stars"></i><i class="mtn m1"></i><i class="mtn m2"></i></div>
-        <button type="button" class="tech-tag scape-tag" data-tech="scapes">{ui.scapeCss}</button>
+        <button type="button" class="tech-tag scape-tag" data-tech="scapeCrystal">{ui.scapeCss}</button>
         <div class="sec-head" data-attn="top5">
           <div><h2 id="h-top5" tabindex="-1">{ui.top5Title}</h2><p class="lead">{ui.top5Sub}</p></div>
           <button type="button" class="tech-tag" data-tech="rim">{ui.techRim}</button>
@@ -143,10 +142,10 @@ const otherUrl = `${BASE}${other === 'fi' ? '/' : '/en/'}`;
 
       <section id="projektit" aria-labelledby="h-proj">
         <canvas class="scape scape-meteor" aria-hidden="true"></canvas>
-        <button type="button" class="tech-tag scape-tag" data-tech="scapes">{ui.scapeMeteor}</button>
+        <button type="button" class="tech-tag scape-tag" data-tech="scapeMeteor">{ui.scapeMeteor}</button>
         <div class="sec-head" data-attn="projektit">
           <div>
-            <p class="eyebrow">{ui.storyEyebrow} · {nf(story.total)} {ui.commits} · {projects.length + story.others.length} {ui.repos}</p>
+            <p class="eyebrow">{ui.storyEyebrow} · {nf(story.total)} {ui.commitsAll}</p>
             <h2 id="h-proj" tabindex="-1">{ui.finderTitle}</h2>
             <p class="lead">{ui.finderSub}</p>
           </div>
@@ -163,27 +162,33 @@ const otherUrl = `${BASE}${other === 'fi' ? '/' : '/en/'}`;
             <div class="ftl-track" id="finder-tl" role="group" aria-labelledby="ftl-cap"></div>
             <figcaption class="small muted" id="ftl-cap">{ui.ftlLabel}</figcaption>
           </figure>
-          <div class="finder-controls">
-            {dims.map(([dim, name]) => (
-              <fieldset class="chips">
-                <legend>{name}</legend>
-                <div class="chip-row">
-                  {TAGS.filter((t) => t.dim === dim).map((t) => (
-                    <button type="button" class="chip" data-tag={t.id} aria-pressed="false">{t.label[lang]}<span class="count" aria-hidden="true">{counts[t.id]}</span></button>
-                  ))}
-                </div>
-              </fieldset>
-            ))}
-          </div>
+          <details class="topics" id="finder-topics">
+            <summary>{ui.topics}<span class="mono small" id="topics-sel"></span></summary>
+            <div class="finder-controls">
+              {dims.map(([dim, name]) => (
+                <fieldset class="chips">
+                  <legend>{name}</legend>
+                  <div class="chip-row">
+                    {TAGS.filter((t) => t.dim === dim).map((t) => (
+                      <button type="button" class="chip" data-tag={t.id} aria-pressed="false">{t.label[lang]}<span class="count" aria-hidden="true">{counts[t.id]}</span></button>
+                    ))}
+                  </div>
+                </fieldset>
+              ))}
+            </div>
+          </details>
           <div class="finder-bar">
             <p id="finder-count" class="mono small" aria-live="polite">{projects.length} {ui.projects} · {ui.finderNone}</p>
             <button type="button" class="btn sm" id="finder-clear" disabled>{ui.clear}</button>
           </div>
           {chapters.map((c, i) => (
-            <section class="pch" data-ch={i} aria-labelledby={`pch-${i}`}>
-              <div class="pch-head">
-                <p class="pch-meta mono">{c.period} · {c.items.length} {ui.projects} · {nf(c.commits)} {ui.commits}</p>
+            <details class="pch" data-ch={i}>
+              <summary class="pch-head">
+                <span class="pch-meta mono">{c.period} · {c.items.length} {ui.projects} · {nf(c.commits)} {ui.commits}</span>
                 <h3 id={`pch-${i}`}>{c.title[lang]}</h3>
+                <span class="pch-names small muted">{c.items.map((p) => p.name).join(' · ')}</span>
+              </summary>
+              <div class="pch-body">
                 <p>{c.paras[lang][0]}</p>
                 <details class="pch-more">
                   <summary>{ui.readMore}</summary>
@@ -191,26 +196,26 @@ const otherUrl = `${BASE}${other === 'fi' ? '/' : '/en/'}`;
                   {c.newTech.length > 0 && <p class="small"><strong>{ui.newHere}:</strong> {c.newTech.join(', ')}</p>}
                   {c.models.length > 0 && <p class="small"><strong>{ui.gModel}:</strong> {c.models.join(', ')}</p>}
                 </details>
+                <ul class="acards">
+                  {c.items.map((p) => (
+                    <li class="acard aurora-bg" data-card={p.id} data-attn={`p-${p.id}`} style={`--ax:${(p.score * 7) % 70 + 15}%`}>
+                      <div class="ac-head">
+                        <h4><button type="button" class="link-btn" data-project={p.id} aria-haspopup="dialog">{p.name}</button></h4>
+                        <span class="ac-score mono">{p.top ? `Top 5 · ${p.score} ${ui.pts}` : `${p.score} ${ui.pts}`}</span>
+                      </div>
+                      <p class="ac-one">{p.one[lang]}</p>
+                      <p class="ac-meta mono">{mm(p.start)} · {nf(p.commits)} {ui.commits}{p.pair ? ` · ${p.pair.split(' · ').pop()}` : ''}</p>
+                      <p class="ac-tags">{p.tags.map((x, j) => <>{j ? ' · ' : ''}<span data-t={x}>{label(x)}</span></>)}</p>
+                      <div class="ac-links">
+                        <button type="button" class="link-btn" data-project={p.id} aria-haspopup="dialog">{ui.analysis}<span class="sr-only">: {p.name}</span></button>
+                        {p.demoUrl && <a href={p.demoUrl}>Demo<span class="sr-only">: {p.name}</span></a>}
+                        <a href={p.repoUrl}>{ui.codeShort}<span class="sr-only">: {p.name}</span></a>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul class="acards">
-                {c.items.map((p) => (
-                  <li class="acard aurora-bg" data-card={p.id} data-attn={`p-${p.id}`} style={`--ax:${(p.score * 7) % 70 + 15}%`}>
-                    <div class="ac-head">
-                      <h4><button type="button" class="link-btn" data-project={p.id} aria-haspopup="dialog">{p.name}</button></h4>
-                      <span class="ac-score mono">{p.top ? `Top 5 · ${p.score} ${ui.pts}` : `${p.score} ${ui.pts}`}</span>
-                    </div>
-                    <p class="ac-one">{p.one[lang]}</p>
-                    <p class="ac-meta mono">{mm(p.start)} · {nf(p.commits)} {ui.commits}{p.pair ? ` · ${p.pair.split(' · ').pop()}` : ''}</p>
-                    <p class="ac-tags">{p.tags.map((x, j) => <>{j ? ' · ' : ''}<span data-t={x}>{label(x)}</span></>)}</p>
-                    <div class="ac-links">
-                      <button type="button" class="link-btn" data-project={p.id} aria-haspopup="dialog">{ui.analysis}<span class="sr-only">: {p.name}</span></button>
-                      {p.demoUrl && <a href={p.demoUrl}>Demo<span class="sr-only">: {p.name}</span></a>}
-                      <a href={p.repoUrl}>{ui.codeShort}<span class="sr-only">: {p.name}</span></a>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </section>
+            </details>
           ))}
           <p class="small muted">{ui.storySources}</p>
         </div>
@@ -218,7 +223,7 @@ const otherUrl = `${BASE}${other === 'fi' ? '/' : '/en/'}`;
 
       <section id="teknologiat" aria-labelledby="h-tek">
         <canvas class="scape scape-flow" aria-hidden="true"></canvas>
-        <button type="button" class="tech-tag scape-tag" data-tech="scapes">{ui.scapeFlow}</button>
+        <button type="button" class="tech-tag scape-tag" data-tech="scapeFlow">{ui.scapeFlow}</button>
         <div class="sec-head" data-attn="teknologiat">
           <div><h2 id="h-tek" tabindex="-1">{ui.techTitle}</h2><p class="lead">{ui.techSub}</p></div>
         </div>
@@ -241,7 +246,7 @@ const otherUrl = `${BASE}${other === 'fi' ? '/' : '/en/'}`;
 
       <section id="yhteys" aria-labelledby="h-yht">
         <div class="scape scape-eclipse" aria-hidden="true"><i class="corona"></i><i class="ring"></i><i class="disc"></i><i class="limb"></i></div>
-        <button type="button" class="tech-tag scape-tag" data-tech="scapes">{ui.scapeEclipse}</button>
+        <button type="button" class="tech-tag scape-tag" data-tech="scapeEclipse">{ui.scapeEclipse}</button>
         <div class="sec-head" data-attn="yhteys">
           <div><h2 id="h-yht" tabindex="-1">{ui.contactTitle}</h2><p class="lead">{ui.contactText}</p></div>
         </div>
@@ -365,13 +370,17 @@ const otherUrl = `${BASE}${other === 'fi' ? '/' : '/en/'}`;
         <h3 id="worms-title">{ui.wormsTitle}</h3>
         <div class="worm-cards">
           {Object.entries(PERSONAS).map(([k, v]) => (
-            <div class={`worm-card by-${k}`}><p><strong class={`who-${k}`}>{v.name}</strong> <span class="muted small">· {v.role[lang]}</span></p><p class="small">{v.bio[lang]}</p></div>
+            <div class={`worm-card by-${k} if-space`}><p><strong class={`who-${k}`}>{v.name}</strong> <span class="muted small">· {v.role[lang]}</span></p><p class="small">{v.bio[lang]}</p></div>
+          ))}
+          {Object.entries(PERSONAS).map(([k, v]) => (
+            <div class={`worm-card by-${k} if-winter`}><p><strong class={`who-${k}`}>{v.bird.name}</strong> <span class="muted small">· {v.bird.role[lang]}</span></p><p class="small">{v.bird.bio[lang]}</p></div>
           ))}
         </div>
         <div class="row">
           <button type="button" class="btn sm" id="crew-toggle" aria-pressed="false"><span class="lbl">{ui.hide}</span></button>
           <button type="button" class="btn sm" id="log-btn" aria-haspopup="dialog" aria-controls="log-dialog"><span class="lbl">{ui.log}</span> <span id="log-count" class="mono">0</span></button>
-          <button type="button" class="tech-tag" data-tech="personas">{ui.techPersonas}</button>
+          <button type="button" class="tech-tag if-space" data-tech="personas">{ui.techPersonas}</button>
+          <button type="button" class="tech-tag if-winter" data-tech="birds">{ui.techBirds}</button>
         </div>
       </section>
       <ol class="ask-log" id="ask-log" aria-live="polite"></ol>

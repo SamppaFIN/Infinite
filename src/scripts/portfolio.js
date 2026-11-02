@@ -6,7 +6,6 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const mqReduce = matchMedia('(prefers-reduced-motion: reduce)');
-  const mqDark = matchMedia('(prefers-color-scheme: dark)');
   const reduced = () => mqReduce.matches;
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -38,20 +37,23 @@
   const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
 
   /* ---------- Teema ---------- */
+  // Painike kiertää Titaani → Timantti → Talvi. Talvi on oletus: tumma teema, jossa madot ovat lintuja omilla nimillään.
+  const THEMES = ['dark', 'light', 'winter'];
   const theme = {
-    current() { const t = document.documentElement.getAttribute('data-theme'); return t === 'dark' || t === 'light' ? t : (mqDark.matches ? 'dark' : 'light'); },
+    current() { const t = document.documentElement.getAttribute('data-theme'); return THEMES.includes(t) ? t : 'winter'; },
     set(t) { document.documentElement.setAttribute('data-theme', t); store.set('infinite-theme', t); this.sync(); },
-    toggle() { this.set(this.current() === 'dark' ? 'light' : 'dark'); },
+    toggle() { this.set(THEMES[(THEMES.indexOf(this.current()) + 1) % THEMES.length]); },
     sync() {
-      const dark = this.current() === 'dark', name = dark ? T.themeDark : T.themeLight;
+      const name = { dark: T.themeDark, light: T.themeLight, winter: T.themeWinter }[this.current()];
       $('#theme-label').textContent = name;
       $('#theme-btn').setAttribute('aria-label', `${T.theme}: ${name}`);
       palette = null;
+      $('meta[name="theme-color"]').content = `rgb(${rgb(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim())})`;
       document.dispatchEvent(new CustomEvent('pf:theme', { detail: this.current() }));
     },
   };
   $('#theme-btn').addEventListener('click', () => theme.toggle());
-  mqDark.addEventListener('change', () => { if (!document.documentElement.hasAttribute('data-theme')) theme.sync(); });
+  const pname = (k) => (theme.current() === 'winter' ? D.personas[k].bird : D.personas[k].name); // linnuilla on omat nimensä
 
   /* ---------- Kiinteiden palkkien tila ---------- */
   const topbar = $('#topbar');
@@ -80,7 +82,7 @@
     let gl = null, U = {}, raf = 0, last = 0, w = 1, h = 1, dpr = 1;
     try { gl = cv.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'low-power' }); } catch (e) { gl = null; }
     const FS = `precision highp float;
-uniform vec2 uRes; uniform float uTime; uniform vec3 uPtr; uniform float uDark; uniform float uHz;
+uniform vec2 uRes; uniform float uTime; uniform vec3 uPtr; uniform float uDark; uniform float uHz; uniform float uWin;
 float h11(float p){ p = fract(p * 0.1031); p *= p + 33.33; p *= p + p; return fract(p); }
 float h21(vec2 p){ vec3 q = fract(vec3(p.xyx) * 0.1031); q += dot(q, q.yzx + 33.33); return fract((q.x + q.y) * q.z); }
 float n11(float x){ float i = floor(x), f = fract(x); f = f*f*(3.0 - 2.0*f); return mix(h11(i), h11(i + 1.0), f); }
@@ -112,9 +114,10 @@ vec3 aurora(vec2 p, float t){
     float edge = smoothstep(-0.006, 0.006, dy);
     float I = (edge * exp(-max(dy, 0.0) / hgt) * pulse + (1.0 - edge) * exp(dy / 0.02) * 0.25) * rays * gap * (1.0 - 0.28*fi) * (1.0 + 1.2*pull);
     float k = clamp(dy / hgt, 0.0, 1.0);
-    vec3 c = mix(vec3(0.62, 0.95, 1.00), vec3(0.12, 0.46, 1.00), smoothstep(0.0, 0.25, k));
-    c = mix(c, vec3(0.34, 0.20, 0.92), smoothstep(0.35, 1.0, k));
-    acc += c * I + vec3(0.75, 0.95, 1.0) * exp(-abs(dy) / 0.004) * rays * gap * 0.6 * (1.0 - 0.28*fi);
+    // Talvessa (uWin) verhot ovat vihreät ja yläreuna violetinpunainen kuten oikeissa revontulissa
+    vec3 c = mix(mix(vec3(0.62, 0.95, 1.00), vec3(0.70, 1.00, 0.80), uWin), mix(vec3(0.12, 0.46, 1.00), vec3(0.10, 0.90, 0.45), uWin), smoothstep(0.0, 0.25, k));
+    c = mix(c, mix(vec3(0.34, 0.20, 0.92), vec3(0.70, 0.22, 0.60), uWin), smoothstep(0.35, 1.0, k));
+    acc += c * I + mix(vec3(0.75, 0.95, 1.0), vec3(0.80, 1.0, 0.85), uWin) * exp(-abs(dy) / 0.004) * rays * gap * 0.6 * (1.0 - 0.28*fi);
   }
   return acc;
 }
@@ -254,7 +257,7 @@ void main(){
       gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
       const a = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
-      for (const n of ['uRes', 'uTime', 'uPtr', 'uDark', 'uHz']) U[n] = gl.getUniformLocation(pr, n);
+      for (const n of ['uRes', 'uTime', 'uPtr', 'uDark', 'uHz', 'uWin']) U[n] = gl.getUniformLocation(pr, n);
     };
     const resize = () => {
       w = sec.clientWidth; h = sec.clientHeight; dpr = Math.min(devicePixelRatio || 1, 1.5);
@@ -266,7 +269,7 @@ void main(){
     const draw = (t) => {
       gl.uniform2f(U.uRes, cv.width, cv.height); gl.uniform1f(U.uTime, t);
       gl.uniform3f(U.uPtr, st.x / h, 1 - st.y / h, st.a);
-      gl.uniform1f(U.uDark, theme.current() === 'dark' ? 1 : 0);
+      gl.uniform1f(U.uDark, theme.current() === 'light' ? 0 : 1); gl.uniform1f(U.uWin, theme.current() === 'winter' ? 1 : 0);
       gl.uniform1f(U.uHz, w < 700 ? 0.6 : 0.3);
       gl.drawArrays(gl.TRIANGLES, 0, 3); st.frames++;
     };
@@ -325,7 +328,6 @@ void main(){
   const PBY = Object.fromEntries(D.projects.map((p) => [p.id, p]));
   const TAGI = Object.fromEntries(D.tags.map((t) => [t.id, t]));
   const verdict = (s) => (s >= 85 ? T.v1 : s >= 70 ? T.v2 : s >= 55 ? T.v3 : s >= 40 ? T.v4 : T.v5);
-  const mmShort = (d) => d.slice(5, 7) + '/' + d.slice(2, 4);
   const projectCard = (p, o = {}) => {
     const lv = o.level || 4, H = 'h' + lv, sel = o.sel || [];
     const parts = [['R', T.pR], ['L', T.pL], ['D', T.pD], ['Doc', T.pDoc], ['T', T.pT], ['K', T.pK]];
@@ -347,7 +349,7 @@ void main(){
       el('section', { class: 'pc-an' },
         el(H, {}, T.analysis, ' ', el('span', { class: 'note', text: '· ' + T.analysisNote })),
         el('div', { class: 'pc-an-grid' }, [['hionta', T.aTech, p.an.tech], ['kirkkaus', T.aPhilo, p.an.philo], ['loiste', T.aFun, p.an.fun]].map(([w, lab, txt]) =>
-          el('div', { class: 'an by-' + w }, el('p', { class: 'an-h' }, el('strong', { class: 'who-' + w, text: lab }), el('span', { class: 'muted', text: ' · ' + D.personas[w].name })), el('p', { text: txt }))))),
+          el('div', { class: 'an by-' + w }, el('p', { class: 'an-h' }, el('strong', { class: 'who-' + w, text: lab }), el('span', { class: 'muted', text: ' · ' + pname(w) })), el('p', { text: txt }))))),
       el('div', { class: 'pc-grid' },
         el('section', { class: 'pc-review' },
           el(H, {}, T.review, ' ', el('span', { class: 'note', text: '· ' + T.reviewNote })),
@@ -380,104 +382,87 @@ void main(){
     return { open, close() { dlg.close(); }, get isOpen() { return dlg.open; }, get current() { return dlg.open ? $('#pd-title').textContent : null; } };
   })();
 
-  /* ---------- Projektit: luku ja aiheet rajaavat samaa korttilistaa, aikajana näyttää ajan ---------- */
+  /* ---------- Projektit: luku ja aiheet rajaavat samaa korttilistaa, luvut ovat suljettavia otsikoita ---------- */
   const finder = (() => {
-    const root = $('#finder'), chips = $$('.chip[data-tag]', root), chs = $$('.chip[data-ch]', root), tl = $('#finder-tl'), count = $('#finder-count'), clear = $('#finder-clear'), NM = 21;
+    const root = $('#finder'), chips = $$('.chip[data-tag]', root), chs = $$('.chip[data-ch]', root), tl = $('#finder-tl'), count = $('#finder-count'), clear = $('#finder-clear'), selN = $('#topics-sel'), NM = 21;
     const cards = Object.fromEntries($$('.acard[data-card]', root).map((c) => [c.dataset.card, c])), groups = $$('.pch', root), C = D.story.chapters;
     const PS = D.projects.slice().sort((a, b) => a.start.localeCompare(b.start));
     const CH = Object.fromEntries(PS.map((p) => [p.id, C.findIndex((c) => mIdx(p.start) >= c.from && mIdx(p.start) <= c.to)]));
-    const st = { ch: null, sel: [], hits: PS, cur: null };
+    const st = { ch: null, sel: [], hits: PS };
     // Projekti näkyy, kun se kuuluu valittuun lukuun ja osuu jokaiseen valittuun aiheeseen
     const fits = (p, ch, sel) => (ch === null || CH[p.id] === ch) && sel.every((t) => p.tags.includes(t));
     const n = (ch, sel) => PS.filter((p) => fits(p, ch, sel)).length;
     const label = (m) => { const mo = (m + 2) % 12 + 1, y = 2025 + Math.floor((m + 2) / 12); return `${String(mo).padStart(2, '0')}/${String(y).slice(2)}`; };
-    // Aikajanan pohja: luvut nauhoina, commitit palkkeina ja kuukausimerkit. Saman kuukauden projektit pinotaan.
+    // Aikajana: luvut nauhoina, commitit palkkeina ja kuukausimerkit. Valittu luku korostuu.
     const maxM = Math.max(...D.story.months);
     const bands = C.map((c) => el('span', { class: 'ftl-band', style: `left:${c.from / NM * 100}%;width:${(c.to + 1 - c.from) / NM * 100}%`, 'aria-hidden': 'true' }, el('b', { text: c.title })));
-    const bars = D.story.months.map((v, m) => (v ? el('span', { class: 'ftl-bar', 'data-m': m, style: `left:${(m + 0.2) / NM * 100}%;width:${0.6 / NM * 100}%;height:${Math.max(3, Math.round(v / maxM * 96))}px`, 'aria-hidden': 'true' }) : null)).filter(Boolean);
+    const bars = D.story.months.map((v, m) => (v ? el('span', { class: 'ftl-bar', 'data-m': m, style: `left:${(m + 0.2) / NM * 100}%;width:${0.6 / NM * 100}%;height:${Math.max(3, Math.round(v / maxM * 72))}px`, 'aria-hidden': 'true' }) : null)).filter(Boolean);
     const axis = Array.from({ length: NM }, (_, m) => (m % 3 === 0 ? el('span', { class: 'ftl-tick', style: `left:${(m + 0.5) / NM * 100}%`, 'aria-hidden': 'true', text: label(m) }) : null)).filter(Boolean);
-    const stack = {}, pos = {};
-    for (const p of PS) { const m = mIdx(p.start); pos[p.id] = { m, k: (stack[m] = (stack[m] || 0) + 1) - 1 }; }
+    tl.replaceChildren(...bands, ...bars, ...axis);
     const renderTl = () => {
-      const hit = new Set(st.hits.map((p) => p.id)), tab = hit.has(st.cur) ? st.cur : st.hits.length ? st.hits[0].id : null;
       bands.forEach((b, i) => { b.classList.toggle('on', st.ch === i); b.classList.toggle('dim', st.ch !== null && st.ch !== i); });
       for (const b of bars) b.classList.toggle('on', st.ch !== null && +b.dataset.m >= C[st.ch].from && +b.dataset.m <= C[st.ch].to);
-      tl.replaceChildren(...bands, ...bars, ...axis, ...PS.map((p) => {
-        const q = pos[p.id], x = (q.m + 0.5) / NM, style = `left:${x * 100}%;bottom:${26 + q.k * 15}px`;
-        if (!hit.has(p.id)) return el('span', { class: 'ftl-dot', style, 'aria-hidden': 'true' });
-        const cur = p.id === st.cur;
-        return el('button', { type: 'button', class: 'ftl-dot hit' + (cur ? ' cur' : ''), style, 'data-id': p.id, tabindex: p.id === tab ? '0' : '-1', 'aria-current': cur ? 'true' : null,
-          'aria-label': `${p.name}, ${mmShort(p.start)}`, onclick: () => go(p.id) },
-          cur ? el('span', { class: 'ftl-lab' + (x < 0.15 ? ' l' : x > 0.85 ? ' r' : ''), 'aria-hidden': 'true', text: p.name }) : null);
-      }));
     };
-    // Pisteen valinta vie kortin luo, korostaa sen hetkeksi ja siirtää fokuksen kortin nimeen
-    function go(id) {
-      const c = cards[id]; if (!c || c.hidden) return;
-      st.cur = id; renderTl();
-      c.scrollIntoView({ block: 'center', behavior: reduced() ? 'auto' : 'smooth' }); $('h4 .link-btn', c).focus({ preventScroll: true });
-      c.classList.remove('flash'); void c.offsetWidth; c.classList.add('flash');
-    }
-    // Nuolinäppäimet kulkevat pisteestä toiseen vierittämättä sivua; Enter vie kortin luo
-    tl.addEventListener('keydown', (e) => {
-      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key) || !st.hits.length) return;
-      e.preventDefault();
-      const ids = st.hits.map((p) => p.id), i = ids.indexOf(st.cur), last = ids.length - 1;
-      const j = e.key === 'Home' ? 0 : e.key === 'End' ? last : i < 0 ? 0 : Math.max(0, Math.min(last, i + (e.key === 'ArrowRight' ? 1 : -1)));
-      st.cur = ids[j]; renderTl(); tl.querySelector(`[data-id="${st.cur}"]`).focus();
-    });
-    const update = () => {
+    // Rajaus avaa luvut, joissa on osumia, ja kaiken näyttäminen sulkee luvut takaisin otsikoiksi. Muuten luvut ovat käyttäjän avattavissa.
+    const update = (filter) => {
       st.hits = PS.filter((p) => fits(p, st.ch, st.sel));
-      const hit = new Set(st.hits.map((p) => p.id));
+      const hit = new Set(st.hits.map((p) => p.id)), on = st.ch !== null || st.sel.length > 0;
       for (const [id, c] of Object.entries(cards)) { c.hidden = !hit.has(id); for (const s of $$('[data-t]', c)) s.classList.toggle('hit', st.sel.includes(s.dataset.t)); }
-      groups.forEach((g, i) => { g.hidden = !st.hits.some((p) => CH[p.id] === i); if (st.ch === i) $('details', g).open = true; });
+      groups.forEach((g, i) => { const has = st.hits.some((p) => CH[p.id] === i); g.hidden = !has; if (filter) g.open = has && on; if (filter && st.ch === i) $('details', g).open = true; });
       // Painikkeen luku kertoo, montako projektia jää, jos sen valitsee; nollan painike ei ole käytössä
-      for (const c of chips) { const t = c.dataset.tag, on = st.sel.includes(t), k = on ? st.hits.length : n(st.ch, [...st.sel, t]);
-        c.setAttribute('aria-pressed', String(on)); c.disabled = !on && !k; $('.count', c).textContent = String(k); }
-      for (const c of chs) { const i = c.dataset.ch === '' ? null : +c.dataset.ch, on = i === st.ch, k = n(i, st.sel);
-        c.setAttribute('aria-pressed', String(on)); c.disabled = !on && !k; $('.count', c).textContent = String(k); }
-      if (!hit.has(st.cur)) st.cur = null;
+      for (const c of chips) { const t = c.dataset.tag, sel = st.sel.includes(t), k = sel ? st.hits.length : n(st.ch, [...st.sel, t]);
+        c.setAttribute('aria-pressed', String(sel)); c.disabled = !sel && !k; $('.count', c).textContent = String(k); }
+      for (const c of chs) { const i = c.dataset.ch === '' ? null : +c.dataset.ch, sel = i === st.ch, k = n(i, st.sel);
+        c.setAttribute('aria-pressed', String(sel)); c.disabled = !sel && !k; $('.count', c).textContent = String(k); }
       const parts = [st.ch === null ? '' : C[st.ch].title, ...st.sel.map((t) => TAGI[t].label)].filter(Boolean);
       count.textContent = `${st.hits.length} ${T.projects} · ${parts.length ? parts.join(' + ') : T.finderNone}`;
-      clear.disabled = st.ch === null && !st.sel.length;
+      selN.textContent = st.sel.length ? ` · ${st.sel.length} ${T.topicsSel}` : '';
+      clear.disabled = !on;
       renderTl();
     };
-    for (const c of chips) c.addEventListener('click', () => { const t = c.dataset.tag; st.sel = st.sel.includes(t) ? st.sel.filter((x) => x !== t) : [...st.sel, t]; update(); });
-    for (const c of chs) c.addEventListener('click', () => { const i = c.dataset.ch === '' ? null : +c.dataset.ch; st.ch = i === st.ch ? null : i; update(); });
-    clear.addEventListener('click', () => { st.ch = null; st.sel = []; update(); chs[0].focus(); });
-    update();
+    for (const c of chips) c.addEventListener('click', () => { const t = c.dataset.tag; st.sel = st.sel.includes(t) ? st.sel.filter((x) => x !== t) : [...st.sel, t]; update(true); });
+    for (const c of chs) c.addEventListener('click', () => { const i = c.dataset.ch === '' ? null : +c.dataset.ch; st.ch = i === st.ch ? null : i; update(true); });
+    clear.addEventListener('click', () => { st.ch = null; st.sel = []; update(true); chs[0].focus(); });
+    update(false);
     return {
-      select(tags, ch = null) { st.sel = tags.slice(); st.ch = ch; update(); return { count: st.hits.length, ids: st.hits.map((p) => p.id) }; },
-      go, get hits() { return st.hits.map((p) => p.id); }, get cur() { return st.cur; }, get selected() { return st.sel.slice(); }, get chapter() { return st.ch; },
+      select(tags, ch = null) { st.sel = tags.slice(); st.ch = ch; update(true); return { count: st.hits.length, ids: st.hits.map((p) => p.id) }; },
+      get hits() { return st.hits.map((p) => p.id); }, get selected() { return st.sel.slice(); }, get chapter() { return st.ch; },
     };
   })();
 
   /* ---------- Neuvonantajat: avaruusmadot, huomiokenttä ja ajatukset ---------- */
   const personas = (() => {
     const cv = $('#bugs'), ctx = cv.getContext('2d'), bubble = $('#bubble'), lineEl = $('#crew-line'), toggle = $('#crew-toggle'), hero = $('[data-attn="hero"]');
-    const TH = { engage: 0.35, speak: 0.55, hold: 600, release: 0.25, hyst: 0.12, tauUp: 0.35, tauDown: 1.2, arrive: 28 };
+    // notice: uuden kohteen huomaaminen (ms), dwell: kuinka kauan uuden kohteen pitää olla paras ennen siirtymää (ms)
+    const TH = { engage: 0.35, speak: 0.55, hold: 600, release: 0.25, hyst: 0.12, tauUp: 0.35, tauDown: 1.2, arrive: 28, notice: 600, dwell: 450 };
     const WHO = ['loiste', 'hionta', 'kirkkaus'];
     const SLOT = [[-44, 16], [42, 12], [0, -32]]; // levossa päät kolmiossa oikeassa alakulmassa
-    // Kohteessa madot kiertävät laatikon reunaa jonossa (px ja px/s, puhuessa hitaammin) ja väistävät osoitinta
-    const RING = { pad: 14, gap: 58, v: 22, vTalk: 8, dodge: 110 };
+    // Kohteessa madot kiertävät pyöristettyä kehää jonossa (px ja px/s, puhuessa hitaammin) ja väistävät osoitinta
+    const RING = { pad: 16, round: 26, gap: 58, v: 16, vTalk: 6, dodge: 110 };
     // Jokaisella madolla oma muoto ja liike: Loiste pomppii, Hionta kulkee suoraan, Kirkkaus aaltoilee hitaasti.
+    // Loiste johtaa jonoa, joten sen sp on matkanopeus; muut seuraavat sen jälkeä.
     const FORM = {
-      loiste: { n: 9, gap: 5.6, r: (k) => 6.4 - k * 0.38, sp: 190, wig: 0.5, freq: 7 },
-      hionta: { n: 8, gap: 6.6, r: (k) => 6.2 - k * 0.3, sp: 210, wig: 0.14, freq: 4.5 },
-      kirkkaus: { n: 13, gap: 4.6, r: (k) => 5.2 - k * 0.3, sp: 150, wig: 0.75, freq: 2.6 },
+      loiste: { n: 9, gap: 5.6, r: (k) => 6.4 - k * 0.38, sp: 150, wig: 0.5, freq: 7 },
+      hionta: { n: 8, gap: 6.6, r: (k) => 6.2 - k * 0.3, sp: 170, wig: 0.14, freq: 4.5 },
+      kirkkaus: { n: 13, gap: 4.6, r: (k) => 5.2 - k * 0.3, sp: 140, wig: 0.75, freq: 2.6 },
     };
     const AV = new WeakMap(); // elementti → huomioarvo A
-    const st = { focus: null, focusEl: null, speaking: false, spoken: false, line: null, log: [], hidden: store.get('infinite-crew') === 'off', aboveSince: 0, mode: 'focus', arrived: false, welcome: true, ring: null, s: 0 };
+    const st = { focus: null, focusEl: null, speaking: false, spoken: false, line: null, lines: [], fact: 0, log: [], hidden: store.get('infinite-crew') === 'off', aboveSince: 0, mode: 'focus', arrived: false, welcome: true, ring: null, u: 0, orbit: false, notice: -1e9, cand: null, candSince: 0 };
     let pointer = null, last = 0, lineTimer = 0, W = 0, H = 0, dpr = 1, S = 1, blank = false;
     const box = { x: 0, y: 0, w: 0, h: 0 };
-    const worms = WHO.map((who, i) => ({ who, i, f: FORM[who], x: 0, y: 0, vx: 0, vy: 0, phase: i * 2, hop: 0, moving: false, dir: [0, -1], segs: [] }));
+    const worms = WHO.map((who, i) => ({ who, i, f: FORM[who], x: 0, y: 0, vx: 0, vy: 0, phase: i * 2, hop: 0, lift: 0, moving: false, dir: [0, -1], face: 1, segs: [] }));
+    const trail = []; // johtajan jälki uusimmasta vanhimpaan; seuraajat kulkevat sitä pitkin
     // Hiiri: madot seuraavat osoitinta. Kosketus ja Tab: ne seuraavat fokusta tai näkymän keskellä olevaa kohtaa.
     addEventListener('pointermove', (e) => { if (e.pointerType !== 'touch') { pointer = [e.clientX, e.clientY]; st.mode = 'pointer'; } }, { passive: true });
     addEventListener('pointerdown', (e) => { if (e.pointerType === 'touch') { pointer = null; st.mode = 'focus'; } }, { passive: true });
     document.addEventListener('mouseout', (e) => { if (!e.relatedTarget) { pointer = null; st.mode = 'focus'; } });
     document.addEventListener('keydown', (e) => { if (e.key === 'Tab') { pointer = null; st.mode = 'focus'; } });
-    const clampX = (x) => Math.max(50, Math.min(W - 50, x)), clampY = (y) => Math.max(topbar.offsetHeight + 40, Math.min(H - 40, y));
+    // Madot ja kehä pysyvät samoissa rajoissa, joten rajaus ei taita rataa
+    const lim = () => { const m = W < 600 ? 22 : 40; return { x0: m, x1: W - m, y0: topbar.offsetHeight + 28, y1: H - 28 }; };
+    const clampX = (x) => { const b = lim(); return Math.max(b.x0, Math.min(b.x1, x)); }, clampY = (y) => { const b = lim(); return Math.max(b.y0, Math.min(b.y1, y)); };
     const intensity = (e, vh) => {
+      // Suljetun luvun kortti ei näy, vaikka selain antaa sille paikan otsikon kohdalta
+      if (e.checkVisibility ? !e.checkVisibility() : e.closest('details:not([open])')) return 0;
       const r = e.getBoundingClientRect(); if (r.bottom <= 0 || r.top >= vh || !r.width) return 0;
       const top = topbar.offsetHeight, vc = (top + vh) / 2, half = Math.max(1, (vh - top) / 2);
       const d = vc >= r.top && vc <= r.bottom ? 0 : Math.min(Math.abs(r.top - vc), Math.abs(r.bottom - vc));
@@ -487,31 +472,60 @@ void main(){
       if (e.contains(document.activeElement) && document.activeElement !== document.body) I = 1;
       return I;
     };
-    // Laatikko, jonka ympäri madot kiertävät: huomion saanut kohta pienellä marginaalilla, rajattuna näkymään
+    // Laatikko, jonka ympäri madot kiertävät: huomion saanut kohta pienellä marginaalilla, rajattuna näkymään.
+    // free = kehää ei ole rajattu pystysuunnassa, joten se liikkuu vierittäessä täsmälleen sivun mukana.
     const ringOf = (e) => {
-      const r = e.getBoundingClientRect(), m = RING.pad * S, top = topbar.offsetHeight + 16;
-      const x0 = Math.max(16, r.left - m), y0 = Math.max(top, r.top - m), w = Math.max(40, Math.min(W - 16, r.right + m) - x0), h = Math.max(30, Math.min(H - 16, r.bottom + m) - y0);
-      return { x0, y0, x1: x0 + w, y1: y0 + h, w, h, L: 2 * (w + h) };
+      const r = e.getBoundingClientRect(), m = RING.pad * S, b = lim();
+      const x0 = Math.max(b.x0, r.left - m), y0 = Math.max(b.y0, r.top - m), w = Math.max(40, Math.min(b.x1, r.right + m) - x0), h = Math.max(30, Math.min(b.y1, r.bottom + m) - y0);
+      const c = Math.min(RING.round * S, w / 2, h / 2);
+      return { el: e, x0, y0, x1: x0 + w, y1: y0 + h, w, h, c, L: 2 * (w + h) - 8 * c + 2 * Math.PI * c, free: r.top - m >= b.y0 && r.bottom + m <= b.y1 };
     };
-    // Kehän piste kaaren pituudesta s (myötäpäivään vasemmasta yläkulmasta) ja pisteen lähin kohta kehällä
-    const at = (R, s) => {
-      s = ((s % R.L) + R.L) % R.L;
-      if (s < R.w) return [R.x0 + s, R.y0]; s -= R.w;
-      if (s < R.h) return [R.x1, R.y0 + s]; s -= R.h;
-      if (s < R.w) return [R.x1 - s, R.y1]; s -= R.w;
-      return [R.x0, R.y1 - s];
+    // Kehän piste osuudesta u ∈ [0, 1) myötäpäivään yläreunan alusta. Osuus pysyy, vaikka kehän koko muuttuu.
+    const at = (R, u) => {
+      const { x0, y0, x1, y1, c } = R, a = R.w - 2 * c, b = R.h - 2 * c, q = Math.PI * c / 2;
+      let s = (((u % 1) + 1) % 1) * R.L;
+      const arc = (cx, cy, t0) => { const t = t0 + (c ? s / c : 0); return [cx + Math.cos(t) * c, cy + Math.sin(t) * c]; };
+      if (s < a) return [x0 + c + s, y0]; s -= a;
+      if (s < q) return arc(x1 - c, y0 + c, -Math.PI / 2); s -= q;
+      if (s < b) return [x1, y0 + c + s]; s -= b;
+      if (s < q) return arc(x1 - c, y1 - c, 0); s -= q;
+      if (s < a) return [x1 - c - s, y1]; s -= a;
+      if (s < q) return arc(x0 + c, y1 - c, Math.PI / 2); s -= q;
+      if (s < b) return [x0, y1 - c - s]; s -= b;
+      return arc(x0 + c, y0 + c, Math.PI);
     };
-    const nearest = (R, x, y) => {
-      const cx = Math.max(R.x0, Math.min(R.x1, x)), cy = Math.max(R.y0, Math.min(R.y1, y));
-      return [[Math.hypot(x - cx, y - R.y0), cx - R.x0], [Math.hypot(x - R.x1, y - cy), R.w + cy - R.y0],
-        [Math.hypot(x - cx, y - R.y1), R.w + R.h + R.x1 - cx], [Math.hypot(x - R.x0, y - cy), 2 * R.w + R.h + R.y1 - cy]].reduce((a, b) => (b[0] < a[0] ? b : a))[1];
+    const nearestU = (R, x, y) => { let u = 0, best = Infinity; for (let k = 0; k < 120; k++) { const [px, py] = at(R, k / 120), d = (px - x) ** 2 + (py - y) ** 2; if (d < best) { best = d; u = k / 120; } } return u; };
+    // Piste johtajan jäljellä matkan dist päässä sen päästä
+    const trailAt = (dist) => {
+      let p = [worms[0].x, worms[0].y];
+      for (const q of trail) { const L = Math.hypot(q[0] - p[0], q[1] - p[1]); if (L >= dist) { const k = dist / L; return [p[0] + (q[0] - p[0]) * k, p[1] + (q[1] - p[1]) * k]; } dist -= L; p = q; }
+      return p;
     };
-    const goals = () => {
+    const shift = (dy) => { for (const w of worms) { w.y += dy; for (const s of w.segs) s[1] += dy; } for (const p of trail) p[1] += dy; };
+    // Tervetulossa madot ovat rinnakkain yläpalkin ja hero-kortin välissä päät oikealle. Rivi vierii sivun mukana.
+    const stage = () => {
+      const c = hero.getBoundingClientRect(), y = $('#etusivu').getBoundingClientRect().top + (W < 600 ? 58 : 46), cx = (c.left + c.right) / 2 + 30 * S;
+      return worms.map((w) => [clampX(cx + (w.i - 1) * 100 * S), clampY(y)]);
+    };
+    // Esittelyn jälkeen jono muodostuu: johtajan jälki kulkee seuraajien päiden kautta, joten ne asettuvat sen perään
+    const endWelcome = () => {
+      st.welcome = false; trail.length = 0; let p = [worms[0].x, worms[0].y];
+      for (const w of worms.slice(1)) { const n = Math.max(1, Math.round(Math.hypot(w.x - p[0], w.y - p[1]) / 4)); for (let k = 1; k <= n; k++) trail.push([p[0] + (w.x - p[0]) * k / n, p[1] + (w.y - p[1]) * k / n]); p = [w.x, w.y]; }
+    };
+    const goals = (now) => {
       const e = st.focusEl;
+      if (st.welcome) { st.ring = null; return stage(); }
       if (!e) { st.ring = null; const ax = W - 120, ay = H - 150; return worms.map((w) => [ax + SLOT[w.i][0] * S, ay + SLOT[w.i][1] * S]); }
-      const R = st.ring = ringOf(e);
+      const R = ringOf(e), P = st.ring;
+      // Saman kohteen kehä siirtyi vierityksen takia: madot kulkevat sivun mukana eivätkä jää jälkeen
+      if (P && P.el === e && P.free && R.free && R.y0 !== P.y0 && Math.abs(R.y0 - P.y0) < 400) shift(R.y0 - P.y0);
+      st.ring = R;
+      // Uuden kohteen huomattuaan madot pysähtyvät hetkeksi ja kääntyvät sitä kohti
+      if (now - st.notice < TH.notice) return worms.map((w) => [w.x, w.y]);
+      const gu = Math.min(RING.gap * S / R.L, 1 / 3);
       return worms.map((w) => {
-        let [x, y] = at(R, st.s - w.i * RING.gap * S);
+        // Matkalla muut seuraavat Loisteen jälkeä jonossa. Kun Loiste on kehällä, muut asettuvat kehälle sen taakse.
+        let [x, y] = !w.i || st.orbit || reduced() ? at(R, st.u - w.i * gu) : trailAt(w.i * RING.gap * S);
         // Osoitin väistetään: kohde siirtyy siitä suoraan poispäin, kunnes väli on RING.dodge
         if (pointer) { const dx = x - pointer[0], dy = y - pointer[1], d = Math.hypot(dx, dy), k = RING.dodge - d; if (k > 0 && d > 0.5) { x += dx / d * k; y += dy / d * k; } }
         return [clampX(x), clampY(y)];
@@ -519,41 +533,50 @@ void main(){
     };
     const renderLine = () => {
       if (st.line) {
-        lineEl.textContent = `${D.personas[st.line.who].name}: ${st.line.text}`;
-        $('strong', bubble).className = 'who-' + st.line.who; $('strong', bubble).textContent = `${D.personas[st.line.who].name} · ${D.points[st.line.point].label}`;
+        lineEl.textContent = `${pname(st.line.who)}: ${st.line.text}`;
+        $('strong', bubble).className = 'who-' + st.line.who; $('strong', bubble).textContent = `${pname(st.line.who)} · ${D.points[st.line.point].label}`;
         $('span', bubble).textContent = st.line.text; bubble.dataset.who = st.line.who;
         return;
       }
       bubble.hidden = true; lineEl.textContent = '';
     };
     const clearLine = () => { clearTimeout(lineTimer); st.speaking = false; st.line = null; renderLine(); };
-    const engage = (e) => { clearLine(); st.focusEl = e; st.focus = e.dataset.attn; st.spoken = false; st.aboveSince = 0; st.s = nearest(ringOf(e), worms[0].x, worms[0].y); };
-    const release = () => { clearLine(); st.focusEl = null; st.focus = null; st.spoken = false; st.aboveSince = 0; };
+    const engage = (e, now) => { clearLine(); st.focusEl = e; st.focus = e.dataset.attn; st.spoken = false; st.aboveSince = 0; st.cand = null; st.u = nearestU(ringOf(e), worms[0].x, worms[0].y); st.notice = reduced() ? -1e9 : now; st.orbit = false; };
+    const release = () => { clearLine(); st.focusEl = null; st.focus = null; st.spoken = false; st.aboveSince = 0; st.orbit = false; };
     const say = (i) => {
-      const lines = (D.points[st.focus] || { lines: [] }).lines;
-      if (i >= lines.length) { st.speaking = false; st.line = null; renderLine(); if (st.focus === 'welcome') { st.welcome = false; st.focus = st.focusEl.dataset.attn; } return; }
-      const ln = lines[i]; st.line = { who: ln.who, text: ln.text, point: st.focus, index: i, total: lines.length };
-      st.log.push({ time: new Date(), point: st.focus, who: ln.who, text: ln.text });
+      // Projektin keskustelun päättää vaihtuva huomio Infinitestä
+      // Talvessa linnut esittelevät itsensä linnuiksi; muut repliikit ovat samat
+      if (!i) { st.lines = (D.points[st.focus === 'welcome' && theme.current() === 'winter' ? 'welcomeB' : st.focus] || { lines: [] }).lines.map((x) => ({ ...x, point: st.focus }));
+        if (st.focus.startsWith('p-')) { const F = D.points.infinite.lines; st.lines.push({ ...F[st.fact++ % F.length], point: 'infinite' }); } }
+      const lines = st.lines;
+      if (i >= lines.length) { st.speaking = false; st.line = null; renderLine(); if (st.focus === 'welcome') { endWelcome(); st.focus = st.focusEl.dataset.attn; } return; }
+      const ln = lines[i]; st.line = { who: ln.who, text: ln.text, point: ln.point, index: i, total: lines.length };
+      st.log.push({ time: new Date(), point: ln.point, who: ln.who, text: ln.text });
       $('#log-count').textContent = String(st.log.length); renderLine();
       lineTimer = setTimeout(() => say(i + 1), 2200 + ln.text.length * 45);
     };
     const place = (w, x, y) => { w.x = x; w.y = y; w.segs = Array.from({ length: w.f.n }, (_, k) => [x + k * w.f.gap * S, y + k * 1.5]); };
     const move = (dt, now, G) => {
       const still = reduced(), R = st.ring; let arrived = true;
-      // Kohteessa madot katsovat laatikon keskelle, levossa toisiaan kohti
+      // Kohteessa madot katsovat laatikon keskelle, levossa toisiaan kohti. Esittelyssä puhuja katsoo lukijaa ja muut puhujaa.
       const fx = R ? (R.x0 + R.x1) / 2 : (G[0][0] + G[1][0] + G[2][0]) / 3, fy = R ? (R.y0 + R.y1) / 2 : (G[0][1] + G[1][1] + G[2][1]) / 3;
+      const sp = st.welcome && st.line && worms.find((o) => o.who === st.line.who);
+      const look = (w, x, y) => (!st.welcome ? [fx - x, fy - y] : sp && sp !== w ? [sp.x - x, sp.y - y] : [0.35, 1]);
       for (const w of worms) {
-        const [gx, gy] = G[w.i], F = w.f;
-        w.hop = st.line && st.line.who === w.who && !still ? Math.abs(Math.sin(now / 110)) * 3 : 0;
-        if (still) { if (w.x !== gx || w.y !== gy) place(w, gx, gy); w.moving = false; w.dir = [fx - gx, fy - gy]; continue; }
-        const dx = gx - w.x, dy = gy - w.y, d = Math.hypot(dx, dy), spd = Math.min(F.sp, d * 2.5), k = 1 - Math.exp(-dt / 0.3);
+        const [gx, gy] = G[w.i], F = w.f, tn = now - st.notice - w.i * 110;
+        // Puhuja nostaa päänsä noin 0,2 sekunnissa ja laskee sen, kun vuoro vaihtuu (liikettä vähennettäessä heti)
+        const talk = st.line && st.line.who === w.who ? 1 : 0; w.lift = still ? talk : w.lift + (talk - w.lift) * (1 - Math.exp(-dt / 0.18)); w.hop = 0;
+        if (tn > 0 && tn < 300) w.hop = Math.sin(tn / 300 * Math.PI) * 7; // huomatessaan mato hypähtää
+        if (still) { if (w.x !== gx || w.y !== gy) place(w, gx, gy); w.moving = false; w.dir = look(w, gx, gy); continue; }
+        // Seuraajat kirivät jäljessä, jotta jono pysyy koossa johtajan matkanopeudella
+        const dx = gx - w.x, dy = gy - w.y, d = Math.hypot(dx, dy), spd = w.i ? Math.min(F.sp * 1.6, d * 3) : Math.min(F.sp, d * 2.2), k = 1 - Math.exp(-dt / 0.3);
         let tx = d > 0.5 ? dx / d * spd : 0, ty = d > 0.5 ? dy / d * spd : 0;
         for (const o of worms) if (o !== w) { const ex = w.x - o.x, ey = w.y - o.y, e2 = ex * ex + ey * ey; if (e2 < 900 && e2 > 0.01) { const e = Math.sqrt(e2); tx += ex / e * (30 - e) * 6; ty += ey / e * (30 - e) * 6; } }
         w.vx += (tx - w.vx) * k; w.vy += (ty - w.vy) * k;
         const v = Math.hypot(w.vx, w.vy), a = Math.sin(w.phase) * F.wig * Math.min(1, v / 150) * Math.min(1, d / 80); // mutkittelu, joka vaimenee perillä
         w.x += (w.vx * Math.cos(a) - w.vy * Math.sin(a)) * dt; w.y += (w.vx * Math.sin(a) + w.vy * Math.cos(a)) * dt;
         w.phase += dt * F.freq * Math.min(1, 0.25 + v / 200); w.moving = v > 14;
-        w.dir = w.moving ? [w.vx, w.vy] : [fx - w.x, fy - w.y];
+        w.dir = w.moving ? [w.vx, w.vy] : look(w, w.x, w.y);
         // Jäsenet seuraavat edellistä vakioetäisyydellä
         w.segs[0] = [w.x, w.y];
         for (let j = 1; j < w.segs.length; j++) {
@@ -570,9 +593,11 @@ void main(){
       const F = w.f, segs = w.segs, n = segs.length, dl = Math.hypot(w.dir[0], w.dir[1]) || 1, ux = w.dir[0] / dl, uy = w.dir[1] / dl, px = -uy, py = ux;
       const breath = reduced() ? 0 : 0.05, white = [255, 255, 255], black = [10, 12, 24];
       ctx.save(); ctx.translate(0, -w.hop);
+      // Puhujan etujäsenet nousevat ja suurenevat, mutta varjo jää maahan, joten pää erottuu ylös nostettuna
+      const lift = (k) => w.lift * Math.max(0, 1 - k / 5) * (14 + (reduced() ? 0 : 2 * Math.sin(t * 4))) * S, grow = (k) => 1 + 0.3 * w.lift * Math.max(0, 1 - k / 3);
       for (let k = n - 1; k >= 0; k -= 2) dot(segs[k][0] + 2, segs[k][1] + 4 + w.hop, F.r(k) * S, lite ? 'rgba(20,30,60,0.10)' : 'rgba(0,0,0,0.28)');
       for (let k = n - 1; k >= 0; k--) {
-        const [x, y] = segs[k], r = F.r(k) * S * (1 + breath * Math.sin(t * 2.2 + k * 0.7));
+        const x = segs[k][0], y = segs[k][1] - lift(k), r = F.r(k) * S * grow(k) * (1 + breath * Math.sin(t * 2.2 + k * 0.7));
         if (w.who === 'loiste') { // hehkumato: valoa jokaisessa jäsenessä
           if (!lite) { ctx.save(); ctx.globalCompositeOperation = 'lighter'; const g = ctx.createRadialGradient(x, y, 0, x, y, r * 2.8); g.addColorStop(0, rgba(c, 0.32)); g.addColorStop(1, rgba(c, 0)); ctx.fillStyle = g; ctx.fillRect(x - r * 3, y - r * 3, r * 6, r * 6); ctx.restore(); }
           const g = ctx.createRadialGradient(x - r * 0.3, y - r * 0.3, r * 0.1, x, y, r); g.addColorStop(0, rgba(mix(c, white, 0.6), 1)); g.addColorStop(0.6, rgba(c, 1)); g.addColorStop(1, rgba(mix(c, black, 0.45), 1));
@@ -592,7 +617,7 @@ void main(){
           }
         }
       }
-      const [hx, hy] = segs[0], hr = F.r(0) * S, talk = st.line && st.line.who === w.who ? 1 : 0, wig = reduced() ? 0 : Math.sin(t * 3 + w.i * 2);
+      const hx = segs[0][0], hy = segs[0][1] - lift(0), hr = F.r(0) * S * grow(0), talk = st.line && st.line.who === w.who ? 1 : 0, wig = reduced() ? 0 : Math.sin(t * 3 + w.i * 2);
       ctx.lineCap = 'round';
       if (w.who === 'loiste') {
         const bx = hx + ux * hr * 2.6 + px * hr * (0.8 + 0.3 * wig), by = hy + uy * hr * 2.6 + py * hr * (0.8 + 0.3 * wig) - talk * 3;
@@ -614,6 +639,63 @@ void main(){
       }
       ctx.restore();
     };
+    // Talvi-teeman linnut sivusta: harakka (Loiste), merikotka (Hionta) ja tunturipöllö (Kirkkaus). Liike ja huomio ovat samat kuin madoilla.
+    // flap kertoo siiveniskujen tiheyden madon vaiheeseen nähden, amp heilahduksen levossa ja täydessä vauhdissa, up siiven perusasennon.
+    const BIRD = {
+      loiste: { size: 1, flap: 2.2, amp: [0.5, 1], up: 0 }, // harakka: tiheät iskut, pyrstö keikkuu
+      hionta: { size: 1.15, flap: 0.8, amp: [0.12, 0.45], up: 0.35 }, // merikotka: liitää siivet koholla ja iskee harvoin
+      kirkkaus: { size: 1.05, flap: 2, amp: [0.35, 0.8], up: 0 }, // tunturipöllö: pehmeät, hitaat iskut
+    };
+    const drawBird = (w, t, c) => {
+      const B = BIRD[w.who], dl = Math.hypot(w.dir[0], w.dir[1]) || 1, still = reduced(), talk = st.line && st.line.who === w.who ? 1 : 0;
+      if (Math.abs(w.dir[0]) > 0.25 * dl) w.face = Math.sign(w.dir[0]); // pystysuunnassa lintu pitää entisen suuntansa
+      const v = Math.hypot(w.vx, w.vy), tilt = w.moving ? Math.max(-0.5, Math.min(0.5, Math.atan2(w.dir[1], Math.abs(w.dir[0])))) * 0.5 : 0;
+      const u = 7 * S * B.size * (1 + 0.25 * w.lift), a = B.up + (still ? 0.3 : Math.sin(w.phase * B.flap) * (B.amp[0] + (B.amp[1] - B.amp[0]) * Math.min(1, v / 120)));
+      const ell = (x, y, rx, ry, fill, edge) => { ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); ctx.fillStyle = fill; ctx.fill(); if (edge) { ctx.strokeStyle = edge; ctx.lineWidth = 1 / u; ctx.stroke(); } };
+      const poly = (pts, fill) => { ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (const p of pts.slice(1)) ctx.lineTo(p[0], p[1]); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); };
+      // Siipi: tyvi selässä, kärki nousee (a > 0) tai laskee (a < 0) siiveniskun mukana
+      const wing = (len, fill, edge) => {
+        const tx = -0.45 * len, ty = -0.35 - a * len;
+        ctx.beginPath(); ctx.moveTo(0.6, -0.3); ctx.quadraticCurveTo(0.15, ty * 0.85 - 0.15, tx, ty);
+        ctx.quadraticCurveTo(-0.35 * len, -0.35 - a * len * 0.35 + 0.3, -0.75, -0.1); ctx.closePath();
+        ctx.fillStyle = fill; ctx.fill(); if (edge) { ctx.strokeStyle = edge; ctx.lineWidth = 1 / u; ctx.stroke(); }
+      };
+      const beak = (top, bottom, fill) => { poly(top, fill); if (talk && !still && Math.sin(t * 9) > 0) poly(bottom, fill); };
+      // Varjo jää maahan, kun puhuja nousee
+      ctx.beginPath(); ctx.ellipse(w.x, w.y + 16 * S, 1.6 * u, 0.4 * u, 0, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.fill();
+      ctx.save(); ctx.translate(w.x, w.y - w.hop - 6 * S * w.lift); ctx.scale(w.face * u, u); ctx.rotate(tilt); ctx.lineJoin = 'round';
+      if (w.who === 'loiste') {
+        const bob = still ? 0 : Math.sin(t * 5) * 0.12 + talk * Math.sin(t * 9) * 0.15, rim = 'rgba(220,235,255,0.4)';
+        ctx.save(); ctx.translate(0.2, -0.05); wing(2, '#0b0d12'); ctx.restore();
+        const g = ctx.createLinearGradient(-1.1, 0, -3.4, 0); g.addColorStop(0, '#101218'); g.addColorStop(1, rgba(c, 1));
+        poly([[-1.1, -0.15], [-3.3, -0.55 + bob], [-3.45, -0.25 + bob], [-1.1, 0.25]], g);
+        ell(0, 0, 1.45, 0.8, '#101218', rim); ell(0.15, 0.3, 0.95, 0.42, '#f2f4f7');
+        ell(1.35, -0.45, 0.6, 0.55, '#101218', rim);
+        beak([[1.85, -0.58], [2.45, -0.44], [1.85, -0.36]], [[1.85, -0.36], [2.3, -0.3], [1.85, -0.26]], '#2c3038');
+        ell(1.52, -0.56, 0.12, 0.12, '#fff'); ell(1.56, -0.56, 0.065, 0.065, '#000');
+        wing(2, '#14161d', rim); ctx.save(); ctx.translate(0.15, -0.12); ctx.scale(0.55, 0.55); wing(2, '#e9edf2'); ctx.restore();
+      } else if (w.who === 'hionta') {
+        ctx.save(); ctx.translate(0.2, -0.05); wing(2.6, '#3a2718'); ctx.restore();
+        poly([[-1.5, -0.25], [-2.5, -0.45], [-2.55, 0.2], [-1.5, 0.3]], '#f3efe6');
+        const g = ctx.createLinearGradient(0, -0.9, 0, 0.9); g.addColorStop(0, '#7a5534'); g.addColorStop(1, '#4a3220');
+        ell(0, 0, 1.75, 0.9, g); ell(1.55, -0.5, 0.62, 0.55, '#dcc8a0');
+        beak([[1.95, -0.7], [2.55, -0.66], [2.72, -0.36], [2.5, -0.4], [1.95, -0.32]], [[1.95, -0.32], [2.4, -0.3], [1.95, -0.2]], '#f0c03a');
+        ell(1.7, -0.62, 0.1, 0.1, '#e8a317'); ell(1.73, -0.62, 0.05, 0.05, '#000');
+        ctx.beginPath(); ctx.moveTo(1.5, -0.78); ctx.lineTo(1.9, -0.72); ctx.strokeStyle = '#6b5233'; ctx.lineWidth = 1.4 / u; ctx.stroke(); // tarkka, tiukka katse
+        wing(2.6, '#5a3d25', '#2c1d12');
+      } else {
+        ctx.save(); ctx.translate(0.2, -0.05); wing(1.8, '#cfd6de'); ctx.restore();
+        poly([[-1.05, -0.1], [-1.75, 0], [-1.7, 0.4], [-1, 0.35]], '#e6eaef');
+        ell(0, 0.05, 1.25, 1, '#f6f8fb', 'rgba(150,165,185,0.7)');
+        for (const [sx, sy] of [[-0.6, 0.1], [-0.2, 0.45], [0.3, 0.2], [-0.4, -0.3], [0.1, 0.65]]) ell(sx, sy, 0.09, 0.06, '#6b7480');
+        ell(0.85, -0.75, 0.85, 0.8, '#f9fbfd', 'rgba(150,165,185,0.7)');
+        const blink = !still && (t * 0.7 + w.i) % 4 < 0.12;
+        for (const [ex, ey, r] of [[0.72, -0.86, 0.25], [1.3, -0.83, 0.22]]) { ell(ex, ey, r, blink ? r * 0.2 : r, '#f5c518'); if (!blink) ell(ex + 0.06, ey, r * 0.5, r * 0.5, '#111'); }
+        beak([[1.0, -0.62], [1.22, -0.62], [1.1, -0.4]], [[1.02, -0.45], [1.18, -0.45], [1.1, -0.3]], '#3a3f48');
+        wing(1.8, '#eef1f5', '#a7b0bb');
+      }
+      ctx.restore();
+    };
     // Kangas rajataan matojen ympärille; koko vaihtuu vain, kun madot eivät enää mahdu tai tilaa on reilusti liikaa.
     const fit = () => {
       let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
@@ -630,7 +712,17 @@ void main(){
     const draw = (now) => {
       const P = pal(), lite = theme.current() === 'light', t = reduced() ? 0 : now / 1000;
       fit(); ctx.setTransform(dpr, 0, 0, dpr, -box.x * dpr, -box.y * dpr); ctx.clearRect(box.x, box.y, box.w, box.h);
-      for (const w of worms) drawWorm(w, t, P[w.who], lite);
+      const birds = theme.current() === 'winter';
+      for (const w of worms) if (birds) drawBird(w, t, P[w.who]); else drawWorm(w, t, P[w.who], lite);
+      // Uuden kohteen huomaaminen: jokaisen madon pään yllä ponnahtaa vuorollaan "!"
+      for (const w of worms) {
+        const tn = now - st.notice - w.i * 110; if (tn < 0 || tn > 900) continue;
+        const k = Math.min(1, tn / 180) - 1, s = 1 + 2.7 * k ** 3 + 1.7 * k ** 2, [hx, hy] = w.segs[0], y = hy - 24 * S - w.hop - 14 * S * w.lift;
+        ctx.globalAlpha = tn > 700 ? 1 - (tn - 700) / 200 : 1;
+        dot(hx, y, 8 * S * s, rgba(P[w.who], 0.95));
+        ctx.fillStyle = lite ? '#fff' : '#0b1020'; ctx.font = `700 ${Math.max(1, Math.round(12 * S * s))}px system-ui, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('!', hx, y + 0.5); ctx.globalAlpha = 1;
+      }
     };
     // Ajatuskupla: pilvi ja kaksi pientä ajatuspalloa, jotka osoittavat puhujan päähän
     const placeBubble = () => {
@@ -639,15 +731,15 @@ void main(){
       const bw = bubble.offsetWidth, bh = bubble.offsetHeight, x = Math.max(8, Math.min(W - bw - 8, w.x - bw / 2));
       // Kupla laatikon ulkopuolelle: yläpuoliskon madolle yläpuolelle, alapuoliskon alapuolelle. Puoli pysyy saman repliikin ajan.
       if (st.line.below == null) st.line.below = !!R && w.y > (R.y0 + R.y1) / 2;
-      let below = st.line.below, y = below ? w.y + 40 : w.y - bh - 40;
-      if (!below && y < top) { below = true; y = w.y + 40; } else if (below && y + bh > H - 8) { below = false; y = w.y - bh - 40; }
+      const off = st.welcome ? 26 : 40, head = w.y - 14 * S * w.lift; let below = st.line.below, y = below ? w.y + off : head - bh - off;
+      if (!below && y < top) { below = true; y = w.y + off; } else if (below && y + bh > H - 8) { below = false; y = head - bh - off; }
       bubble.style.transform = `translate(${Math.round(x)}px, ${Math.round(Math.max(top, y))}px)`;
       bubble.style.setProperty('--ax', Math.round(Math.max(18, Math.min(bw - 18, w.x - x))) + 'px'); bubble.classList.toggle('below', below);
     };
     const resize = () => {
       W = document.documentElement.clientWidth; H = document.documentElement.clientHeight; dpr = Math.min(devicePixelRatio || 1, 2); S = W < 600 ? 1 : 1.25; box.w = box.h = 0;
-      // Madot aloittavat valmiiksi hero-kortin kehältä oikeasta alakulmasta, joten tervetulotoivotus alkaa heti
-      if (!worms[0].segs.length) { const R = ringOf(hero); for (const w of worms) { const [x, y] = at(R, R.w + R.h - w.i * RING.gap * S); place(w, clampX(x), clampY(y)); } }
+      // Madot aloittavat valmiiksi rivissä hero-kortin yläpuolella vartalot vasemmalle, joten esittely alkaa heti
+      if (!worms[0].segs.length) for (const [i, [x, y]] of stage().entries()) { const w = worms[i]; w.x = x; w.y = y; w.segs = Array.from({ length: w.f.n }, (_, k) => [x - k * w.f.gap * S, y + Math.sin(k * 0.9) * 2]); }
     };
     const tick = (now) => {
       requestAnimationFrame(tick);
@@ -662,46 +754,54 @@ void main(){
       }
       const f = st.focusEl;
       if (st.welcome) {
-        // Tervetulotoivotus hero-kortin ympärillä, kunnes repliikit loppuvat tai kortti vierii pois näkyvistä
+        // Esittely ja tervetulotoivotus rivissä hero-kortin yläpuolella, kunnes repliikit loppuvat tai kortti vierii pois näkyvistä
         const r = hero.getBoundingClientRect();
-        if (r.bottom < topbar.offsetHeight + 60 || r.top > vh - 60) { st.welcome = false; release(); }
-        else if (f !== hero) { engage(hero); st.focus = 'welcome'; }
+        if (r.bottom < topbar.offsetHeight + 60 || r.top > vh - 60) { endWelcome(); release(); }
+        else if (f !== hero) { engage(hero, now); st.focus = 'welcome'; }
       }
       if (!st.welcome) {
         // Kohta katosi tai poistui näkyvistä: huomio on siirtynyt, joten ajatus poistuu heti.
         if (f && (!document.contains(f) || (AV.get(f) || 0) < TH.release || f._I === 0)) release();
-        if (st.focusEl) { if (best && best !== st.focusEl && bestA >= TH.engage && bestA > (AV.get(st.focusEl) || 0) + TH.hyst) engage(best); }
-        else if (best && bestA >= TH.engage) engage(best);
+        // Uusi kohde otetaan vasta, kun se on pysynyt parhaana hetken, joten madot eivät lähde jokaisen ohi vieritetyn kortin perään
+        const cur = st.focusEl, want = best && best !== cur && bestA >= TH.engage && (!cur || bestA > (AV.get(cur) || 0) + TH.hyst) ? best : null;
+        if (want !== st.cand) { st.cand = want; st.candSince = now; }
+        if (want && now - st.candSince >= TH.dwell * (st.mode === 'pointer' ? 1 : 1.6)) engage(want, now);
       }
-      move(dt, now, goals());
-      if (st.arrived && !reduced()) st.s += dt * (st.line ? RING.vTalk : RING.v);
+      move(dt, now, goals(now));
+      if (now - st.notice < TH.notice) st.arrived = false;
+      if (st.ring && !st.orbit && now - st.notice >= TH.notice) { const [x, y] = at(st.ring, st.u); st.orbit = Math.hypot(worms[0].x - x, worms[0].y - y) < TH.arrive; }
+      const h = worms[0];
+      if (!trail.length || Math.hypot(h.x - trail[0][0], h.y - trail[0][1]) > 3) { trail.unshift([h.x, h.y]); if (trail.length > 160) trail.pop(); }
+      if (st.arrived && st.orbit && st.ring && !reduced()) st.u += dt * (st.line ? RING.vTalk : RING.v) * S / st.ring.L;
       const g = st.focusEl;
       if (g) {
         if (st.welcome || (AV.get(g) || 0) >= TH.speak) { if (!st.aboveSince) st.aboveSince = now; } else st.aboveSince = 0;
         // Keskustelu alkaa vasta, kun madot ovat perillä.
-        if (!st.speaking && !st.spoken && st.arrived && st.aboveSince && now - st.aboveSince >= TH.hold) { st.speaking = true; st.spoken = true; say(0); }
+        if (!st.speaking && !st.spoken && st.arrived && (st.orbit || st.welcome) && st.aboveSince && now - st.aboveSince >= TH.hold) { st.speaking = true; st.spoken = true; say(0); }
       }
       draw(now); placeBubble();
     };
+    const label = () => { const b = theme.current() === 'winter' ? 'B' : ''; $('.lbl', toggle).textContent = st.hidden ? T['show' + b] : T['hide' + b]; };
     const setHidden = (h) => {
-      st.hidden = h; toggle.setAttribute('aria-pressed', String(h));
-      $('.lbl', toggle).textContent = h ? T.show : T.hide;
-      store.set('infinite-crew', h ? 'off' : 'on'); if (h) { st.welcome = false; release(); }
+      st.hidden = h; toggle.setAttribute('aria-pressed', String(h)); label();
+      store.set('infinite-crew', h ? 'off' : 'on'); if (h) { endWelcome(); release(); }
     };
     toggle.addEventListener('click', () => setHidden(!st.hidden));
+    document.addEventListener('pf:theme', label);
     $('#log-btn').addEventListener('click', (e) => {
       const list = $('#log-list'); list.replaceChildren();
       if (!st.log.length) list.append(el('li', { class: 'muted', text: T.logEmpty }));
       for (const x of st.log) list.append(el('li', {}, el('time', { datetime: x.time.toISOString(), text: x.time.toLocaleTimeString(L === 'fi' ? 'fi-FI' : 'en-GB') }), ' · ',
-        el('span', { class: 'muted', text: D.points[x.point].label }), ' · ', el('strong', { class: 'who-' + x.who, text: D.personas[x.who].name }), ' · ' + x.text));
+        el('span', { class: 'muted', text: D.points[x.point].label }), ' · ', el('strong', { class: 'who-' + x.who, text: pname(x.who) }), ' · ' + x.text));
       openDialog($('#log-dialog'), e.currentTarget);
     });
     addEventListener('resize', resize);
     resize(); renderLine(); setHidden(st.hidden); requestAnimationFrame(tick);
     return { thresholds: TH, setHidden, get hidden() { return st.hidden; }, get focus() { return st.focus; }, get speaking() { return st.speaking; },
       get line() { return st.line && { ...st.line }; }, get log() { return st.log.map((x) => ({ ...x, time: x.time.toISOString() })); },
-      get arrived() { return st.arrived; }, get mode() { return st.mode; }, get ring() { return st.ring && { ...st.ring }; }, get welcome() { return st.welcome; },
-      get bugs() { return worms.map((w) => ({ who: w.who, x: Math.round(w.x), y: Math.round(w.y), segs: w.segs.length })); },
+      get arrived() { return st.arrived; }, get mode() { return st.mode; }, get welcome() { return st.welcome; }, get kind() { return theme.current() === 'winter' ? 'birds' : 'worms'; },
+      get ring() { if (!st.ring) return null; const { el: _, ...r } = st.ring; return r; }, get noticed() { return st.notice; }, get u() { return st.u; },
+      get bugs() { return worms.map((w) => ({ who: w.who, x: Math.round(w.x), y: Math.round(w.y), segs: w.segs.length, lift: +w.lift.toFixed(2) })); },
       get points() { return $$('[data-attn]').map((e) => ({ id: e.dataset.attn, A: +(AV.get(e) || 0).toFixed(3) })); } };
   })();
 
@@ -756,7 +856,7 @@ void main(){
     };
     const msg = (who, text, ps) => {
       const li = el('li', { class: 'ask-msg ' + (who === 'you' ? 'you' : 'by-' + who) },
-        el('strong', { class: who === 'you' ? null : 'who-' + who, text: who === 'you' ? T.askYou : D.personas[who].name }), el('p', { text }),
+        el('strong', { class: who === 'you' ? null : 'who-' + who, text: who === 'you' ? T.askYou : pname(who) }), el('p', { text }),
         ps && ps.length ? el('div', { class: 'chip-row' }, ps.slice(0, 8).map((id) => el('button', { type: 'button', class: 'chip sm', 'data-project': id, 'aria-haspopup': 'dialog' }, PBY[id].name))) : null);
       logEl.append(li); li.scrollIntoView({ block: 'nearest' });
     };
@@ -769,6 +869,17 @@ void main(){
     for (const b of $$('#ask-sugg [data-q]')) b.addEventListener('click', () => submit(b.dataset.q));
     $('#ask-btn').addEventListener('click', (e) => { openDialog(dlg, e.currentTarget); input.focus(); });
     return { answer: (q) => answer(q).map(({ who, text, ps }) => ({ who, text, ps: ps || [] })), submit, open() { $('#ask-btn').click(); }, get isOpen() { return dlg.open; } };
+  })();
+
+  /* ---------- Osioiden siirtymä: osio nousee esiin kerran, kun se tulee näkyviin (tyylit .rv ja .in) ---------- */
+  const reveal = (() => {
+    const secs = $$('.sections > section');
+    if (!reduced()) {
+      document.documentElement.classList.add('rv');
+      const io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }, { rootMargin: '0px 0px -15% 0px' });
+      for (const s of secs) io.observe(s);
+    }
+    return { get shown() { return secs.filter((s) => !document.documentElement.classList.contains('rv') || s.classList.contains('in')).map((s) => s.id); } };
   })();
 
   /* ---------- Osioiden maisemat: canvas-meteorit ja virtauskenttä (CSS- ja SVG-maisemat ovat tyylitiedostossa) ---------- */
@@ -805,7 +916,9 @@ void main(){
         }
         d.m = d.m.filter((m) => m.life < 1.6 && m.y < s.h);
         const g = ctx.createRadialGradient(cx, cy, R * 0.9, cx, cy, R * 1.04);
-        g.addColorStop(0, rgba(lite ? [205, 222, 245] : [14, 24, 52], 1)); g.addColorStop(0.92, rgba(lite ? [225, 236, 252] : [30, 52, 104], 1)); g.addColorStop(1, rgba(P.hionta, 0));
+        // Talvessa kaari on luminen kumpu
+        const win = theme.current() === 'winter';
+        g.addColorStop(0, rgba(lite ? [205, 222, 245] : win ? [92, 112, 138] : [14, 24, 52], 1)); g.addColorStop(0.92, rgba(lite ? [225, 236, 252] : win ? [196, 212, 232] : [30, 52, 104], 1)); g.addColorStop(1, rgba(P.hionta, 0));
         ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R * 1.04, 0, Math.PI * 2); ctx.fill();
         ctx.strokeStyle = rgba(P.hionta, lite ? 0.5 : 0.8); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, R, Math.PI * 1.1, Math.PI * 1.9); ctx.stroke();
       });
@@ -1002,5 +1115,5 @@ void main(){
   })();
 
   theme.sync();
-  window.portfolioPOC = { hero, finder, personas, ask, contact, scapes, map, seo, tech, theme, projectDialog, data: D };
+  window.portfolioPOC = { hero, finder, personas, ask, contact, reveal, scapes, map, seo, tech, theme, projectDialog, data: D };
 })();
