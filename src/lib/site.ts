@@ -95,7 +95,7 @@ export function page(lang: Lang) {
       chapters: story.chapters.map((c) => ({ n: c.n, from: c.from, to: c.to, period: c.period, key: c.key, title: c.title[lang], paras: c.paras[lang], ai: c.ai[lang] })),
       others: story.others.map((o) => ({ id: o.id, name: o.name, start: o.start, last: o.last, commits: o.commits, one: o.one[lang], code: o.repoUrl })) },
     sections: SECTIONS.map((s) => ({ id: s.id, name: s.nav[lang], summary: s.summary[lang], status: s.status === 'new' ? ui.statusNew : ui.statusUpdated })),
-    personas: Object.fromEntries(Object.entries(PERSONAS).map(([k, v]) => [k, { name: v.name, bird: v.bird.name, role: v.role[lang] }])),
+    personas: Object.fromEntries(Object.entries(PERSONAS).map(([k, v]) => [k, { name: v.name, bird: v.bird.name, elf: v.elf.name, ghost: v.ghost.name, role: v.role[lang] }])),
     points: Object.fromEntries([
       ...POINTS.map((pt) => [pt.id, { label: pt.label[lang], lines: pt.lines.map((x) => ({ who: x.who, text: x.text[lang] })) }]),
       ...Object.entries(crewTalk(lang)),

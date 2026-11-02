@@ -37,23 +37,40 @@
   const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
 
   /* ---------- Teema ---------- */
-  // Painike kiertää Titaani → Timantti → Talvi. Talvi on oletus: tumma teema, jossa madot ovat lintuja omilla nimillään.
-  const THEMES = ['dark', 'light', 'winter'];
+  // Teema valitaan yläpalkin valikosta. Talvi on oletus. Jokaisella teemalla on oma neuvonantajajoukkonsa omilla nimillään.
+  const THEMES = ['dark', 'light', 'winter', 'christmas', 'kekri'];
+  const CAST = { dark: 'worms', light: 'worms', winter: 'birds', christmas: 'elves', kekri: 'ghosts' };
+  const SUF = { worms: '', birds: 'B', elves: 'E', ghosts: 'G' }; // joukon omat repliikit ja tekstit: welcomeB, heroE, hideG …
   const theme = {
     current() { const t = document.documentElement.getAttribute('data-theme'); return THEMES.includes(t) ? t : 'winter'; },
+    cast() { return CAST[this.current()]; },
     set(t) { document.documentElement.setAttribute('data-theme', t); store.set('infinite-theme', t); this.sync(); },
-    toggle() { this.set(THEMES[(THEMES.indexOf(this.current()) + 1) % THEMES.length]); },
     sync() {
-      const name = { dark: T.themeDark, light: T.themeLight, winter: T.themeWinter }[this.current()];
+      const t = this.current(), name = { dark: T.themeDark, light: T.themeLight, winter: T.themeWinter, christmas: T.themeChristmas, kekri: T.themeKekri }[t];
       $('#theme-label').textContent = name;
       $('#theme-btn').setAttribute('aria-label', `${T.theme}: ${name}`);
+      for (const r of $$('#theme-menu input')) r.checked = r.value === t;
+      $('#hero-canvas').setAttribute('aria-label', { christmas: T.heroCanvasXmas, kekri: T.heroCanvasKekri }[t] || T.heroCanvas);
       palette = null;
       $('meta[name="theme-color"]').content = `rgb(${rgb(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim())})`;
-      document.dispatchEvent(new CustomEvent('pf:theme', { detail: this.current() }));
+      document.dispatchEvent(new CustomEvent('pf:theme', { detail: t }));
     },
   };
-  $('#theme-btn').addEventListener('click', () => theme.toggle());
-  const pname = (k) => (theme.current() === 'winter' ? D.personas[k].bird : D.personas[k].name); // linnuilla on omat nimensä
+  // Valikko: hiirellä valinta sulkee valikon, näppäimistöllä nuolet vaihtavat teemaa ja Enter tai Esc sulkee
+  const themeBtn = $('#theme-btn'), themeMenu = $('#theme-menu');
+  let menuByPointer = false;
+  const themeMenuOpen = (open, refocus) => {
+    themeMenu.hidden = !open; themeBtn.setAttribute('aria-expanded', String(open));
+    if (open) ($(`input[value="${theme.current()}"]`, themeMenu) || $('input', themeMenu)).focus(); else if (refocus) themeBtn.focus();
+  };
+  themeBtn.addEventListener('click', () => themeMenuOpen(themeMenu.hidden));
+  themeMenu.addEventListener('pointerdown', () => { menuByPointer = true; });
+  themeMenu.addEventListener('keydown', (e) => { menuByPointer = false; if (e.key === 'Escape' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); themeMenuOpen(false, true); } });
+  themeMenu.addEventListener('change', (e) => theme.set(e.target.value));
+  themeMenu.addEventListener('click', (e) => { if (menuByPointer && e.target.matches('input')) { theme.set(e.target.value); themeMenuOpen(false, true); } });
+  document.addEventListener('pointerdown', (e) => { if (!themeMenu.hidden && !e.target.closest('.theme-pick')) themeMenuOpen(false); });
+  const NAMEKEY = { worms: 'name', birds: 'bird', elves: 'elf', ghosts: 'ghost' };
+  const pname = (k) => D.personas[k][NAMEKEY[theme.cast()]]; // jokaisella joukolla omat nimet
 
   /* ---------- Kiinteiden palkkien tila ---------- */
   const topbar = $('#topbar');
@@ -82,7 +99,7 @@
     let gl = null, U = {}, raf = 0, last = 0, w = 1, h = 1, dpr = 1;
     try { gl = cv.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'low-power' }); } catch (e) { gl = null; }
     const FS = `precision highp float;
-uniform vec2 uRes; uniform float uTime; uniform vec3 uPtr; uniform float uDark; uniform float uHz; uniform float uWin;
+uniform vec2 uRes; uniform float uTime; uniform vec3 uPtr; uniform float uDark; uniform float uHz; uniform float uWin; uniform float uXmas; uniform float uKekri;
 float h11(float p){ p = fract(p * 0.1031); p *= p + 33.33; p *= p + p; return fract(p); }
 float h21(vec2 p){ vec3 q = fract(vec3(p.xyx) * 0.1031); q += dot(q, q.yzx + 33.33); return fract((q.x + q.y) * q.z); }
 float n11(float x){ float i = floor(x), f = fract(x); f = f*f*(3.0 - 2.0*f); return mix(h11(i), h11(i + 1.0), f); }
@@ -96,8 +113,10 @@ float fell(float x, float sharp){
 float near(vec2 p, float s){ vec2 d = p - uPtr.xy; return uPtr.z * exp(-dot(d, d) / s); }
 vec3 skyCol(float y){
   float g = clamp((y - uHz) / (1.0 - uHz), 0.0, 1.0);
-  return mix(mix(vec3(0.90, 0.95, 1.00), vec3(0.56, 0.71, 0.93), pow(g, 0.8)),
-             mix(vec3(0.035, 0.075, 0.16), vec3(0.008, 0.014, 0.045), pow(g, 0.6)), uDark);
+  vec3 c = mix(mix(vec3(0.90, 0.95, 1.00), vec3(0.56, 0.71, 0.93), pow(g, 0.8)),
+               mix(vec3(0.035, 0.075, 0.16), vec3(0.008, 0.014, 0.045), pow(g, 0.6)), uDark);
+  // Kekri: violetinmusta taivas, horisontissa luumunpunainen hehku
+  return mix(c, mix(vec3(0.16, 0.06, 0.16), vec3(0.025, 0.012, 0.05), pow(g, 0.55)), uKekri);
 }
 // Revontulet: kolme verhoa. Alareuna aaltoilee, säteet tulevat 1D-kohinasta, ja verho taipuu osoitinta kohti.
 vec3 aurora(vec2 p, float t){
@@ -127,6 +146,37 @@ float stars(vec2 p, float t){
   vec2 o = vec2(h21(id + 3.1), h21(id + 7.7)) - 0.5;
   return smoothstep(0.14, 0.0, length(f - o*0.6)) * (0.6 + 0.4*sin(t*(1.0 + 2.0*h21(id + 1.3)) + h*50.0)) * (h - 0.965) / 0.035;
 }
+float sdSeg(vec2 p, vec2 a, vec2 b){ vec2 pa = p - a, ba = b - a; return length(pa - ba*clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0)); }
+// Joulutähti: hehkuva ydin, neljä pitkää ja neljä lyhyttä sädettä. Osoitin kirkastaa sitä.
+vec3 xmasStar(vec2 p, float t, float asp){
+  vec2 c = vec2(asp*0.8, uHz + (1.0 - uHz)*0.78), d = p - c;
+  float r = length(d), boost = 1.0 + 1.5*near(c, 0.02);
+  float core = exp(-r*r/0.00006) + 0.3*exp(-r/0.025);
+  float sp = exp(-abs(d.x)/0.0022)*exp(-abs(d.y)/0.12) + exp(-abs(d.y)/0.0022)*exp(-abs(d.x)/0.09);
+  vec2 e = vec2(d.x + d.y, d.y - d.x)*0.7071;
+  sp += 0.45*(exp(-abs(e.x)/0.0016)*exp(-abs(e.y)/0.045) + exp(-abs(e.y)/0.0016)*exp(-abs(e.x)/0.045));
+  return vec3(1.0, 0.86, 0.55)*(core + sp)*(0.85 + 0.15*sin(1.3*t))*boost;
+}
+// Lepakko omassa koordinaatistossaan: siivenkärjet ±1, siivet heiluvat flapin mukaan
+float bat(vec2 q, float flap, float aa){
+  q.x = abs(q.x);
+  float top = 0.10 + 0.45*q.x*flap - 0.20*q.x*q.x, bot = top - 0.22 + 0.10*abs(sin(q.x*9.0));
+  float wing = smoothstep(1.0 + aa, 1.0 - aa, q.x) * smoothstep(bot - aa, bot + aa, q.y) * smoothstep(top + aa, top - aa, q.y);
+  return max(wing, smoothstep(0.26 + aa, 0.26 - aa, length(q*vec2(2.6, 1.3))));
+}
+// Punainen mökki rannalla: valaistut ikkunat ja lumikatto. Järvi peilaa sen.
+vec3 cottage(vec2 p, vec3 col, float asp, float S){
+  float w = 0.05*S, h = 0.028*S, rw = w*1.18; vec2 q = p - vec2(asp*0.62, uHz);
+  float top = h + (rw - abs(q.x))*0.62;
+  if (abs(q.x) < rw && q.y >= h && q.y < top) col = mix(vec3(0.10, 0.11, 0.15), vec3(0.90, 0.94, 1.0), smoothstep(h + 0.4*(top - h), h + 0.6*(top - h), q.y));
+  if (abs(q.x) < w && q.y >= 0.0 && q.y < h){
+    col = vec3(0.48, 0.10, 0.08);
+    vec2 wq = vec2(abs(abs(q.x) - w*0.5), q.y - h*0.52);
+    if (wq.x < w*0.17 && abs(wq.y) < h*0.21) col = vec3(1.0, 0.80, 0.45);
+  }
+  vec2 g1 = q - vec2(-w*0.5, h*0.52), g2 = q - vec2(w*0.5, h*0.52);
+  return col + vec3(1.0, 0.65, 0.30)*0.30*(exp(-dot(g1, g1)/(0.25*w*w)) + exp(-dot(g2, g2)/(0.25*w*w)));
+}
 float farTop(float x){ return uHz + (1.0 - uHz) * (0.07 + 0.40*fell(1.05*x + 4.0, 0.85)); }
 float midTop(float x){ return uHz + (1.0 - uHz) * (0.02 + 0.17*fell(1.7*x + 11.0, 0.25)); }
 vec3 snowFace(float lit, float depth, vec2 p, float dh){
@@ -139,36 +189,76 @@ vec3 snowFace(float lit, float depth, vec2 p, float dh){
 }
 // Taivas, revontulet, tunturit ja rantakuuset. Järvi kutsuu tätä peilattuna.
 vec3 scene(vec2 p, float t, float px){
-  float S = 1.0 - uHz;
-  vec3 col = skyCol(p.y), au = aurora(p, t);
+  float S = 1.0 - uHz, asp = uRes.x / uRes.y;
+  // Joulussa revontulien tilalla on joulutähti, Kekrissä kuu
+  vec3 col = skyCol(p.y), au = vec3(0.0);
+  if (uXmas + uKekri < 0.5) au = aurora(p, t);
   float a = clamp(dot(au, vec3(0.3, 0.5, 0.2)), 0.0, 1.0);
   col = mix(col, vec3(0.10, 0.40, 1.00), a * 0.62 * (1.0 - uDark)) + (au + stars(p, t)*vec3(0.8, 0.9, 1.0)) * uDark;
+  if (uXmas > 0.5) col += xmasStar(p, t, asp);
+  if (uKekri > 0.5){
+    // Kekrikuu: oranssi kiekko, kraatterit, hehku ja sen yli ajelehtivat pilvet; edessä lepattaa lepakoita
+    vec2 mc = vec2(asp*0.78, uHz + S*0.72), d = p - mc; float R = 0.16*S, r = length(d);
+    col += vec3(1.0, 0.50, 0.18)*0.30*exp(-max(r - R, 0.0)/(0.35*R));
+    vec3 mcol = mix(vec3(0.85, 0.36, 0.10), vec3(1.0, 0.80, 0.48), smoothstep(R, 0.0, r)) * (0.82 + 0.18*n21(d/R*4.0 + 3.0));
+    col = mix(col, mcol, smoothstep(R + px, R - px, r));
+    float cl = smoothstep(0.55, 0.8, n21(vec2(p.x*3.5 - t*0.03, p.y*16.0))) * smoothstep(0.45*S, 0.0, abs(p.y - mc.y + 0.02));
+    col = mix(col, vec3(0.07, 0.03, 0.09), cl*0.85);
+    for (int k = 0; k < 3; k++){
+      float fk = float(k), sz = (0.018 + 0.010*h11(fk + 5.0))*S/0.7;
+      vec2 bp = vec2(mod(t*(0.05 + 0.02*fk) + fk*0.7, asp + 0.6) - 0.3, uHz + S*(0.55 + 0.25*h11(fk*3.1)) + 0.03*sin(t*1.7 + fk*2.0));
+      col = mix(col, vec3(0.02, 0.01, 0.03), bat((p - bp)/sz, sin(t*14.0 + fk*1.3), px/sz*1.5));
+    }
+  }
   if (p.y < uHz + S*0.37){
     float e = 0.004, hz = skyCol(uHz + 0.02).x;
     float tf = farTop(p.x);
     if (p.y < tf + px){
       float dh = (farTop(p.x + e) - farTop(p.x - e)) / (2.0*e*S);
       vec3 m = mix(snowFace(smoothstep(-1.2, 1.2, dh), (tf - p.y)/S, p, dh), skyCol(uHz + 0.02), 0.30);
-      m += mix(vec3(0.2), vec3(0.35, 0.65, 1.0)*0.6, uDark) * exp(-(tf - p.y)*400.0);
+      m = mix(m, m*vec3(0.55, 0.40, 0.70), uKekri); // Kekrissä tunturit ovat violetin tummia
+      m += mix(mix(vec3(0.2), vec3(0.35, 0.65, 1.0)*0.6, uDark), vec3(0.9, 0.45, 0.2)*0.5, uKekri) * exp(-(tf - p.y)*400.0);
       col = mix(col, m, smoothstep(0.0, px, tf - p.y));
     }
     float tm = midTop(p.x);
     if (p.y < tm + px){
       float dh = (midTop(p.x + e) - midTop(p.x - e)) / (2.0*e*S);
       vec3 m = mix(snowFace(smoothstep(-0.8, 0.8, dh), (tm - p.y)/S, p, dh*0.5), skyCol(uHz + 0.02), 0.16);
+      m = mix(m, m*vec3(0.55, 0.40, 0.70), uKekri);
       col = mix(col, m, smoothstep(0.0, px, tm - p.y));
     }
+    if (uXmas > 0.5) col = cottage(p, col, asp, S);
     float cw = 0.03, cx = floor(p.x / cw);
     for (int j = -1; j <= 1; j++){
       float id = cx + float(j);
       if (h11(id*1.37 + 5.0) < 0.55) continue;
       float H = S * (0.025 + 0.055*h11(id*2.71 + 1.0)), yy = (p.y - uHz) / H;
       if (yy < 0.0 || yy > 1.0) continue;
-      float wd = H * 0.24 * pow(1.0 - yy, 0.85) * (0.82 + 0.18*sin(26.0*yy + 7.0*id)) + 0.001;
       float bx = (id + 0.5 + 0.6*(h11(id*3.3) - 0.5)) * cw;
+      if (uKekri > 0.5){
+        // Kekrissä rantapuut ovat paljaita: kapeneva runko ja kolme oksaa
+        float dt = abs(p.x - bx - 0.06*H*sin(yy*5.0 + id)) - H*0.03*(1.0 - 0.6*yy);
+        for (int b = 0; b < 3; b++){
+          float fb = float(b), sg = h11(id*5.0 + fb) < 0.5 ? -1.0 : 1.0;
+          vec2 a0 = vec2(bx, uHz + H*(0.35 + 0.2*fb)), a1 = a0 + vec2(sg*H*(0.34 - 0.06*fb), H*(0.20 + 0.05*fb));
+          dt = min(dt, sdSeg(p, a0, a1) - H*0.012*(1.0 - 0.4*fb));
+        }
+        col = mix(col, vec3(0.025, 0.012, 0.035), smoothstep(px, 0.0, dt));
+        continue;
+      }
+      float wd = H * 0.24 * pow(1.0 - yy, 0.85) * (0.82 + 0.18*sin(26.0*yy + 7.0*id)) + 0.001;
       float snow = smoothstep(0.35, 0.7, n21(vec2(120.0*p.x, 80.0*p.y)));
       vec3 tc = mix(mix(vec3(0.42, 0.52, 0.64), vec3(0.93, 0.95, 0.99), 0.35 + 0.65*snow), mix(vec3(0.02, 0.035, 0.07), vec3(0.20, 0.30, 0.50), 0.8*snow), uDark);
       col = mix(col, tc, smoothstep(wd + px, wd, abs(p.x - bx)));
+      if (uXmas > 0.5){
+        // Jouluvalot kuusissa: neljä väriä, ja jokainen tuikkii omaan tahtiinsa
+        for (int k = 0; k < 5; k++){
+          float fk = float(k), ly = 0.16 + 0.15*fk, hh = h11(id*7.3 + fk), q4 = h11(id*3.7 + fk*1.9);
+          float dd = length(p - vec2(bx + (hh - 0.5)*1.6*H*0.24*pow(1.0 - ly, 0.85), uHz + H*ly));
+          vec3 lc = q4 < 0.25 ? vec3(1.0, 0.30, 0.25) : q4 < 0.5 ? vec3(1.0, 0.80, 0.35) : q4 < 0.75 ? vec3(0.40, 0.95, 0.55) : vec3(0.50, 0.75, 1.0);
+          col += lc*(0.55 + 0.45*sin(t*(1.5 + 2.5*hh) + fk*2.3))*(smoothstep(0.0028, 0.0010, dd) + 0.35*exp(-dd/0.003));
+        }
+      }
     }
   }
   return col;
@@ -201,7 +291,7 @@ void main(){
     float d = uHz - p.y;
     vec3 r = scene(vec2(p.x, uHz + d), t, px);
     float F = mix(0.78, 0.30, smoothstep(0.0, 0.22, d));
-    col = mix(mix(vec3(0.70, 0.82, 0.94), vec3(0.015, 0.04, 0.09), uDark), r * mix(vec3(0.80, 0.90, 1.00), vec3(0.75, 0.88, 1.00), uDark), F);
+    col = mix(mix(mix(vec3(0.70, 0.82, 0.94), vec3(0.015, 0.04, 0.09), uDark), vec3(0.035, 0.015, 0.05), uKekri), r * mix(vec3(0.80, 0.90, 1.00), vec3(0.75, 0.88, 1.00), uDark), F);
     float cr = (1.0 - smoothstep(0.0, 0.035, crack(vec2((p.x - 0.5*asp) * 0.6 / d, 0.6 / d)))) * smoothstep(0.02, 0.08, d);
     col = mix(mix(col, vec3(0.45, 0.62, 0.85), cr*0.6), col + vec3(0.25, 0.60, 1.00)*cr*0.45, uDark);
     float bk = uHz * (0.30 + 0.45*fell(0.8*p.x + 21.0, 0.0) + 0.2*smoothstep(0.5*asp, asp, p.x));
@@ -209,8 +299,32 @@ void main(){
       float e = 0.004, dh = (fell(0.8*(p.x + e) + 21.0, 0.0) - fell(0.8*(p.x - e) + 21.0, 0.0)) / (2.0*e) * 0.36;
       float lit = smoothstep(-0.6, 0.6, dh) * (0.75 + 0.25*smoothstep(0.0, uHz*0.5, p.y));
       vec3 sn = mix(mix(vec3(0.74, 0.82, 0.95), vec3(1.0), lit), mix(vec3(0.03, 0.05, 0.12), vec3(0.16, 0.24, 0.42), lit), uDark);
-      sn += exp(-(bk - p.y)*160.0) * mix(vec3(0.6), vec3(0.3, 0.55, 0.9), uDark) * 0.5;
+      sn = mix(sn, vec3(0.05, 0.025, 0.07) + vec3(0.10, 0.05, 0.12)*lit, uKekri); // Kekrissä lumen tilalla on tumma maa
+      sn += exp(-(bk - p.y)*160.0) * mix(mix(vec3(0.6), vec3(0.3, 0.55, 0.9), uDark), vec3(0.8, 0.4, 0.15), uKekri) * 0.5;
       col = mix(col, sn, smoothstep(0.0, px, bk - p.y));
+    }
+    if (uXmas + uKekri > 0.5){
+      // Rantapenkalla Joulussa lumilyhdyt ja Kekrissä kurpitsalyhdyt; liekki lepattaa
+      for (int k = 0; k < 3; k++){
+        float fk = float(k), lx = asp*(0.66 + 0.13*fk), s = 0.014*(1.0 - uHz)/0.7;
+        if (abs(p.x - lx) > 4.0*s) continue; // penkan korkeus lasketaan vain lyhdyn kohdalla
+        float ly = uHz*(0.30 + 0.45*fell(0.8*lx + 21.0, 0.0) + 0.2*smoothstep(0.5*asp, asp, lx)) + 0.8*s;
+        vec2 q = (p - vec2(lx, ly)) / s;
+        float fl = 0.8 + 0.2*sin(t*11.0 + fk*3.0) + 0.1*sin(t*23.0 + fk);
+        if (uXmas > 0.5){
+          float cone = smoothstep(1.0, 0.9, abs(q.x)/(1.0 - 0.45*max(q.y, 0.0))) * step(-1.0, q.y) * step(q.y, 1.6);
+          col = mix(col, vec3(0.88, 0.92, 0.98)*(0.75 + 0.25*n21(q*3.0)), cone);
+          vec2 cq = q - vec2(0.0, -0.2);
+          col += vec3(1.0, 0.72, 0.35)*fl*(0.9*exp(-dot(cq, cq)*3.0) + 0.25*exp(-length(q)*0.6));
+        } else {
+          float pr = length(q*vec2(0.85, 1.0));
+          col = mix(col, vec3(0.90, 0.45, 0.10)*(0.75 + 0.25*cos(q.x*5.0)), smoothstep(1.1, 0.9, pr));
+          float face = max(smoothstep(0.22, 0.12, length(q - vec2(-0.35, 0.2))), smoothstep(0.22, 0.12, length(q - vec2(0.35, 0.2))));
+          face = max(face, smoothstep(0.12, 0.04, abs(q.y + 0.3 + 0.08*sin(q.x*12.0))) * step(abs(q.x), 0.55));
+          col = mix(col, vec3(1.0, 0.85, 0.40)*fl, face*step(pr, 1.0));
+          col += vec3(1.0, 0.55, 0.15)*fl*0.25*exp(-pr*0.7);
+        }
+      }
     }
     // Timanttikimallus jäällä ja hangella: harva hash-ruudukko, spektriväri, voimistuu osoittimen lähellä.
     vec2 gc = floor(gl_FragCoord.xy / 3.0);
@@ -221,20 +335,37 @@ void main(){
       col += fire * pow(0.5 + 0.5*sin(t*(1.5 + 3.0*g2) + 60.0*g2), 6.0) * (gh - th) / (1.0 - th) * mix(0.9, 1.4, uDark);
     }
   }
+  if (uKekri > 0.5){
+    // Usva horisontin tuntumassa. Osoitin on lyhty: usva hälvenee sen ympäriltä ja muu maisema tummuu.
+    float fn = 0.6*n21(vec2(p.x*2.5 - t*0.05, p.y*9.0 + t*0.02)) + 0.4*n21(vec2(p.x*6.0 + t*0.08, p.y*21.0));
+    float fog = exp(-abs(p.y - uHz)/0.07) * smoothstep(0.35, 0.8, fn) * 0.5 * (1.0 - 0.85*near(p, 0.04));
+    col = mix(col, vec3(0.55, 0.45, 0.66), fog);
+    vec2 dp = p - uPtr.xy;
+    col *= mix(1.0, 0.55 + 0.45*exp(-dot(dp, dp)/0.05), uPtr.z);
+    col += vec3(1.0, 0.62, 0.28)*0.10*near(p, 0.03);
+  }
   // Lumisade neljässä kerroksessa: kaksi lähintä ovat kiteitä, kolmas pisteitä, kaukaisin kimaltavaa timanttipölyä.
+  // Kekrissä kolme lähintä kerrosta ovat syksyn lehtiä, jotka putoavat hitaammin ja pyörivät.
   vec3 flk = mix(vec3(0.38, 0.55, 0.86), vec3(0.86, 0.94, 1.00), uDark), zap = mix(vec3(0.15, 0.45, 1.00), vec3(0.45, 0.82, 1.00), uDark);
   float np = near(p, 0.02);
   for (int i = 0; i < 4; i++){
-    float fi = float(i), sc = 4.5 * pow(1.85, fi), sp = 0.11 / (1.0 + 0.55*fi);
+    if (uKekri > 0.5 && i == 3) continue;
+    float fi = float(i), sc = 4.5 * pow(1.85, fi), sp = 0.11 / (1.0 + 0.55*fi) * (1.0 - 0.45*uKekri);
     vec2 g = p * sc + vec2(0.6*sin(0.21*t + 1.3*fi) + 0.02*t*sc, t * sp * sc);
     vec2 id = floor(g), f = fract(g) - 0.5;
     if (h21(id + 31.7*fi) > 0.12 + 0.08*fi) continue;
     float h2 = h21(id*1.7 + 3.3 + fi), h3 = h21(id*2.3 + 9.1 + fi);
     float r = i < 2 ? mix(0.11, 0.20, h3) : 0.10, pc = px * sc;
-    vec2 q = f - (vec2(h2, h3) - 0.5) * (1.0 - 2.0*r - 0.12) - vec2(0.04*sin(t*(0.6 + h2) + 6.28*h3), 0.0);
+    vec2 q = f - (vec2(h2, h3) - 0.5) * (1.0 - 2.0*r - 0.12) - vec2((0.04 + 0.03*uKekri)*sin(t*(0.6 + h2) + 6.28*h3), 0.0);
     float v;
     vec3 c = mix(flk, zap, np);
-    if (i < 2){ float an = t*(h2 - 0.5)*0.9 + 6.28*h3; q = mat2(cos(an), -sin(an), sin(an), cos(an)) * q; v = star6(q, r, pc) * (i == 0 ? 0.75 : 0.5); }
+    if (uKekri > 0.5){
+      float an = t*(h2 - 0.5)*1.8 + 6.28*h3; q = mat2(cos(an), -sin(an), sin(an), cos(an)) * q;
+      float u = q.x / r, hw = 0.42*r*pow(max(1.0 - u*u, 0.0), 0.9);
+      v = smoothstep(pc, 0.0, abs(q.y) - hw) * step(abs(u), 1.0) * (i == 0 ? 0.95 : 0.8);
+      c = h2 < 0.33 ? vec3(0.90, 0.48, 0.16) : h2 < 0.66 ? vec3(0.74, 0.28, 0.10) : vec3(0.96, 0.68, 0.26);
+    }
+    else if (i < 2){ float an = t*(h2 - 0.5)*0.9 + 6.28*h3; q = mat2(cos(an), -sin(an), sin(an), cos(an)) * q; v = star6(q, r, pc) * (i == 0 ? 0.75 : 0.5); }
     else if (i == 2) v = smoothstep(0.05 + pc, 0.0, length(q)) * 0.5;
     else {
       v = (max(smoothstep(pc*1.2, 0.0, abs(q.x)) * smoothstep(0.35, 0.0, abs(q.y)), smoothstep(pc*1.2, 0.0, abs(q.y)) * smoothstep(0.35, 0.0, abs(q.x))) * 0.8
@@ -257,7 +388,7 @@ void main(){
       gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
       const a = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
-      for (const n of ['uRes', 'uTime', 'uPtr', 'uDark', 'uHz', 'uWin']) U[n] = gl.getUniformLocation(pr, n);
+      for (const n of ['uRes', 'uTime', 'uPtr', 'uDark', 'uHz', 'uWin', 'uXmas', 'uKekri']) U[n] = gl.getUniformLocation(pr, n);
     };
     const resize = () => {
       w = sec.clientWidth; h = sec.clientHeight; dpr = Math.min(devicePixelRatio || 1, 1.5);
@@ -269,7 +400,8 @@ void main(){
     const draw = (t) => {
       gl.uniform2f(U.uRes, cv.width, cv.height); gl.uniform1f(U.uTime, t);
       gl.uniform3f(U.uPtr, st.x / h, 1 - st.y / h, st.a);
-      gl.uniform1f(U.uDark, theme.current() === 'light' ? 0 : 1); gl.uniform1f(U.uWin, theme.current() === 'winter' ? 1 : 0);
+      const th = theme.current(); gl.uniform1f(U.uDark, th === 'light' ? 0 : 1); gl.uniform1f(U.uWin, th === 'winter' ? 1 : 0);
+      gl.uniform1f(U.uXmas, th === 'christmas' ? 1 : 0); gl.uniform1f(U.uKekri, th === 'kekri' ? 1 : 0);
       gl.uniform1f(U.uHz, w < 700 ? 0.6 : 0.3);
       gl.drawArrays(gl.TRIANGLES, 0, 3); st.frames++;
     };
@@ -545,8 +677,8 @@ void main(){
     const release = () => { clearLine(); st.focusEl = null; st.focus = null; st.spoken = false; st.aboveSince = 0; st.orbit = false; };
     const say = (i) => {
       // Projektin keskustelun päättää vaihtuva huomio Infinitestä
-      // Talvessa linnut esittelevät itsensä linnuiksi; muut repliikit ovat samat
-      if (!i) { st.lines = (D.points[st.focus === 'welcome' && theme.current() === 'winter' ? 'welcomeB' : st.focus] || { lines: [] }).lines.map((x) => ({ ...x, point: st.focus }));
+      // Joukolla voi olla kohtaan omat repliikkinsa (welcomeB, heroE …): linnut esittelevät itsensä linnuiksi, tontut tontuiksi
+      if (!i) { st.lines = (D.points[st.focus + SUF[theme.cast()]] || D.points[st.focus] || { lines: [] }).lines.map((x) => ({ ...x, point: st.focus }));
         if (st.focus.startsWith('p-')) { const F = D.points.infinite.lines; st.lines.push({ ...F[st.fact++ % F.length], point: 'infinite' }); } }
       const lines = st.lines;
       if (i >= lines.length) { st.speaking = false; st.line = null; renderLine(); if (st.focus === 'welcome') { endWelcome(); st.focus = st.focusEl.dataset.attn; } return; }
@@ -696,6 +828,134 @@ void main(){
       }
       ctx.restore();
     };
+    // Joulun tontut ja Kekrin haamut: design-taulun SVG-muodot Path2D-polkuina (yksiköt 240 × 200, keskipiste 124, 118).
+    // Liike ja huomio ovat samat kuin madoilla; jalat, lakit, helmat ja jäljet liikkuvat piirrossa.
+    const P2 = {};
+    const pth = (d) => P2[d] || (P2[d] = new Path2D(d));
+    const fp = (d, c) => { ctx.fillStyle = c; ctx.fill(pth(d)); };
+    const sk = (d, c, lw) => { ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.stroke(pth(d)); };
+    const ov = (x, y, rx, ry, c, rot = 0) => { ctx.beginPath(); ctx.ellipse(x, y, rx, ry, rot, 0, Math.PI * 2); ctx.fillStyle = c; ctx.fill(); };
+    const around = (x, y, a, fn) => { ctx.save(); ctx.translate(x, y); ctx.rotate(a); ctx.translate(-x, -y); fn(); ctx.restore(); };
+    const spark = (x, y, r) => { const k = r * 0.18; ctx.beginPath(); ctx.moveTo(x, y - r); ctx.quadraticCurveTo(x + k, y - k, x + r, y); ctx.quadraticCurveTo(x + k, y + k, x, y + r); ctx.quadraticCurveTo(x - k, y + k, x - r, y); ctx.quadraticCurveTo(x - k, y - k, x, y - r); ctx.fill(); };
+    // Suunta, koko ja varjo kuten linnuilla: puhuja kasvaa 25 %, ja varjo jää maahan
+    const pose = (w, shadowRx) => {
+      const dl = Math.hypot(w.dir[0], w.dir[1]) || 1; if (Math.abs(w.dir[0]) > 0.25 * dl) w.face = Math.sign(w.dir[0]);
+      const sc = 0.27 * S * (1 + 0.25 * w.lift);
+      ctx.beginPath(); ctx.ellipse(w.x, w.y + 68 * sc, shadowRx * sc, 6 * sc, 0, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0,0,0,0.28)'; ctx.fill();
+      return sc;
+    };
+    const ELF = { loiste: 'kurkki', hionta: 'hoyla', kirkkaus: 'loyly' }, GHOST = { loiste: 'poo', hionta: 'lyhty', kirkkaus: 'usva' };
+    const drawElf = (w, t) => {
+      const kind = ELF[w.who], still = reduced(), talk = st.line && st.line.who === w.who ? 1 : 0, v = Math.hypot(w.vx, w.vy), mv = w.moving && !still ? 1 : 0;
+      const sc = pose(w, 40), stepA = Math.sin(w.phase * 2) * 0.45 * mv, bob = kind === 'kurkki' ? Math.abs(Math.sin(w.phase * 2)) * 8 * mv : Math.abs(stepA) * 4;
+      const tr = 0.35 + 0.65 * Math.min(1, v / 80), body = { kurkki: '#c8312b', hoyla: '#2f7d4f', loyly: '#d9d2c3' }[kind], dark = { kurkki: '#9c241f', hoyla: '#235f3c', loyly: '#b3aa96' }[kind];
+      ctx.save(); ctx.translate(w.x, w.y - w.hop - 6 * S * w.lift - bob * sc); ctx.scale(w.face * sc, sc); ctx.translate(-124, -118);
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      // Jälki vahvistuu vauhdissa: Kurkilla kultaisia kipinöitä, Höylällä lastuja, Löylyllä nousevaa höyryä
+      if (kind === 'kurkki') { ctx.fillStyle = '#f3cf63'; [[52, 112, 7, 0.95], [30, 138, 5, 0.8], [64, 152, 4, 0.7], [18, 98, 4, 0.6], [40, 80, 3, 0.5]].forEach(([x, y, r, o], i) => { ctx.globalAlpha = o * tr * (still ? 1 : 0.6 + 0.4 * Math.sin(t * 6 + i)); spark(x, y, r); }); }
+      else if (kind === 'hoyla') { ctx.globalAlpha = tr; [[56, 118, 1], [32, 144, 0.8], [22, 102, 0.7]].forEach(([x, y, k], i) => around(x + 5, y - 4, still ? 0 : t * 0.8 + i, () => sk(`M${x} ${y} c-7 -9 7 -16 12 -7 c4 7 -5 12 -9 7 c-3 -4 2 -7 4 -4`, '#d9a066', 3 * k))); }
+      else { [[60, 106, 9, 0.22], [42, 88, 12, 0.18], [22, 68, 15, 0.14]].forEach(([x, y, r, o], i) => { const up = still ? 0 : (t * 8 + i * 9) % 18; ctx.globalAlpha = tr * (1 - up / 18); ctx.beginPath(); ctx.arc(x, y - up, r, 0, Math.PI * 2); ctx.fillStyle = `rgba(240,244,250,${o})`; ctx.fill(); ctx.strokeStyle = `rgba(240,244,250,${o + 0.12})`; ctx.lineWidth = 1.5; ctx.stroke(); }); }
+      ctx.globalAlpha = 1;
+      for (const [hx, x1, y1, bx, by, a] of [[112, 106, 173, 110, 176, stepA], [132, 138, 171, 143, 174, -stepA]]) around(hx, 150, a, () => { ctx.strokeStyle = '#3a2a22'; ctx.lineWidth = 7; ctx.beginPath(); ctx.moveTo(hx, 150); ctx.lineTo(x1, y1); ctx.stroke(); ov(bx, by, 11, 6, '#2b1d16'); });
+      fp('M92 152 C92 122 102 104 122 102 C142 104 152 122 152 152 C140 161 104 161 92 152 Z', body);
+      ctx.globalAlpha = 0.6; fp('M92 152 C92 124 100 108 114 103 C104 116 102 134 104 157 C98 156 94 154 92 152 Z', dark); ctx.globalAlpha = 1;
+      if (kind === 'hoyla') { fp('M122 110 C138 112 148 126 150 150 C140 156 128 157 120 156 Z', '#8a5a36'); sk('M128 128 L144 128', '#6a4227', 2); }
+      else { sk('M95 136 C110 141 134 141 149 136', '#2b1d16', 6); ctx.fillStyle = '#f0c44c'; ctx.fillRect(126, 134, 9, 8); }
+      if (kind === 'loyly') sk('M110 106 L148 142', '#f4f1ea', 7);
+      sk('M138 114 C150 118 156 126 160 134', dark, 9);
+      // Puhuessa Höylä nostaa vasaraa ja Löylyn vihta heilahtaa
+      const pa = kind === 'hoyla' ? (talk && !still ? -0.7 * Math.abs(Math.sin(t * 7)) : 0) : kind === 'loyly' ? (still ? 0 : talk ? 0.45 * Math.sin(t * 5) : 0.08 * Math.sin(t * 1.5)) : 0;
+      around(162, 136, pa, () => {
+        if (kind === 'kurkki') { ctx.fillStyle = '#2f8a4e'; ctx.fillRect(150, 136, 25, 21); ctx.fillStyle = '#f3cf63'; ctx.fillRect(160.5, 136, 4, 21); ctx.fillRect(150, 144.5, 25, 4); ov(157, 133, 5.5, 3.5, '#f3cf63', -0.35); ov(168, 133, 5.5, 3.5, '#f3cf63', 0.35); }
+        else if (kind === 'hoyla') { sk('M160 142 L175 110', '#a06b3e', 4.5); fp('M165 106 L184 114 L181 121 L162 113 Z', '#9aa6b2'); sk('M165 106 L184 114 L181 121 L162 113 Z', '#6c7682', 1); }
+        else { sk('M160 142 L168 118', '#8a6a43', 4); for (const [x, y, rx, ry, r, c] of [[170, 106, 9, 5, -30, '#5aa65a'], [179, 113, 8, 4.5, 10, '#3f8a45'], [166, 97, 8, 4.5, -60, '#74c072'], [181, 101, 7, 4, -20, '#5aa65a']]) ov(x, y, rx, ry, c, r * Math.PI / 180); }
+      });
+      ov(162, 136, 5.5, 5.5, '#f1c6a2');
+      if (kind === 'hoyla') { sk('M108 80 L120 66', '#f2c94c', 4); sk('M120 66 L123 63', '#3a2a22', 3); }
+      ov(114, 88, 5, 7, '#e2ac86'); ov(128, 86, 21, 21, '#f1c6a2');
+      ctx.globalAlpha = 0.55; ov(139, 95, 5, 5, '#f29a8f'); ctx.globalAlpha = 1;
+      if (kind === 'hoyla') { fp('M118 94 C120 110 132 116 145 111 C151 107 151 101 149 97 C141 101 128 101 118 94 Z', '#7a4a2a'); fp('M138 97 Q145 92 153 97 Q146 101 138 97 Z', '#6b3f23'); }
+      else if (kind === 'loyly') {
+        around(134, 100, talk && !still ? 0.06 * Math.sin(t * 9) : 0, () => { fp('M114 92 C114 118 124 142 140 148 C147 134 152 116 153 99 C144 104 128 104 114 92 Z', '#f3f1ec'); sk('M128 112 C130 124 134 134 138 140 M138 108 C141 120 142 128 143 136', '#d8d3c8', 1.4); });
+        fp('M136 98 Q146 92 156 99 Q146 103 136 98 Z', '#e7e3da');
+      } else {
+        ctx.fillStyle = '#b06a4a'; for (const [x, y] of [[133, 92], [136.5, 96], [130.5, 96.5]]) { ctx.beginPath(); ctx.arc(x, y, 0.9, 0, Math.PI * 2); ctx.fill(); }
+        sk(talk && !still && Math.sin(t * 9) > 0 ? 'M137 100 Q144 109 151 99' : 'M137 101 Q144 106 151 100', '#5a2a1a', 2);
+      }
+      ov(148, 90, 6.5, 6.5, '#e8928a'); ctx.globalAlpha = 0.6; ov(146, 88, 1.6, 1.6, '#ffffff'); ctx.globalAlpha = 1;
+      if (kind === 'loyly') { sk('M134 82 Q138 79 142 82', '#2a1d14', 2); sk('M132 75 Q138 71 145 75', '#f3f1ec', 3.5); }
+      else { ov(139, 82, 2.6, 3.2, '#1b1410'); ov(140, 81, 0.9, 0.9, '#ffffff'); sk('M134 75 Q139 72 144 75', '#6b4a33', 2); }
+      if (kind === 'hoyla') {
+        ctx.fillStyle = talk && !still && Math.sin(t * 4) > 0.6 ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.08)'; ctx.beginPath(); ctx.arc(139, 82, 6, 0, Math.PI * 2); ctx.fill(); // silmälasit välähtävät
+        sk('M145 82 A6 6 0 1 0 133 82 A6 6 0 1 0 145 82', '#c9b37a', 1.6); sk('M133 82 L116 84', '#c9b37a', 1.4);
+      }
+      // Lakki heiluu; puhuessaan Kurkki nostaa lakkiaan ja tiuku kilahtaa
+      const capA = still ? 0 : 0.05 * Math.sin(t * 3 + w.i), up = kind === 'kurkki' ? talk * (still ? 1 : 0.5 + 0.5 * Math.sin(t * 6)) : 0;
+      ctx.save(); ctx.translate(0, -8 * up); around(128, 74, capA - 0.22 * up, () => {
+        if (kind === 'kurkki') {
+          fp('M104 76 C102 56 84 36 60 28 C92 34 128 48 152 72 Z', '#d63a32'); ctx.globalAlpha = 0.5; fp('M104 76 C103 60 90 44 70 33 C88 42 98 58 112 74 Z', '#a8281f'); ctx.globalAlpha = 1;
+          sk('M102 78 Q128 64 154 74', '#f4efe6', 10);
+          around(60, 26, still ? 0 : 0.3 * Math.sin(t * 9), () => { ctx.strokeStyle = '#f0c44c'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.arc(60, 22.5, 2.2, 0, Math.PI * 2); ctx.stroke(); ov(58, 30, 7, 7, '#f0c44c'); sk('M54 32 L62 32', '#8a6a1f', 1.6); ctx.globalAlpha = 0.8; ov(55.5, 27, 1.8, 1.8, '#ffffff'); ctx.globalAlpha = 1; });
+        } else if (kind === 'hoyla') { fp('M104 76 C100 54 116 40 134 40 C153 40 167 50 168 63 C160 57 151 59 152 72 Z', '#d63a32'); sk('M102 78 Q128 64 154 74', '#f4efe6', 10); ov(169, 65, 7, 7, '#f4efe6'); }
+        else { fp('M104 78 C104 56 117 46 130 46 C144 46 155 57 155 76 Z', '#8f8a82'); sk('M112 60 C120 54 140 54 148 60', '#a39e95', 1.4); ov(130, 78, 31, 6, '#7b766e'); fp('M116 68 Q120 62 124 68 Q120 72 116 68 Z', '#6bb36b'); }
+      }); ctx.restore();
+      ctx.restore();
+    };
+    const drawGhost = (w, t, c) => {
+      const kind = GHOST[w.who], still = reduced(), talk = st.line && st.line.who === w.who ? 1 : 0, v = Math.hypot(w.vx, w.vy), mv = w.moving && !still ? 1 : 0;
+      const sc = pose(w, kind === 'usva' ? 26 : 30), fl = still ? 0 : Math.sin(t * 2 + w.i * 1.7) * 5, tr = 0.35 + 0.65 * Math.min(1, v / 80);
+      ctx.save(); ctx.translate(w.x, w.y - w.hop - 6 * S * w.lift + fl * sc); ctx.scale(w.face * sc, sc);
+      if (kind === 'poo' && mv) ctx.rotate(0.18 * Math.sin(w.phase)); // Pöö keikkuu lentäessään
+      ctx.translate(-124, -118); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      // Helma aaltoilee: kaarevat lovet oikealta vasemmalle
+      const hem = (b, x0, x1, y, n, amp) => { const dx = (x1 - x0) / n; for (let k = 0; k < n; k++) { const xa = x0 + dx * k; b.quadraticCurveTo(xa + dx / 2, y + 10 + (still ? 0 : Math.sin(t * 5 + k * 1.4 + w.i) * amp), xa + dx, y); } };
+      if (kind === 'poo') {
+        ctx.fillStyle = c; [[62, 126, 4, 0.75], [46, 142, 3, 0.55], [30, 118, 2.5, 0.45], [52, 104, 2, 0.4]].forEach(([x, y, r, o], i) => { ctx.globalAlpha = o * tr * (still ? 1 : 0.6 + 0.4 * Math.sin(t * 5 + i)); ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill(); }); ctx.globalAlpha = 1;
+        const b = new Path2D(); b.moveTo(84, 132); b.bezierCurveTo(84, 84, 100, 62, 124, 62); b.bezierCurveTo(148, 62, 164, 84, 164, 132); b.lineTo(164, 150); hem(b, 164, 84, 150, 4, 3); b.closePath();
+        ctx.fillStyle = '#f6f4fb'; ctx.fill(b); ctx.strokeStyle = 'rgba(140,120,180,0.45)'; ctx.lineWidth = 1.5; ctx.stroke(b);
+        fp('M84 132 C84 100 92 78 106 68 C96 86 94 110 96 152 C92 158 86 152 84 140 Z', '#e3ddf0');
+        around(162, 114, talk && !still ? 0.4 * Math.sin(t * 8) : 0, () => { fp('M162 112 C174 104 183 110 177 118 C173 122 167 122 162 119 Z', '#f6f4fb'); sk('M162 112 C174 104 183 110 177 118 C173 122 167 122 162 119 Z', 'rgba(140,120,180,0.45)', 1.5); });
+        ov(134, 100, 6, 9, '#1a1024'); ov(154, 100, 5, 8, '#1a1024'); ov(136, 96, 1.8, 1.8, '#ffffff'); ov(156, 96, 1.5, 1.5, '#ffffff');
+        const m = talk && !still ? 0.55 + 0.45 * Math.abs(Math.sin(t * 7)) : 1; // "pöö"
+        ov(146, 123, 6 * (0.8 + 0.2 * m), 8 * m, '#1a1024'); ov(146, 127 - 4 * (1 - m), 3.5, 3 * m, '#e0607a');
+        ctx.globalAlpha = 0.5; ov(124, 114, 4.5, 4.5, '#f3a6c0'); ctx.globalAlpha = 1;
+        // Kurpitsahattu hyppää puhuessa
+        ctx.save(); ctx.translate(0, talk && !still ? -6 * Math.abs(Math.sin(t * 8)) : 0); around(124, 62, -0.24, () => {
+          ov(124, 56, 19, 13, '#f08a24'); ctx.strokeStyle = '#c96a12'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.ellipse(124, 56, 9, 13, 0, 0, Math.PI * 2); ctx.stroke(); sk('M124 43 L124 69', '#c96a12', 1.2);
+          sk('M123 44 Q124 36 130 34', '#4f7a2a', 4); fp('M128 38 Q136 32 140 40 Q132 42 128 38 Z', '#6a9a3a');
+        }); ctx.restore();
+      } else if (kind === 'lyhty') {
+        // Lyhty lepattaa ja kirkastuu puhuessa
+        const fk = still ? 0 : 0.08 * (Math.sin(t * 13) + Math.sin(t * 7.3)), gr = 64 + 20 * talk;
+        const g = ctx.createRadialGradient(188, 144, 0, 188, 144, gr); g.addColorStop(0, `rgba(255,200,90,${Math.min(1, 0.75 * (1 + fk) * (0.8 + 0.4 * talk))})`); g.addColorStop(1, 'rgba(255,140,40,0)');
+        ctx.fillStyle = g; ctx.fillRect(188 - gr, 144 - gr, gr * 2, gr * 2);
+        ctx.fillStyle = '#ffb347'; [[64, 150, 3, 0.8], [48, 132, 2.2, 0.6], [36, 152, 1.8, 0.5], [58, 116, 1.6, 0.4]].forEach(([x, y, r, o], i) => { const up = still ? 0 : (t * 14 + i * 7) % 20; ctx.globalAlpha = o * tr * (1 - up / 20); ctx.beginPath(); ctx.arc(x, y - up, r, 0, Math.PI * 2); ctx.fill(); }); ctx.globalAlpha = 1;
+        const b = new Path2D(); b.moveTo(92, 162); b.bezierCurveTo(88, 122, 92, 84, 110, 64); b.bezierCurveTo(120, 52, 136, 50, 146, 60); b.bezierCurveTo(162, 76, 166, 114, 164, 162); hem(b, 164, 92, 164, 4, 3); b.closePath();
+        ctx.fillStyle = '#d8d2ea'; ctx.fill(b); ctx.strokeStyle = 'rgba(150,130,190,0.5)'; ctx.lineWidth = 1.5; ctx.stroke(b);
+        fp('M92 162 C88 124 94 88 110 66 C102 90 100 124 104 170 C98 174 94 168 92 162 Z', '#c3bbdc');
+        fp('M118 72 C126 60 146 62 152 78 C156 92 150 108 138 112 C124 114 114 100 118 72 Z', '#241634');
+        for (const [x, rx] of [[134, 4.5], [148, 4]]) { ctx.globalAlpha = 0.22 * (1 + fk); ov(x, 88, 9, 9, '#ffd75e'); ctx.globalAlpha = 1; ov(x, 88, rx, 3, '#ffd75e'); }
+        fp('M146 110 C162 114 172 122 178 132 C172 137 164 133 156 127 Z', '#cfc8e2');
+        ov(188, 148, 21, 17, '#f08a24'); ctx.strokeStyle = '#c96a12'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.ellipse(188, 148, 10, 17, 0, 0, Math.PI * 2); ctx.stroke();
+        sk('M187 131 Q188 125 193 123', '#4f7a2a', 3.5);
+        const face = `rgba(255,226,122,${Math.min(1, 0.85 + fk + 0.15 * talk)})`;
+        fp('M177 144 L183 137 L187 145 Z M190 145 L194 137 L200 144 Z', face); fp('M176 153 L180 150 L184 154 L188 150 L192 154 L196 150 L200 153 L195 160 L181 160 Z', face);
+      } else {
+        // Usva: häntä kiemurtelee kuin usva, ja puhuessa se hehkuu sisältä ja häntä kiertyy enemmän
+        [[64, 170, 30, 6, 0.13], [32, 152, 22, 5, 0.1], [100, 178, 24, 5, 0.1]].forEach(([x, y, rx, ry, o], i) => { ctx.globalAlpha = tr; ov(x + (still ? 0 : Math.sin(t * 0.8 + i) * 6), y, rx, ry, `rgba(230,225,250,${o})`); }); ctx.globalAlpha = 1;
+        const A = (still ? 0 : 1) * (1 + 0.5 * talk), wv = (k) => Math.sin(t * 2 + k * 0.8) * A;
+        const b = new Path2D(); b.moveTo(120, 74); b.bezierCurveTo(124, 52, 156, 48, 168, 66); b.bezierCurveTo(180, 86, 172, 114, 152, 128);
+        b.bezierCurveTo(130, 142, 106, 138 + 2 * wv(0), 86, 148 + 2 * wv(0)); b.bezierCurveTo(68, 157 + 4 * wv(1), 52, 152 + 6 * wv(2), 38, 140 + 8 * wv(3));
+        b.bezierCurveTo(58, 144 + 6 * wv(2), 74, 136 + 4 * wv(1), 88, 122); b.bezierCurveTo(102, 108, 112, 94, 120, 74); b.closePath();
+        const g = ctx.createLinearGradient(170, 70, 40, 140); g.addColorStop(0, 'rgba(242,238,250,0.95)'); g.addColorStop(0.55, 'rgba(222,212,246,0.72)'); g.addColorStop(1, 'rgba(200,190,240,0)');
+        ctx.fillStyle = g; ctx.fill(b);
+        ov(156, 82, 24, 24, `rgba(255,255,255,${0.12 + (still ? 0 : 0.16 * talk * (0.5 + 0.5 * Math.sin(t * 4)))})`);
+        sk('M150 114 C162 118 172 114 178 106', 'rgba(242,238,250,0.75)', 4);
+        sk('M146 78 Q150 74 154 78 M160 78 Q164 74 168 78', '#2a1b3a', 2.4);
+        sk(talk && !still && Math.sin(t * 7) > 0 ? 'M153 91 Q157 96 161 91' : 'M153 92 Q157 94 161 92', '#2a1b3a', 2);
+      }
+      ctx.restore();
+    };
     // Kangas rajataan matojen ympärille; koko vaihtuu vain, kun madot eivät enää mahdu tai tilaa on reilusti liikaa.
     const fit = () => {
       let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
@@ -712,12 +972,12 @@ void main(){
     const draw = (now) => {
       const P = pal(), lite = theme.current() === 'light', t = reduced() ? 0 : now / 1000;
       fit(); ctx.setTransform(dpr, 0, 0, dpr, -box.x * dpr, -box.y * dpr); ctx.clearRect(box.x, box.y, box.w, box.h);
-      const birds = theme.current() === 'winter';
-      for (const w of worms) if (birds) drawBird(w, t, P[w.who]); else drawWorm(w, t, P[w.who], lite);
+      const cast = theme.cast();
+      for (const w of worms) if (cast === 'birds') drawBird(w, t, P[w.who]); else if (cast === 'elves') drawElf(w, t, P[w.who]); else if (cast === 'ghosts') drawGhost(w, t, P[w.who]); else drawWorm(w, t, P[w.who], lite);
       // Uuden kohteen huomaaminen: jokaisen madon pään yllä ponnahtaa vuorollaan "!"
       for (const w of worms) {
         const tn = now - st.notice - w.i * 110; if (tn < 0 || tn > 900) continue;
-        const k = Math.min(1, tn / 180) - 1, s = 1 + 2.7 * k ** 3 + 1.7 * k ** 2, [hx, hy] = w.segs[0], y = hy - 24 * S - w.hop - 14 * S * w.lift;
+        const k = Math.min(1, tn / 180) - 1, s = 1 + 2.7 * k ** 3 + 1.7 * k ** 2, [hx, hy] = w.segs[0], y = hy - (cast === 'elves' ? 36 : cast === 'ghosts' ? 30 : 24) * S - w.hop - 14 * S * w.lift;
         ctx.globalAlpha = tn > 700 ? 1 - (tn - 700) / 200 : 1;
         dot(hx, y, 8 * S * s, rgba(P[w.who], 0.95));
         ctx.fillStyle = lite ? '#fff' : '#0b1020'; ctx.font = `700 ${Math.max(1, Math.round(12 * S * s))}px system-ui, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
@@ -781,7 +1041,7 @@ void main(){
       }
       draw(now); placeBubble();
     };
-    const label = () => { const b = theme.current() === 'winter' ? 'B' : ''; $('.lbl', toggle).textContent = st.hidden ? T['show' + b] : T['hide' + b]; };
+    const label = () => { const b = SUF[theme.cast()]; $('.lbl', toggle).textContent = st.hidden ? T['show' + b] : T['hide' + b]; };
     const setHidden = (h) => {
       st.hidden = h; toggle.setAttribute('aria-pressed', String(h)); label();
       store.set('infinite-crew', h ? 'off' : 'on'); if (h) { endWelcome(); release(); }
@@ -799,7 +1059,7 @@ void main(){
     resize(); renderLine(); setHidden(st.hidden); requestAnimationFrame(tick);
     return { thresholds: TH, setHidden, get hidden() { return st.hidden; }, get focus() { return st.focus; }, get speaking() { return st.speaking; },
       get line() { return st.line && { ...st.line }; }, get log() { return st.log.map((x) => ({ ...x, time: x.time.toISOString() })); },
-      get arrived() { return st.arrived; }, get mode() { return st.mode; }, get welcome() { return st.welcome; }, get kind() { return theme.current() === 'winter' ? 'birds' : 'worms'; },
+      get arrived() { return st.arrived; }, get mode() { return st.mode; }, get welcome() { return st.welcome; }, get kind() { return theme.cast(); },
       get ring() { if (!st.ring) return null; const { el: _, ...r } = st.ring; return r; }, get noticed() { return st.notice; }, get u() { return st.u; },
       get bugs() { return worms.map((w) => ({ who: w.who, x: Math.round(w.x), y: Math.round(w.y), segs: w.segs.length, lift: +w.lift.toFixed(2) })); },
       get points() { return $$('[data-attn]').map((e) => ({ id: e.dataset.attn, A: +(AV.get(e) || 0).toFixed(3) })); } };
@@ -901,13 +1161,57 @@ void main(){
       return s;
     };
     const rnd = mulberry(7);
-    // Tarina: meteoriparvi jääplaneetan kaaren yllä
-    const meteor = canvasScape($('.scape-meteor'), (s) => ({ stars: Array.from({ length: 140 }, () => [rnd() * s.w, rnd() * s.h * 0.75, rnd() * 1.2 + 0.3, rnd() * 6]), m: [] }),
+    // Joulun reki ja Kekrin lepakot ja lehdet: muodot ovat design-taulun SVG-polkuja
+    const SLEIGH = { body: new Path2D('M0 0 L34 0 Q40 0 40 -6 L40 -16 L30 -16 L26 -8 L6 -8 Z'), runner: new Path2D('M-4 4 L40 4 Q48 4 48 -2'), antler: new Path2D('M0 -3 l-3 -7 m3 7 l3 -7 m-5 3 l-3 -2') };
+    const BAT = new Path2D('M0 -2 C-4 -9 -14 -12 -26 -7 C-22 -3 -21 1 -22 5 C-17 2 -13 3 -10 7 C-8 3 -5 2 -2 4 Z M0 -2 C4 -9 14 -12 26 -7 C22 -3 21 1 22 5 C17 2 13 3 10 7 C8 3 5 2 2 4 Z M-3.4 0 A3.4 5 0 1 0 3.4 0 A3.4 5 0 1 0 -3.4 0 Z');
+    const LEAF = new Path2D('M0 -9 C6 -5 7 3 0 9 C-7 3 -6 -5 0 -9 Z');
+    const LEAFC = ['#e0782a', '#c2501f', '#f2a541', '#8a3b1a'];
+    const drawSleigh = (ctx, x, y, t) => {
+      ctx.save(); ctx.translate(x, y); ctx.lineCap = 'round';
+      for (let k = 1; k <= 10; k++) { ctx.fillStyle = rgba([243, 207, 99], 0.75 - k * 0.07); ctx.beginPath(); ctx.arc(-k * 10, 2 + Math.sin(t * 3 + k) * 3, 1.6 + (k % 3) * 0.6, 0, Math.PI * 2); ctx.fill(); }
+      ctx.fillStyle = '#c8312b'; ctx.fill(SLEIGH.body); ctx.strokeStyle = '#f0c44c'; ctx.lineWidth = 2; ctx.stroke(SLEIGH.runner);
+      ctx.fillStyle = '#8a5a36'; ctx.beginPath(); ctx.ellipse(12, -14, 9, 7, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#f0c44c'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(40, -12); ctx.lineTo(70, -10); ctx.stroke();
+      for (const dx of [70, 96]) {
+        const lg = Math.sin(t * 10 + dx) * 3;
+        ctx.fillStyle = '#8a5a36'; ctx.beginPath(); ctx.ellipse(dx + 8, -10, 11, 5, 0, 0, Math.PI * 2); ctx.arc(dx + 19, -14, 3.5, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = '#8a5a36'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(dx + 2, -8); ctx.lineTo(dx - lg, 0); ctx.moveTo(dx + 14, -8); ctx.lineTo(dx + 17 + lg, 0); ctx.stroke();
+        ctx.save(); ctx.translate(dx + 18, -14); ctx.strokeStyle = '#d8c3a0'; ctx.lineWidth = 1.3; ctx.stroke(SLEIGH.antler); ctx.restore();
+      }
+      ctx.restore();
+    };
+    const drawPumpkin = (ctx, x, y, r, t) => {
+      const g = ctx.createRadialGradient(x, y, 0, x, y, r * 3); g.addColorStop(0, 'rgba(255,190,80,0.55)'); g.addColorStop(1, 'rgba(255,140,40,0)');
+      ctx.fillStyle = g; ctx.fillRect(x - r * 3, y - r * 3, r * 6, r * 6);
+      ctx.fillStyle = '#ef8a26'; ctx.beginPath(); ctx.ellipse(x, y, r * 1.25, r, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = rgba([255, 224, 122], 0.8 + 0.2 * Math.sin(t * 11 + x));
+      ctx.beginPath(); ctx.moveTo(x - r * 0.7, y - r * 0.2); ctx.lineTo(x - r * 0.4, y - r * 0.6); ctx.lineTo(x - r * 0.15, y - r * 0.15); ctx.moveTo(x + r * 0.15, y - r * 0.15); ctx.lineTo(x + r * 0.4, y - r * 0.6); ctx.lineTo(x + r * 0.7, y - r * 0.2); ctx.fill();
+      ctx.fillRect(x - r * 0.6, y + r * 0.15, r * 1.2, r * 0.3);
+    };
+    // Tarina: meteoriparvi jääplaneetan kaaren yllä. Joulussa taivaalla liitää reki, Kekrissä lepakot ja lehdet.
+    const meteor = canvasScape($('.scape-meteor'), (s) => ({ stars: Array.from({ length: 140 }, () => [rnd() * s.w, rnd() * s.h * 0.75, rnd() * 1.2 + 0.3, rnd() * 6]), m: [], sl: null,
+      bats: Array.from({ length: 4 }, (_, i) => ({ x: rnd() * s.w, y: s.h * (0.12 + rnd() * 0.4), vx: (40 + rnd() * 40) * (i % 2 ? -1 : 1), ph: rnd() * 6, sc: 0.6 + rnd() * 0.5 })),
+      leaves: Array.from({ length: 16 }, () => ({ x: rnd() * s.w, y: rnd() * s.h * 0.8, vy: 18 + rnd() * 22, ph: rnd() * 6, rot: rnd() * 6, vr: (rnd() - 0.5) * 2, c: LEAFC[Math.floor(rnd() * 4)], sc: 0.6 + rnd() * 0.6 })) }),
       (ctx, s, dt, t) => {
-        const P = pal(), lite = theme.current() === 'light', d = s.data, R = s.w * 0.95, cx = s.w * 0.5, cy = s.h * 0.8 + R;
+        const P = pal(), th = theme.current(), lite = th === 'light', xmas = th === 'christmas', kekri = th === 'kekri', d = s.data, R = s.w * 0.95, cx = s.w * 0.5, cy = s.h * 0.8 + R;
         ctx.clearRect(0, 0, s.w, s.h);
         for (const [x, y, r, ph] of d.stars) { ctx.fillStyle = rgba(lite ? P.hionta : P.text, (lite ? 0.35 : 0.55) * (0.6 + 0.4 * Math.sin(t * 1.3 + ph))); ctx.fillRect(x, y, r, r); }
-        if (dt && rnd() < dt * 1.8) d.m.push({ x: s.w * (0.3 + rnd() * 0.8), y: -10, vx: -(380 + rnd() * 160), vy: 150 + rnd() * 110, life: 0 });
+        if (xmas) {
+          if (!d.sl && dt && rnd() < dt / 9) d.sl = { x: -160, y: s.h * (0.16 + rnd() * 0.22), vx: 70 + rnd() * 30 };
+          if (d.sl) { d.sl.x += d.sl.vx * dt; drawSleigh(ctx, d.sl.x, d.sl.y + Math.sin(t * 1.5) * 4, t); if (d.sl.x > s.w + 40) d.sl = null; }
+        }
+        if (kekri) {
+          for (const L of d.leaves) {
+            L.y += L.vy * dt; L.rot += L.vr * dt; if (L.y > s.h * 0.85) { L.y = -12; L.x = rnd() * s.w; }
+            ctx.save(); ctx.translate(L.x + Math.sin(t * 1.2 + L.ph) * 14, L.y); ctx.rotate(L.rot); ctx.scale(L.sc, L.sc); ctx.fillStyle = L.c; ctx.fill(LEAF); ctx.restore();
+          }
+          for (const B of d.bats) {
+            B.x += B.vx * dt; if (B.x < -40) B.x = s.w + 40; if (B.x > s.w + 40) B.x = -40;
+            ctx.save(); ctx.translate(B.x, B.y + Math.sin(t * 2 + B.ph) * 8); ctx.scale(B.sc * Math.sign(B.vx), B.sc * (0.55 + 0.45 * Math.sin(t * 12 + B.ph)));
+            ctx.fillStyle = '#12081a'; ctx.fill(BAT); ctx.strokeStyle = 'rgba(255,149,66,0.6)'; ctx.lineWidth = 1.2 / B.sc; ctx.stroke(BAT); ctx.restore();
+          }
+        }
+        if (!xmas && !kekri && dt && rnd() < dt * 1.8) d.m.push({ x: s.w * (0.3 + rnd() * 0.8), y: -10, vx: -(380 + rnd() * 160), vy: 150 + rnd() * 110, life: 0 });
         for (const m of d.m) {
           m.x += m.vx * dt; m.y += m.vy * dt; m.life += dt;
           const g = ctx.createLinearGradient(m.x, m.y, m.x - m.vx * 0.12, m.y - m.vy * 0.12), c = m.life < 1.2 ? 1 : Math.max(0, 1 - (m.life - 1.2) * 3);
@@ -916,31 +1220,51 @@ void main(){
         }
         d.m = d.m.filter((m) => m.life < 1.6 && m.y < s.h);
         const g = ctx.createRadialGradient(cx, cy, R * 0.9, cx, cy, R * 1.04);
-        // Talvessa kaari on luminen kumpu
-        const win = theme.current() === 'winter';
-        g.addColorStop(0, rgba(lite ? [205, 222, 245] : win ? [92, 112, 138] : [14, 24, 52], 1)); g.addColorStop(0.92, rgba(lite ? [225, 236, 252] : win ? [196, 212, 232] : [30, 52, 104], 1)); g.addColorStop(1, rgba(P.hionta, 0));
+        // Talvessa ja Joulussa kaari on luminen kumpu, Kekrissä tumma kumpu, jonka reunaa kuu valaisee
+        const snowy = th === 'winter' || xmas, rim = kekri ? [255, 149, 66] : P.hionta;
+        g.addColorStop(0, rgba(lite ? [205, 222, 245] : snowy ? [92, 112, 138] : kekri ? [16, 8, 24] : [14, 24, 52], 1)); g.addColorStop(0.92, rgba(lite ? [225, 236, 252] : snowy ? [196, 212, 232] : kekri ? [34, 18, 46] : [30, 52, 104], 1)); g.addColorStop(1, rgba(rim, 0));
         ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R * 1.04, 0, Math.PI * 2); ctx.fill();
-        ctx.strokeStyle = rgba(P.hionta, lite ? 0.5 : 0.8); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, R, Math.PI * 1.1, Math.PI * 1.9); ctx.stroke();
+        ctx.strokeStyle = rgba(rim, lite ? 0.5 : kekri ? 0.6 : 0.8); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, R, Math.PI * 1.1, Math.PI * 1.9); ctx.stroke();
+        // Joulun mökkien ikkunat ja Kekrin kurpitsalyhdyt kummun laella
+        for (const f of [-0.2, 0.06, 0.24]) {
+          const x = cx + f * s.w, y = cy - Math.sqrt(Math.max(0, R * R - (x - cx) ** 2));
+          if (xmas) { const w = ctx.createRadialGradient(x, y - 6, 0, x, y - 6, 16); w.addColorStop(0, 'rgba(255,198,100,0.8)'); w.addColorStop(1, 'rgba(255,170,70,0)'); ctx.fillStyle = w; ctx.fillRect(x - 16, y - 22, 32, 32); ctx.fillStyle = '#ffd27a'; ctx.fillRect(x - 3, y - 9, 6, 5); }
+          if (kekri) drawPumpkin(ctx, x, y - 6, 5, t);
+        }
       });
     // Teknologiat: virtauskenttä, jonka viivat jäävät haaleiksi jäljiksi
     const flow = canvasScape($('.scape-flow'), (s) => ({ p: Array.from({ length: 240 }, (_, i) => ({ x: rnd() * s.w, y: rnd() * s.h, life: rnd() * 6, c: i % 3 })), seeded: false }),
       (ctx, s, dt, t, first) => {
-        const P = pal(), lite = theme.current() === 'light', d = s.data, cols = [P.hionta, P.kirkkaus, P.accent];
+        // Joulussa jäljet ovat punaisia, vihreitä ja kultaisia nauhoja. Kekrissä ne nousevat höyrynä, osa padasta.
+        const P = pal(), th = theme.current(), lite = th === 'light', kekri = th === 'kekri', d = s.data;
+        const cols = th === 'christmas' ? [P.loiste, P.hionta, P.accent] : kekri ? [P.loiste, P.accent, P.kirkkaus] : [P.hionta, P.kirkkaus, P.accent];
+        const pot = { x: s.w * 0.84, y: s.h * 0.32, r: Math.min(46, s.w * 0.08) };
         const field = (x, y, tt) => 1.6 * Math.sin(0.006 * x + 0.15 * tt) + 1.6 * Math.cos(0.009 * y - 0.11 * tt) + 1.2 * Math.sin(0.003 * (x + y));
         const advance = (h, tt) => {
           ctx.save(); ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = 'rgba(0,0,0,0.06)'; ctx.fillRect(0, 0, s.w, s.h); ctx.restore();
           ctx.save(); if (!lite) ctx.globalCompositeOperation = 'lighter'; ctx.lineWidth = 1.1;
           for (const q of d.p) {
-            const a = field(q.x, q.y, tt), nx = q.x + Math.cos(a) * 42 * h, ny = q.y + Math.sin(a) * 42 * h;
+            let a = field(q.x, q.y, tt); if (kekri) a = -Math.PI / 2 + 0.85 * Math.sin(a);
+            const nx = q.x + Math.cos(a) * 42 * h, ny = q.y + Math.sin(a) * 42 * h;
             ctx.strokeStyle = rgba(cols[q.c], lite ? 0.35 : 0.45); ctx.beginPath(); ctx.moveTo(q.x, q.y); ctx.lineTo(nx, ny); ctx.stroke();
             q.x = nx; q.y = ny; q.life -= h;
-            if (q.life < 0 || q.x < -5 || q.x > s.w + 5 || q.y < -5 || q.y > s.h + 5) { q.x = rnd() * s.w; q.y = rnd() * s.h; q.life = 3 + rnd() * 5; }
+            if (q.life < 0 || q.x < -5 || q.x > s.w + 5 || q.y < -5 || q.y > s.h + 5) {
+              if (kekri && rnd() < 0.35) { q.x = pot.x + (rnd() - 0.5) * pot.r * 1.4; q.y = pot.y - pot.r * 0.1; } else { q.x = rnd() * s.w; q.y = rnd() * s.h; }
+              q.life = 3 + rnd() * 5;
+            }
           }
           ctx.restore();
         };
+        const drawPot = () => {
+          const { x, y, r } = pot;
+          ctx.fillStyle = '#07040b'; ctx.beginPath(); ctx.moveTo(x - r, y); ctx.lineTo(x + r, y); ctx.bezierCurveTo(x + r * 1.1, y + r * 0.6, x + r * 0.55, y + r * 0.78, x, y + r * 0.78); ctx.bezierCurveTo(x - r * 0.55, y + r * 0.78, x - r * 1.1, y + r * 0.6, x - r, y); ctx.fill();
+          ctx.fillStyle = '#1a1024'; ctx.fillRect(x - r * 1.15, y - r * 0.1, r * 2.3, r * 0.2);
+          for (let k = 0; k < 3; k++) { const ph = (t * 0.6 + k / 3) % 1; ctx.fillStyle = rgba(P.loiste, 0.75 * (1 - ph)); ctx.beginPath(); ctx.arc(x + (k - 1) * r * 0.5, y - r * 0.2 - ph * r * 0.5, r * (0.08 + 0.05 * k), 0, Math.PI * 2); ctx.fill(); }
+        };
         // Ensimmäinen kuva (ja reduced motion): ajetaan valmiiksi, jotta jäljet näkyvät heti
-        if (first || !d.seeded) { ctx.clearRect(0, 0, s.w, s.h); for (let i = 0; i < 90; i++) advance(1 / 30, 20 + i / 30); d.seeded = true; return; }
-        advance(dt, t);
+        if (first || !d.seeded) { ctx.clearRect(0, 0, s.w, s.h); for (let i = 0; i < 90; i++) advance(1 / 30, 20 + i / 30); d.seeded = true; }
+        else advance(dt, t);
+        if (kekri) drawPot();
       });
     mqReduce.addEventListener('change', () => { for (const s of runs.values()) s.kick(); });
     document.addEventListener('visibilitychange', () => { for (const s of runs.values()) s.kick(); });

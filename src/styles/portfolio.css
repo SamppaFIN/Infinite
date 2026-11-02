@@ -1,4 +1,4 @@
-/* Infinite – Titaani (tumma), Timantti (vaalea) ja Talvi (kaamosyö). Asettelu: kiinteä lasinen yläpalkki, osiot pinossa, Kysy-painike alakulmassa. */
+/* Infinite – Titaani (tumma), Timantti (vaalea), Talvi (kaamosyö), Joulu ja Kekri. Asettelu: kiinteä lasinen yläpalkki, osiot pinossa, Kysy-painike alakulmassa. */
 @property --rim { syntax: '<angle>'; inherits: false; initial-value: 210deg; }
 
 :root {
@@ -69,8 +69,41 @@
   --map-bg: oklch(0.15 0.02 238);
   --hero-fallback: radial-gradient(120% 60% at 70% 30%, oklch(0.55 0.15 160 / 0.5), transparent 60%), linear-gradient(180deg, oklch(0.12 0.03 245) 0%, oklch(0.20 0.05 225) 62%, oklch(0.16 0.03 235) 100%);
 }
-/* Teeman mukaan vaihtuvat tekstit: madot avaruusteemoissa, linnut Talvessa */
-:root[data-theme="winter"] .if-space, :root:not([data-theme="winter"]) .if-winter { display: none !important; }
+/* Joulu: jouluyö, kuusenvihreä pohja, kynttilänkultainen korostus ja karpalonpunainen. Neuvonantajat ovat tonttuja. */
+:root[data-theme="christmas"] {
+  color-scheme: dark;
+  --bg: oklch(0.1900 0.0280 165); --surface: oklch(0.2400 0.0320 162); --panel: oklch(0.2150 0.0300 164);
+  --line: oklch(0.3300 0.0350 160); --line-soft: oklch(0.2850 0.0330 161);
+  --text: oklch(0.9600 0.0150 85); --muted: oklch(0.8000 0.0300 100);
+  --accent: oklch(0.8600 0.1300 88); --on-accent: oklch(0.1900 0.0280 165); --chip: oklch(0.2850 0.0330 161);
+  --loiste: oklch(0.7400 0.1600 27); --hionta: oklch(0.8300 0.1300 150); --kirkkaus: oklch(0.8500 0.0600 265);
+  --thread: oklch(0.7400 0.1600 27); --other: oklch(0.3300 0.0350 160);
+  --rim-1: oklch(0.8600 0.1300 88); --rim-2: oklch(0.7400 0.1600 27); --rim-3: oklch(0.8300 0.1300 150); --rim-4: oklch(0.8500 0.0600 265); --rim-5: oklch(0.9600 0.0150 85);
+  --glass: oklch(0.2400 0.0320 162 / 0.72);
+  --band: oklch(0.8600 0.1300 88 / 0.10); --bar: oklch(0.8000 0.0300 100 / 0.35); --bar-on: oklch(0.8600 0.1300 88 / 0.75);
+  --ring-soft: oklch(0.8600 0.1300 88 / 0.35); --shadow: none;
+  --map-bg: oklch(0.15 0.025 165);
+  --hero-fallback: radial-gradient(60% 50% at 80% 20%, oklch(0.80 0.12 85 / 0.45), transparent 60%), linear-gradient(180deg, oklch(0.12 0.03 255) 0%, oklch(0.22 0.05 240) 62%, oklch(0.18 0.03 220) 100%);
+}
+/* Kekri: kurpitsakuun yö, munakoisonmusta pohja, kurpitsanoranssi korostus ja kummitusvihreä. Neuvonantajat ovat haamuja. */
+:root[data-theme="kekri"] {
+  color-scheme: dark;
+  --bg: oklch(0.1700 0.0300 305); --surface: oklch(0.2250 0.0360 305); --panel: oklch(0.2000 0.0330 305);
+  --line: oklch(0.3200 0.0450 305); --line-soft: oklch(0.2750 0.0400 305);
+  --text: oklch(0.9500 0.0200 85); --muted: oklch(0.7900 0.0350 305);
+  --accent: oklch(0.7700 0.1600 55); --on-accent: oklch(0.1700 0.0300 305); --chip: oklch(0.2750 0.0400 305);
+  --loiste: oklch(0.8700 0.1700 135); --hionta: oklch(0.8800 0.1300 95); --kirkkaus: oklch(0.8100 0.1000 300);
+  --thread: oklch(0.8700 0.1700 135); --other: oklch(0.3200 0.0450 305);
+  --rim-1: oklch(0.7700 0.1600 55); --rim-2: oklch(0.8700 0.1700 135); --rim-3: oklch(0.8800 0.1300 95); --rim-4: oklch(0.8100 0.1000 300); --rim-5: oklch(0.9500 0.0200 85);
+  --glass: oklch(0.2250 0.0360 305 / 0.72);
+  --band: oklch(0.7700 0.1600 55 / 0.10); --bar: oklch(0.7900 0.0350 305 / 0.35); --bar-on: oklch(0.7700 0.1600 55 / 0.75);
+  --ring-soft: oklch(0.7700 0.1600 55 / 0.35); --shadow: none;
+  --map-bg: oklch(0.14 0.03 305);
+  --hero-fallback: radial-gradient(50% 45% at 78% 25%, oklch(0.72 0.16 55 / 0.5), transparent 60%), linear-gradient(180deg, oklch(0.10 0.03 305) 0%, oklch(0.20 0.06 310) 62%, oklch(0.15 0.04 305) 100%);
+}
+/* Teeman mukaan vaihtuvat tekstit: madot avaruusteemoissa, linnut Talvessa, tontut Joulussa ja haamut Kekrissä */
+:root:is([data-theme="winter"], [data-theme="christmas"], [data-theme="kekri"]) .if-space, :root:is([data-theme="christmas"], [data-theme="kekri"]) .if-aurora,
+:root:not([data-theme="winter"]) .if-winter, :root:not([data-theme="christmas"]) .if-christmas, :root:not([data-theme="kekri"]) .if-kekri { display: none !important; }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-padding-top: calc(var(--header-h) + 16px); scroll-padding-bottom: calc(var(--crew-h) + 16px); -webkit-text-size-adjust: 100%; }
@@ -121,6 +154,22 @@ p { margin: 0; }
 /* SEO on sivuseikka: pieni merkintä ilman kehystä, kosketusalue silti 44 px korkea */
 #seo-btn { padding-inline: 6px; border-color: transparent; color: var(--muted); font: 500 12px/1 var(--font-mono); letter-spacing: 0.04em; }
 #seo-btn:hover { color: var(--text); border-color: var(--line); }
+/* Teemavalikko yläpalkissa: viisi teemaa, jokaisella nimi, neuvonantajajoukko ja värit */
+.theme-pick { position: relative; }
+.theme-menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; width: 300px; }
+.theme-menu[hidden] { display: none; }
+.theme-menu fieldset { margin: 0; padding: 8px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); display: flex; flex-direction: column; gap: 2px; box-shadow: 0 12px 32px oklch(0 0 0 / 0.35); }
+.theme-menu legend { padding: 0 6px; font: 500 12px/1.4 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.theme-menu label { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; align-items: center; column-gap: 12px; min-height: 48px; padding: 4px 10px; border-radius: 10px; cursor: pointer; }
+.theme-menu label:hover { background: var(--chip); }
+.theme-menu label:has(input:checked) { background: var(--band); }
+.theme-menu input { width: 18px; height: 18px; margin: 0; accent-color: var(--accent); }
+.tm-text { display: flex; flex-direction: column; min-width: 0; }
+.tm-name { font-weight: 600; font-size: 15px; }
+.tm-sub { font-size: 13px; color: var(--muted); }
+.tm-sw { display: flex; gap: 3px; }
+.tm-sw i { width: 12px; height: 12px; border-radius: 50%; border: 1px solid var(--line); }
+@media (max-width: 960px) { .theme-menu { position: fixed; top: calc(var(--header-h) + 6px); right: 12px; width: min(320px, calc(100vw - 24px)); } }
 @media (max-width: 960px) {
   .topbar-in { gap: 0 8px; padding-block: 6px 0; }
   .brand { margin-right: auto; font-size: 18px; }
@@ -301,6 +350,8 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); min-hei
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --aur1: oklch(0.55 0.19 250 / 0.42); --aur2: oklch(0.50 0.20 290 / 0.30); --aur-sky: oklch(0.22 0.06 262 / 0.85); } }
 :root[data-theme="dark"] { --aur1: oklch(0.55 0.19 250 / 0.42); --aur2: oklch(0.50 0.20 290 / 0.30); --aur-sky: oklch(0.22 0.06 262 / 0.85); }
 :root[data-theme="winter"] { --aur1: oklch(0.60 0.16 160 / 0.40); --aur2: oklch(0.52 0.12 205 / 0.30); --aur-sky: oklch(0.21 0.05 238 / 0.85); }
+:root[data-theme="christmas"] { --aur1: oklch(0.65 0.13 85 / 0.35); --aur2: oklch(0.55 0.15 27 / 0.28); --aur-sky: oklch(0.21 0.04 165 / 0.85); }
+:root[data-theme="kekri"] { --aur1: oklch(0.65 0.15 55 / 0.35); --aur2: oklch(0.48 0.15 300 / 0.30); --aur-sky: oklch(0.20 0.05 305 / 0.85); }
 .aurora-bg { position: relative; isolation: isolate; }
 .aurora-bg::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
   background: radial-gradient(70% 55% at var(--ax, 30%) -10%, var(--aur1), transparent 70%), radial-gradient(45% 45% at calc(var(--ax, 30%) + 30%) 0%, var(--aur2), transparent 70%),
@@ -408,6 +459,14 @@ label.chip:has(input:focus-visible) { outline: 2px solid var(--accent); outline-
 :root[data-theme="winter"] { --sc-op: 0.95; --sc-sky: oklch(0.18 0.04 240 / 0.9); --sc-neb1: oklch(0.58 0.16 158 / 0.45); --sc-neb2: oklch(0.50 0.12 205 / 0.35); --sc-ice1: oklch(0.74 0.03 230); --sc-ice2: oklch(0.44 0.04 235); --sc-ice3: oklch(0.27 0.03 238);
   --sc-star: oklch(0.97 0.01 220); --sc-c1: oklch(0.86 0.12 160); --sc-c2: oklch(0.72 0.10 200); --sc-c3: oklch(0.96 0.03 180);
   --sc-disc: oklch(0.95 0.02 225); }
+/* Joulu: lumiset tunturit kultaisen hehkun alla, ja pimennyksen kehästä tulee havukranssi */
+:root[data-theme="christmas"] { --sc-op: 0.95; --sc-sky: oklch(0.20 0.04 230 / 0.9); --sc-neb1: oklch(0.72 0.12 85 / 0.40); --sc-neb2: oklch(0.55 0.15 27 / 0.30); --sc-ice1: oklch(0.88 0.02 240); --sc-ice2: oklch(0.55 0.03 235); --sc-ice3: oklch(0.32 0.03 220);
+  --sc-star: oklch(0.95 0.05 90); --sc-c1: oklch(0.86 0.13 88); --sc-c2: oklch(0.55 0.11 150); --sc-c3: oklch(0.65 0.18 27);
+  --sc-disc: transparent; }
+/* Kekri: violetit kukkulat oranssin kuunhehkun alla, ja pimennyksestä tulee oranssi kuu */
+:root[data-theme="kekri"] { --sc-op: 0.95; --sc-sky: oklch(0.17 0.05 305 / 0.9); --sc-neb1: oklch(0.66 0.15 55 / 0.42); --sc-neb2: oklch(0.45 0.15 300 / 0.35); --sc-ice1: oklch(0.34 0.05 305); --sc-ice2: oklch(0.24 0.04 305); --sc-ice3: oklch(0.17 0.03 305);
+  --sc-star: oklch(0.92 0.03 300); --sc-c1: oklch(0.77 0.16 55); --sc-c2: oklch(0.58 0.15 300); --sc-c3: oklch(0.88 0.12 85);
+  --sc-disc: oklch(0.80 0.14 62); }
 main { overflow-x: clip; }
 .sections > section { position: relative; isolation: isolate; }
 .scape { position: absolute; top: -40px; left: calc(50% - 50vw); width: 100vw; height: 320px; z-index: -1; display: block; pointer-events: none; overflow: hidden; opacity: var(--sc-op);
@@ -437,6 +496,34 @@ main { overflow-x: clip; }
 .scape-eclipse .disc { right: calc(14% + 40px); top: 70px; width: 120px; height: 120px; background: var(--sc-disc); box-shadow: 0 0 24px 4px var(--sc-c1); }
 .scape-eclipse .limb { left: -10%; right: -10%; bottom: -250px; height: 330px; background: radial-gradient(ellipse at 50% 0%, var(--sc-ice1), var(--sc-ice2) 55%, transparent 72%); }
 @keyframes sc-spin { to { --sc-a: 360deg; } }
+/* Teemojen lisäelementit: valoketju (Joulu), usva, lepakot ja kukkulat (Kekri), kranssi (Joulu), kuu ja seitti (Kekri) */
+.scape-crystal .lights, .scape-crystal .mist, .scape-crystal .bats, .scape-eclipse .web, .scape-eclipse .berries, .scape-eclipse .bow { display: none; }
+:root[data-theme="christmas"] .scape-crystal .lights, :root[data-theme="kekri"] .scape-crystal .mist, :root[data-theme="kekri"] .scape-crystal .bats,
+:root[data-theme="kekri"] .scape-eclipse .web, :root[data-theme="christmas"] .scape-eclipse .berries, :root[data-theme="christmas"] .scape-eclipse .bow { display: block; }
+.scape-crystal .lights { left: 0; right: 0; top: 4%; height: 22%; background-repeat: no-repeat; background-size: 100% 100%; will-change: opacity; animation: sc-bulb 1.6s ease-in-out infinite alternate; }
+.scape-crystal .lights.a { background-image: radial-gradient(circle 3.5px at 2.1% 22.4%, #ff6a5c 85%, transparent), radial-gradient(circle 12px at 2.1% 22.4%, #ff6a5c55, transparent), radial-gradient(circle 3.5px at 10.4% 42.8%, #7fe39a 85%, transparent), radial-gradient(circle 12px at 10.4% 42.8%, #7fe39a55, transparent), radial-gradient(circle 3.5px at 18.8% 54.9%, #ff6a5c 85%, transparent), radial-gradient(circle 12px at 18.8% 54.9%, #ff6a5c55, transparent), radial-gradient(circle 3.5px at 27.1% 58.7%, #7fe39a 85%, transparent), radial-gradient(circle 12px at 27.1% 58.7%, #7fe39a55, transparent), radial-gradient(circle 3.5px at 35.4% 54.1%, #ff6a5c 85%, transparent), radial-gradient(circle 12px at 35.4% 54.1%, #ff6a5c55, transparent), radial-gradient(circle 3.5px at 43.8% 41.2%, #7fe39a 85%, transparent), radial-gradient(circle 12px at 43.8% 41.2%, #7fe39a55, transparent), radial-gradient(circle 3.5px at 52.1% 31.6%, #ff6a5c 85%, transparent), radial-gradient(circle 12px at 52.1% 31.6%, #ff6a5c55, transparent), radial-gradient(circle 3.5px at 60.4% 48.7%, #7fe39a 85%, transparent), radial-gradient(circle 12px at 60.4% 48.7%, #7fe39a55, transparent), radial-gradient(circle 3.5px at 68.8% 57.4%, #ff6a5c 85%, transparent), radial-gradient(circle 12px at 68.8% 57.4%, #ff6a5c55, transparent), radial-gradient(circle 3.5px at 77.1% 57.8%, #7fe39a 85%, transparent), radial-gradient(circle 12px at 77.1% 57.8%, #7fe39a55, transparent), radial-gradient(circle 3.5px at 85.4% 49.9%, #ff6a5c 85%, transparent), radial-gradient(circle 12px at 85.4% 49.9%, #ff6a5c55, transparent), radial-gradient(circle 3.5px at 93.8% 33.7%, #7fe39a 85%, transparent), radial-gradient(circle 12px at 93.8% 33.7%, #7fe39a55, transparent), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 10 Q25 90 50 20 Q75 90 100 10' fill='none' stroke='%232f3d33' stroke-width='1.4' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E"); }
+.scape-crystal .lights.b { background-image: radial-gradient(circle 3.5px at 6.2% 33.7%, #ffd36a 85%, transparent), radial-gradient(circle 12px at 6.2% 33.7%, #ffd36a55, transparent), radial-gradient(circle 3.5px at 14.6% 49.9%, #8fc8ff 85%, transparent), radial-gradient(circle 12px at 14.6% 49.9%, #8fc8ff55, transparent), radial-gradient(circle 3.5px at 22.9% 57.8%, #ffd36a 85%, transparent), radial-gradient(circle 12px at 22.9% 57.8%, #ffd36a55, transparent), radial-gradient(circle 3.5px at 31.2% 57.4%, #8fc8ff 85%, transparent), radial-gradient(circle 12px at 31.2% 57.4%, #8fc8ff55, transparent), radial-gradient(circle 3.5px at 39.6% 48.7%, #ffd36a 85%, transparent), radial-gradient(circle 12px at 39.6% 48.7%, #ffd36a55, transparent), radial-gradient(circle 3.5px at 47.9% 31.6%, #8fc8ff 85%, transparent), radial-gradient(circle 12px at 47.9% 31.6%, #8fc8ff55, transparent), radial-gradient(circle 3.5px at 56.2% 41.2%, #ffd36a 85%, transparent), radial-gradient(circle 12px at 56.2% 41.2%, #ffd36a55, transparent), radial-gradient(circle 3.5px at 64.6% 54.1%, #8fc8ff 85%, transparent), radial-gradient(circle 12px at 64.6% 54.1%, #8fc8ff55, transparent), radial-gradient(circle 3.5px at 72.9% 58.7%, #ffd36a 85%, transparent), radial-gradient(circle 12px at 72.9% 58.7%, #ffd36a55, transparent), radial-gradient(circle 3.5px at 81.2% 54.9%, #8fc8ff 85%, transparent), radial-gradient(circle 12px at 81.2% 54.9%, #8fc8ff55, transparent), radial-gradient(circle 3.5px at 89.6% 42.8%, #ffd36a 85%, transparent), radial-gradient(circle 12px at 89.6% 42.8%, #ffd36a55, transparent), radial-gradient(circle 3.5px at 97.9% 22.4%, #8fc8ff 85%, transparent), radial-gradient(circle 12px at 97.9% 22.4%, #8fc8ff55, transparent); animation-delay: -0.8s; }
+@keyframes sc-bulb { from { opacity: 0.35; } to { opacity: 1; } }
+:root[data-theme="kekri"] .scape-crystal .m1 { clip-path: polygon(0 100%, 0.0% 54.0%, 2.1% 55.8%, 4.2% 56.5%, 6.2% 56.0%, 8.3% 54.9%, 10.4% 53.7%, 12.5% 52.7%, 14.6% 52.1%, 16.7% 51.9%, 18.8% 51.9%, 20.8% 51.7%, 22.9% 51.1%, 25.0% 50.0%, 27.1% 48.7%, 29.2% 47.5%, 31.2% 46.7%, 33.3% 46.6%, 35.4% 47.2%, 37.5% 48.4%, 39.6% 49.6%, 41.7% 50.4%, 43.8% 50.1%, 45.8% 48.7%, 47.9% 46.3%, 50.0% 43.2%, 52.1% 40.0%, 54.2% 37.3%, 56.2% 35.4%, 58.3% 34.6%, 60.4% 34.7%, 62.5% 35.4%, 64.6% 36.2%, 66.7% 37.0%, 68.8% 37.5%, 70.8% 38.1%, 72.9% 38.9%, 75.0% 40.2%, 77.1% 42.2%, 79.2% 44.7%, 81.2% 47.5%, 83.3% 50.1%, 85.4% 51.9%, 87.5% 52.6%, 89.6% 52.2%, 91.7% 50.9%, 93.8% 49.2%, 95.8% 47.7%, 97.9% 46.9%, 100.0% 47.1%, 100% 100%); }
+:root[data-theme="kekri"] .scape-crystal .m2 { clip-path: polygon(0 100%, 0.0% 47.5%, 2.1% 47.6%, 4.2% 47.5%, 6.2% 47.1%, 8.3% 46.2%, 10.4% 45.0%, 12.5% 44.0%, 14.6% 43.3%, 16.7% 43.3%, 18.8% 43.9%, 20.8% 44.7%, 22.9% 45.3%, 25.0% 45.0%, 27.1% 43.6%, 29.2% 41.1%, 31.2% 37.8%, 33.3% 34.3%, 35.4% 31.3%, 37.5% 29.4%, 39.6% 29.0%, 41.7% 29.9%, 43.8% 31.8%, 45.8% 34.2%, 47.9% 36.6%, 50.0% 38.6%, 52.1% 40.1%, 54.2% 41.4%, 56.2% 42.7%, 58.3% 44.3%, 60.4% 46.4%, 62.5% 48.7%, 64.6% 50.9%, 66.7% 52.6%, 68.8% 53.3%, 70.8% 52.8%, 72.9% 51.3%, 75.0% 49.2%, 77.1% 47.2%, 79.2% 45.8%, 81.2% 45.6%, 83.3% 46.5%, 85.4% 48.4%, 87.5% 50.6%, 89.6% 52.7%, 91.7% 53.9%, 93.8% 54.2%, 95.8% 53.4%, 97.9% 52.0%, 100.0% 50.3%, 100% 100%); }
+.scape-crystal .mist { left: -20%; right: -20%; top: 52%; height: 30%; background: linear-gradient(90deg, transparent, oklch(0.85 0.05 300 / 0.20) 25%, transparent 45%, oklch(0.85 0.05 300 / 0.16) 70%, transparent); will-change: transform; animation: sc-mist 28s ease-in-out infinite alternate; }
+@keyframes sc-mist { to { transform: translateX(12%); } }
+.scape-crystal .bats { left: 0; right: 0; top: 8%; height: 34%; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-28 -14 56 26'%3E%3Cpath d='M0 -2 C-4 -9 -14 -12 -26 -7 C-22 -3 -21 1 -22 5 C-17 2 -13 3 -10 7 C-8 3 -5 2 -2 4 Z M0 -2 C4 -9 14 -12 26 -7 C22 -3 21 1 22 5 C17 2 13 3 10 7 C8 3 5 2 2 4 Z' fill='%231a0e24' stroke='%23ff9542' stroke-opacity='0.55' stroke-width='1'/%3E%3Cellipse cx='0' cy='0' rx='3.4' ry='5' fill='%231a0e24'/%3E%3C/svg%3E") 18% 30% / 44px auto no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-28 -14 56 26'%3E%3Cpath d='M0 -2 C-4 -9 -14 -12 -26 -7 C-22 -3 -21 1 -22 5 C-17 2 -13 3 -10 7 C-8 3 -5 2 -2 4 Z M0 -2 C4 -9 14 -12 26 -7 C22 -3 21 1 22 5 C17 2 13 3 10 7 C8 3 5 2 2 4 Z' fill='%231a0e24' stroke='%23ff9542' stroke-opacity='0.55' stroke-width='1'/%3E%3Cellipse cx='0' cy='0' rx='3.4' ry='5' fill='%231a0e24'/%3E%3C/svg%3E") 62% 10% / 30px auto no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-28 -14 56 26'%3E%3Cpath d='M0 -2 C-4 -9 -14 -12 -26 -7 C-22 -3 -21 1 -22 5 C-17 2 -13 3 -10 7 C-8 3 -5 2 -2 4 Z M0 -2 C4 -9 14 -12 26 -7 C22 -3 21 1 22 5 C17 2 13 3 10 7 C8 3 5 2 2 4 Z' fill='%231a0e24' stroke='%23ff9542' stroke-opacity='0.55' stroke-width='1'/%3E%3Cellipse cx='0' cy='0' rx='3.4' ry='5' fill='%231a0e24'/%3E%3C/svg%3E") 80% 60% / 36px auto no-repeat; will-change: transform; animation: sc-bats 22s ease-in-out infinite alternate; }
+@keyframes sc-bats { to { transform: translate(-6%, 8%); } }
+:root[data-theme="christmas"] .scape-eclipse .ring { background: radial-gradient(closest-side, oklch(0.18 0.04 150 / 0.55) 54%, transparent 64%, transparent 76%, oklch(0.18 0.04 150 / 0.5) 88%),
+    repeating-conic-gradient(from var(--sc-a), oklch(0.50 0.12 150) 0deg 1.6deg, oklch(0.36 0.09 152) 1.6deg 3.4deg, oklch(0.62 0.13 146) 3.4deg 4.4deg, oklch(0.44 0.11 150) 4.4deg 6deg);
+  -webkit-mask: radial-gradient(closest-side, transparent 52%, #000 56%, #000 86%, transparent 92%); mask: radial-gradient(closest-side, transparent 52%, #000 56%, #000 86%, transparent 92%); animation-duration: 60s; }
+:root[data-theme="christmas"] .scape-eclipse .disc { box-shadow: none; }
+:root[data-theme="christmas"] .scape-eclipse .corona { background: radial-gradient(closest-side, oklch(0.80 0.12 85 / 0.55), transparent 75%); }
+.scape-eclipse .berries { right: 14%; top: 30px; width: 200px; height: 200px; background: radial-gradient(circle 4px at 67.8% 19.3%, #d83b34 85%, transparent), radial-gradient(circle 4px at 70.8% 20.8%, #d83b34 85%, transparent), radial-gradient(circle 4px at 66.8% 22.3%, #d83b34 85%, transparent), radial-gradient(circle 4px at 80.7% 67.8%, #d83b34 85%, transparent), radial-gradient(circle 4px at 83.7% 69.2%, #d83b34 85%, transparent), radial-gradient(circle 4px at 79.7% 70.8%, #d83b34 85%, transparent), radial-gradient(circle 4px at 16.6% 62.1%, #d83b34 85%, transparent), radial-gradient(circle 4px at 19.6% 63.6%, #d83b34 85%, transparent), radial-gradient(circle 4px at 15.6% 65.1%, #d83b34 85%, transparent); }
+.scape-eclipse .bow { right: calc(14% + 70px); top: 181px; width: 60px; height: 44px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -4 60 44'%3E%3Cpath d='M30 10 C14 -2 4 12 14 20 C20 24 26 18 30 12 Z M30 10 C46 -2 56 12 46 20 C40 24 34 18 30 12 Z' fill='%23c8312b'/%3E%3Cpath d='M28 12 L20 36 L26 32 L30 38 M32 12 L40 36 L34 32 L30 38' fill='none' stroke='%23c8312b' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='30' cy='12' r='5' fill='%23a8261f'/%3E%3C/svg%3E") center / contain no-repeat; }
+:root[data-theme="kekri"] .scape-eclipse .corona { background: radial-gradient(closest-side, oklch(0.70 0.16 55 / 0.5), transparent 75%); }
+:root[data-theme="kekri"] .scape-eclipse .disc { background: radial-gradient(circle 9px at 35% 40%, oklch(0.70 0.14 55) 90%, transparent), radial-gradient(circle 12px at 62% 62%, oklch(0.72 0.14 58) 90%, transparent), radial-gradient(circle 6px at 50% 25%, oklch(0.70 0.14 55) 90%, transparent), var(--sc-disc); }
+.scape-eclipse .web { left: 0; top: 0; width: 200px; height: 200px; border-radius: 0; opacity: 0.35; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M0 0 L200.0 0.0 M0 0 L193.2 51.8 M0 0 L173.2 100.0 M0 0 L141.4 141.4 M0 0 L100.0 173.2 M0 0 L51.8 193.2 M0 0 L0.0 200.0 M30.0 0.0 Q26.5 3.5 29.0 7.8 Q24.7 10.2 26.0 15.0 Q21.2 16.3 21.2 21.2 Q16.3 21.2 15.0 26.0 Q10.2 24.7 7.8 29.0 Q3.5 26.5 0.0 30.0 M55.0 0.0 Q48.7 6.4 53.1 14.2 Q45.3 18.8 47.6 27.5 Q38.9 29.9 38.9 38.9 Q29.9 38.9 27.5 47.6 Q18.8 45.3 14.2 53.1 Q6.4 48.7 0.0 55.0 M80.0 0.0 Q70.8 9.3 77.3 20.7 Q66.0 27.3 69.3 40.0 Q56.6 43.5 56.6 56.6 Q43.5 56.6 40.0 69.3 Q27.3 66.0 20.7 77.3 Q9.3 70.8 0.0 80.0 M105.0 0.0 Q92.9 12.2 101.4 27.2 Q86.6 35.9 90.9 52.5 Q74.3 57.0 74.2 74.2 Q57.0 74.3 52.5 90.9 Q35.9 86.6 27.2 101.4 Q12.2 92.9 0.0 105.0 M130.0 0.0 Q115.0 15.1 125.6 33.6 Q107.2 44.4 112.6 65.0 Q92.0 70.6 91.9 91.9 Q70.6 92.0 65.0 112.6 Q44.4 107.2 33.6 125.6 Q15.1 115.0 0.0 130.0 M155.0 0.0 Q137.1 18.1 149.7 40.1 Q127.8 52.9 134.2 77.5 Q109.7 84.2 109.6 109.6 Q84.2 109.7 77.5 134.2 Q52.9 127.8 40.1 149.7 Q18.1 137.1 0.0 155.0 M180.0 0.0 Q159.2 21.0 173.9 46.6 Q148.4 61.5 155.9 90.0 Q127.4 97.8 127.3 127.3 Q97.8 127.4 90.0 155.9 Q61.5 148.4 46.6 173.9 Q21.0 159.2 0.0 180.0' fill='none' stroke='%23e6e1f5' stroke-opacity='0.6' stroke-width='1'/%3E%3Cpath d='M96 70 L96 118' stroke='%23e6e1f5' stroke-opacity='0.6' stroke-width='1'/%3E%3Cpath d='M90 116 L84 112 M90 120 L83 120 M90 124 L84 128 M102 116 L108 112 M102 120 L109 120 M102 124 L108 128' stroke='%230a0610' stroke-width='1.8' stroke-linecap='round'/%3E%3Cellipse cx='96' cy='122' rx='6' ry='7' fill='%230a0610'/%3E%3Ccircle cx='94' cy='120' r='1' fill='%23ffd75e'/%3E%3Ccircle cx='98' cy='120' r='1' fill='%23ffd75e'/%3E%3C/svg%3E") 0 0 / contain no-repeat; transform-origin: 0 0; will-change: transform; animation: sc-web 7s ease-in-out infinite alternate; }
+@keyframes sc-web { to { transform: rotate(2deg); } }
+@media (max-width: 700px) {
+  .scape-eclipse .berries { right: 4%; width: 140px; height: 140px; } .scape-eclipse .bow { right: calc(4% + 40px); top: 136px; } .scape-eclipse .web { width: 150px; height: 150px; }
+}
 @media (max-width: 700px) {
   .scape { height: 240px; }
   .scape-eclipse .ring { right: 4%; width: 140px; height: 140px; } .scape-eclipse .disc { right: calc(4% + 28px); top: 58px; width: 84px; height: 84px; } .scape-eclipse .corona { right: -60px; width: 240px; height: 240px; }
