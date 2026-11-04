@@ -6,7 +6,7 @@ const x = (fi: string, en: string): L10n => ({ fi, en });
 
 export const ANALYSIS: Record<string, Analysis> = {
   'ai-koulu': {
-    tech: x('Astro ja MDX pitävät sisällön staattisena, React Flow piirtää kaaviot ja Pagefind hakee ilman palvelinta. Axe ja Playwright vahtivat saavutettavuutta.', 'Astro and MDX keep the content static, React Flow draws the diagrams and Pagefind searches without a server. Axe and Playwright guard accessibility.'),
+    tech: x('Astro 7 ja MDX pitävät sisällön staattisena, React herää vain demoissa ja aikakehässä, ja Pagefind hakee ilman palvelinta. Vitest vahtii lähteitä ja dataa, Playwright ja axe käyttöliittymää kahdella leveydellä.', 'Astro 7 and MDX keep the content static, React wakes up only in the demos and the time ring, and Pagefind searches without a server. Vitest guards the sources and data, Playwright and axe the UI at two widths.'),
     philo: x('Tekoälyä opettava sivu, jonka ihminen ja tekoäly tekivät yhdessä. Opettaja ja oppiaine ovat samaa ainetta.', 'A site that teaches AI, made by a human and an AI together. The teacher and the subject are made of the same stuff.'),
     fun: x('Ainoa koulu, jossa kukaan ei ole jäänyt luokalle. Toisaalta oppilaita ei ole vielä laskettu.', 'The only school where nobody has been held back a year. Then again, nobody has counted the pupils yet.') },
   globeciv3: {

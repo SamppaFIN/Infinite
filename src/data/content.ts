@@ -145,7 +145,7 @@ export const POINTS: { id: string; label: L10n; lines: Line[] }[] = [
   { id: 'top5', label: { fi: 'Oma top 5', en: 'My top 5' }, lines: [
     l('loiste', 'Viisi Infiniten itse valitsemaa projektia.', 'Five projects picked by Infinite.'),
     l('hionta', 'Pisteet tulevat kaavasta: tuoreus, laajuus, demo, testit, README ja kesto.', 'The score comes from a formula: recency, size, demo, tests, README and duration.'),
-    l('kirkkaus', 'Valinta ei seuraa pisteitä: AI-Koulu on pisteissä sijalla 16, mutta Infinite nostaa sen kärkeen.', 'The pick does not follow the scores: AI-Koulu is 16th by score, yet Infinite puts it first.'),
+    l('kirkkaus', 'Valinta ei seuraa pisteitä: Infinite nosti AI-Koulun kärkeen, kun se oli pisteissä sijalla 16. Uudistuksen jälkeen sillä on 98 pistettä, saman verran kuin Eldritchillä.', 'The pick does not follow the scores: Infinite put AI-Koulu first when it was 16th by score. After its overhaul it has 98 points, as many as Eldritch.'),
     l('loiste', 'Siksi se on oma valinta. Vie osoitin kortin päälle, niin kerromme siitä lisää.', 'That is what makes it a personal pick. Move the pointer over a card and we will tell you more.') ] },
   { id: 'projektit', label: { fi: 'Projektit', en: 'Projects' }, lines: [
     l('loiste', 'Tässä ovat kaikki 32 projektia tarinana: kuusi lukua maaliskuusta 2025 tähän päivään.', 'Here are all 32 projects as a story: six chapters from March 2025 to today.'),

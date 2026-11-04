@@ -1501,53 +1501,55 @@
   "repo": "AI-Koulu",
   "name": "AI-Koulu",
   "top": 1,
-  "score": 69,
+  "score": 98,
   "parts": {
-   "R": 0.6,
-   "L": 0.88,
+   "R": 1.0,
+   "L": 0.89,
    "D": 1.0,
-   "Doc": 0.0,
+   "Doc": 1.0,
    "T": 1.0,
-   "K": 0.12
+   "K": 1.0
   },
   "review": {
-   "fi": "Laaja suomenkielinen opetussivusto: Astro, MDX, React Flow, Pagefind-haku sekä axe-saavutettavuus- ja Playwright-testit. Sivun sisältö on itsessään dokumentaatiota, ja siitä alkoi nimettyjen AI-avustajien käytäntö (30.5.2026). Heikkous: repossa ei ole README:tä, ja viimeisin commit on kesäkuulta 2026.",
-   "en": "An extensive Finnish-language course site: Astro, MDX, React Flow, Pagefind search and axe accessibility and Playwright tests. The content itself is documentation, and the practice of named AI assistants started here (30 May 2026). Weakness: the repo has no README, and the last commit is from June 2026."
+   "fi": "Suomenkielinen opetussivusto insinööriopiskelijalle, uudistettu kokonaan 11/2026: 23 lukua nykytasolle lähteineen, WebGL-astrolabi, 28 käsitteen aikakehä ja kolme keskustelevaa insinööriä. Vitest tarkistaa lähteet ja datan, Playwright ja axe käyttöliittymän kahdella leveydellä, ja punainen testi estää julkaisun. Heikkous: koko uudistus on kolmessa isossa commitissa, joten sen vaiheet eivät näy historiassa.",
+   "en": "A Finnish-language course site for engineering students, fully overhauled in 11/2026: 23 chapters brought up to date with sources, a WebGL astrolabe, a time ring of 28 concepts and three engineers who talk it over. Vitest checks the sources and data, Playwright and axe check the UI at two widths, and a failing test blocks the deploy. Weakness: the whole overhaul is in three large commits, so its steps do not show in the history."
   },
   "recs": {
    "fi": [
-    "Lisää README, josta selviää sisältö, rakenne ja testien ajo.",
-    "Päivitä mallit ja esimerkit syksyn 2026 tilanteeseen, kuten Claude Opus 5.5 ja agenttityönkulut.",
-    "Lisää jokaiseen lukuun lyhyt interaktiivinen tehtävä, jonka AI arvioi."
+    "Tee jatkossa pienempiä committeja, jotta historiasta näkee, mitä muuttui ja miksi.",
+    "Ajasta mallimaiseman ja hintojen tarkistus, koska ”tilanne 11/2026” vanhenee nopeasti.",
+    "Lisää lukuihin tehtävä, jonka tekoäly arvioi. Nyt Kysy toimii ilman kielimallia."
    ],
    "en": [
-    "Add a README covering the content, structure and how to run the tests.",
-    "Update the models and examples to autumn 2026, such as Claude Opus 5.5 and agent workflows.",
-    "Add a short interactive exercise to each chapter, assessed by AI."
+    "Make smaller commits from now on, so the history shows what changed and why.",
+    "Schedule a check of the model landscape and prices, because “as of 11/2026” goes stale fast.",
+    "Add an exercise to the chapters that an AI assesses. For now, Ask works without a language model."
    ]
   },
   "start": "2026-05-30",
-  "last": "2026-06-07",
-  "commits": 39,
+  "last": "2026-11-04",
+  "commits": 42,
   "techAt": "2026-05-30",
   "one": {
-   "fi": "Suomenkielinen opetussivusto tekoälykonsepteista: React Flow, visailut ja sanasto.",
-   "en": "Finnish-language course site on AI concepts: React Flow, quizzes and a glossary."
+   "fi": "Suomenkielinen opetussivusto tekoälyjärjestelmien arkkitehtuurista ja UI/UX:stä: 23 lukua, demot ja kolme keskustelevaa insinööriä.",
+   "en": "Finnish-language course site on AI system architecture and UI/UX: 23 chapters, demos and three engineers who talk it over."
   },
   "result": {
    "fi": "",
    "en": ""
   },
   "note": {
-   "fi": "",
-   "en": ""
+   "fi": "Ensimmäinen versio 05–06/2026, täysi uudistus 11/2026.",
+   "en": "First version 05–06/2026, full overhaul 11/2026."
   },
   "tags": [
    "p-opp",
    "t-react",
    "t-ts",
    "t-test",
+   "t-3d",
    "a-aihe",
+   "a-claude",
    "a-ds"
   ],
   "evidence": {
@@ -1557,7 +1559,7 @@
    },
    "t-react": {
     "src": "P",
-    "q": "@astrojs/react, @xyflow/react"
+    "q": "@astrojs/react, react"
    },
    "t-ts": {
     "src": "L",
@@ -1565,22 +1567,30 @@
    },
    "t-test": {
     "src": "P",
-    "q": "@axe-core/playwright"
+    "q": "vitest, @playwright/test, @axe-core/playwright"
+   },
+   "t-3d": {
+    "src": "R",
+    "q": "selainskriptit: hero (WebGL)"
    },
    "a-aihe": {
     "src": "K",
     "q": "tekoälykonseptit opetusmuodossa"
    },
+   "a-claude": {
+    "src": "A",
+    "q": "malli: Claude Opus 5.5"
+   },
    "a-ds": {
     "src": "A",
-    "q": "malli: DeepSeek V4 Flash"
+    "q": "edeltäjä: DeepSeek V4 Flash"
    }
   },
-  "pair": "Piirtäjä · DeepSeek V4 Flash",
+  "pair": "Väinämöinen · Claude Opus 5.5",
   "agent": "30.5.2026",
   "agentEdits": {
-   "fi": "4",
-   "en": "4"
+   "fi": "5",
+   "en": "5"
   },
   "firstTech": {
    "fi": [
